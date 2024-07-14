@@ -126,4 +126,42 @@ class Plugin {
 
 		return str_replace( $source, $new_image, $html );
 	}
+
+	/**
+	 * Get Watermark.
+	 *
+	 * This method is responsible for handling custom
+	 * watermarking operations.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function get_watermark(): string {
+		$img_absolute_path = get_attached_file( $this->image_id );
+
+		if ( ! file_exists( $img_absolute_path ) ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
+					$this->image_id
+				)
+			);
+		}
+
+		try {
+			$text = ( new Text() )->get_text();
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to create Text object, %s' ),
+					$e->getMessage()
+				)
+			);
+		}
+
+		$image = ( new Imagine() )->open( $img_absolute_path );
+		$image->paste( $text, new Point( 0, 0 ) );
+		$image->save( $img_absolute_path );
+	}
 }

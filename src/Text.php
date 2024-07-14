@@ -89,11 +89,22 @@ class Text {
 	 * @return Font
 	 */
 	public function get_font(): Font {
-		$font = new Font(
-			$this->get_font_url(),
-			$this->get_watermark( 'size' ),
-			( new RGB() )->color( $this->get_watermark( 'tx_color' ), 100 )
-		);
+		try {
+			$tx_color = ( new RGB() )->color( $this->get_watermark( 'tx_color' ), 100 );
+
+			$font = new Font(
+				$this->get_font_url(),
+				$this->get_watermark( 'size' ),
+				$tx_color
+			);
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to create Text color, %s' ),
+					$e->getMessage()
+				)
+			);
+		}
 
 		return $font;
 	}

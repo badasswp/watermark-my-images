@@ -103,4 +103,27 @@ class Plugin {
 
 		return $image_html;
 	}
+
+	/**
+	 * Get HTML Image.
+	 *
+	 * Reusable utility function for replacing the Image
+	 * HTML with a new watermarked image.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $html      Image HTML.
+	 * @param string $new_image New Image URL.
+	 *
+	 * @return string
+	 */
+	public function get_image_html( $html, $new_image ): string {
+		$dom = new DOMDocument();
+		$dom->loadHTML( $html, LIBXML_NOERROR );
+
+		$image  = $dom->getElementsByTagName( 'img' )[0];
+		$source = $image->getAttribute( 'src' );
+
+		return str_replace( $source, $new_image, $html );
+	}
 }

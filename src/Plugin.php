@@ -48,6 +48,7 @@ class Plugin {
 	 */
 	public function run(): void {
 		add_filter( 'woocommerce_product_get_image', [ $this, 'get_watermark_image' ], 10, 5 );
+		add_action( 'watermark_my_images_completed', [ $this, 'add_watermark_metadata' ], 10, 3 );
 	}
 
 	/**

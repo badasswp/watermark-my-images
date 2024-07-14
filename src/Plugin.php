@@ -164,6 +164,11 @@ class Plugin {
 		$image = ( new Imagine() )->open( $img_absolute_path );
 		$image->paste( $text, new Point( 0, 0 ) );
 		$image->save( $img_absolute_path );
+
+		return [
+			'abs' => $img_absolute_path,
+			'rel' => $img_relative_path,
+		];
 	}
 
 	/**

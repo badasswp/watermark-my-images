@@ -64,7 +64,7 @@ class Text {
 	 */
 	public function get_options(): array {
 		$options = wp_parse_args(
-			get_option( 'watermark_my_image', [] )['text'] ?? [],
+			get_option( 'watermark_my_images', [] )['text'] ?? [],
 			$this->args
 		);
 
@@ -79,7 +79,7 @@ class Text {
 		 * @param mixed[] $options Text Options.
 		 * @return mixed[]
 		 */
-		return (array) apply_filters( 'watermark_my_image_text', $options );
+		return (array) apply_filters( 'watermark_my_images_text', $options );
 	}
 
 	/**

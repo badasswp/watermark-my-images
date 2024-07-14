@@ -12,8 +12,8 @@ namespace WatermarkMyImages;
 
 use Imagine\Gd\Font;
 use Imagine\Image\Box;
+use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
-use Imagine\Imagick\Imagine;
 use Imagine\Image\Palette\RGB;
 
 class Text {

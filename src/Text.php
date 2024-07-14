@@ -12,6 +12,7 @@ namespace WatermarkMyImages;
 
 use Imagine\Gd\Font;
 use Imagine\Image\Box;
+use Imagine\Gd\Drawer;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Image\Palette\RGB;
@@ -125,22 +126,49 @@ class Text {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return Imagine
+	 * @return Drawer
 	 */
-	public function get_text(): Imagine {
-		$imagine_box = ( new Imagine() )->create(
-			new Box( 85, 35 ),
-			( new RGB() )->color( $this->get_watermark( 'bg_color' ), 100 )
-		);
+	public function get_text(): Drawer {
+		try {
+			$bg_color = ( new RGB() )->color( $this->get_watermark( 'bg_color' ), 100 );
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to create Background color, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
 
-		$imagine = $imagine_box->draw();
+		try {
+			$text_box = ( new Imagine() )->create(
+				new Box( 85, 35 ),
+				$bg_color
+			);
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to create Text Box, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
 
-		$imagine->text(
-			$this->get_watermark( 'label' ),
-			$this->get_font(),
-			new Point( 0, 0 )
-		);
+		try {
+			$text_box->draw()->text(
+				$this->get_watermark( 'label' ),
+				$this->get_font(),
+				new Point( 0, 0 )
+			);
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to draw Text, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
 
-		return $imagine;
+		return $text_box;
 	}
 }

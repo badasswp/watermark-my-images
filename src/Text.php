@@ -93,12 +93,6 @@ class Text {
 	public function get_font(): Font {
 		try {
 			$tx_color = ( new RGB() )->color( $this->get_watermark( 'tx_color' ), 100 );
-
-			$font = new Font(
-				$this->get_font_url(),
-				$this->get_watermark( 'size' ),
-				$tx_color
-			);
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -108,7 +102,11 @@ class Text {
 			);
 		}
 
-		return $font;
+		return new Font(
+			$this->get_font_url(),
+			$this->get_watermark( 'size' ),
+			$tx_color
+		);
 	}
 
 	/**

@@ -86,6 +86,8 @@ class Text {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @throws \Exception $e When RGB Palette is unable to create Text color.
+	 *
 	 * @return Font
 	 */
 	public function get_font(): Font {

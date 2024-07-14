@@ -37,7 +37,7 @@ class Text {
 			'bg_color' => '#BBB',
 			'font'     => 'Arial',
 			'size'     => 12,
-			'position' => [0,0],
+			'position' => [ 0, 0 ],
 			'label'    => 'WATERMARK',
 		];
 	}

@@ -96,7 +96,7 @@ class Text {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
-					esc_html__( 'Unable to create Text color, %s' ),
+					esc_html__( 'Unable to create Text color, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
 			);

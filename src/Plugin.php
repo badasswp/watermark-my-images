@@ -94,13 +94,13 @@ class Plugin {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string|\WP_Error   $html      Image HTML or WP Error.
-		 * @param string[]           $watermark Array containing abs and rel paths to new images.
-		 * @param int                $id        Image ID.
+		 * @param string|\WP_Error $image_html Image HTML or WP Error.
+		 * @param string[]         $watermark  Array containing abs and rel paths to new images.
+		 * @param int              $id         Image ID.
 		 *
 		 * @return void
 		 */
-		do_action( 'watermark_my_images_completed', $html, $watermark, $id = $this->image_id );
+		do_action( 'watermark_my_images_completed', $image_html, $watermark, $id = $this->image_id );
 
 		return $image_html;
 	}

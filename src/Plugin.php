@@ -180,8 +180,8 @@ class Plugin {
 		}
 
 		return [
-			'abs' => $img_absolute_path,
-			'rel' => $img_relative_path,
+			'abs' => $this->get_watermark_abs_path(),
+			'rel' => $this->get_watermark_rel_path(),
 		];
 	}
 
@@ -208,5 +208,37 @@ class Plugin {
 				]
 			);
 		}
+	}
+
+	/**
+	 * Get Watermark absolute path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function get_watermark_abs_path(): string {
+		return str_replace(
+			pathinfo( get_attached_file( $this->image_id ), PATHINFO_BASENAME ),
+			'watermark-my-images-' . $this->image_id . '.jpg',
+			$img_absolute_path
+		);
+	}
+
+	/**
+	 * Get Watermark relative path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function get_watermark_rel_path(): string {
+		$url = wp_get_attachment_url( $this->id );
+
+		return str_replace(
+			substr( $url, strrpos( $url, '/' ) ),
+			'watermark-my-images-' . $this->image_id . '.jpg',
+			$url
+		);
 	}
 }

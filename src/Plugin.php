@@ -106,29 +106,6 @@ class Plugin {
 	}
 
 	/**
-	 * Get HTML Image.
-	 *
-	 * Reusable utility function for replacing the Image
-	 * HTML with a new watermarked image.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $html      Image HTML.
-	 * @param string $new_image New Image URL.
-	 *
-	 * @return string
-	 */
-	public function get_image_html( $html, $new_image ): string {
-		$dom = new DOMDocument();
-		$dom->loadHTML( $html, LIBXML_NOERROR );
-
-		$image  = $dom->getElementsByTagName( 'img' )[0];
-		$source = $image->getAttribute( 'src' );
-
-		return str_replace( $source, $new_image, $html );
-	}
-
-	/**
 	 * Get Watermark.
 	 *
 	 * This method is responsible for handling custom
@@ -207,31 +184,6 @@ class Plugin {
 	}
 
 	/**
-	 * Add Watermark Meta.
-	 *
-	 * This method is responsible for capturing meta-data
-	 * if watermarking was successful.
-	 *
-	 * @param string|\WP_Error $html      Image HTML or WP_Error.
-	 * @param string[]         $watermark Watermark paths.
-	 * @param int              $id        Image ID.
-	 *
-	 * @return void
-	 */
-	public function add_watermark_metadata( $html, $watermark, $id ): void {
-		if ( ! is_wp_error( $html ) ) {
-			update_post_meta(
-				$id,
-				'watermark_my_images',
-				[
-					'abs' => $watermark['abs'] ?? '',
-					'rel' => $watermark['rel'] ?? '',
-				]
-			);
-		}
-	}
-
-	/**
 	 * Get Watermark absolute path.
 	 *
 	 * @since 1.0.0
@@ -261,5 +213,53 @@ class Plugin {
 			'watermark-my-images-' . $this->image_id . '.jpg',
 			$url
 		);
+	}
+
+	/**
+	 * Add Watermark Meta.
+	 *
+	 * This method is responsible for capturing meta-data
+	 * if watermarking was successful.
+	 *
+	 * @param string|\WP_Error $html      Image HTML or WP_Error.
+	 * @param string[]         $watermark Watermark paths.
+	 * @param int              $id        Image ID.
+	 *
+	 * @return void
+	 */
+	public function add_watermark_metadata( $html, $watermark, $id ): void {
+		if ( ! is_wp_error( $html ) ) {
+			update_post_meta(
+				$id,
+				'watermark_my_images',
+				[
+					'abs' => $watermark['abs'] ?? '',
+					'rel' => $watermark['rel'] ?? '',
+				]
+			);
+		}
+	}
+
+	/**
+	 * Get HTML Image.
+	 *
+	 * Reusable utility function for replacing the Image
+	 * HTML with a new watermarked image.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $html      Image HTML.
+	 * @param string $new_image New Image URL.
+	 *
+	 * @return string
+	 */
+	public function get_image_html( $html, $new_image ): string {
+		$dom = new DOMDocument();
+		$dom->loadHTML( $html, LIBXML_NOERROR );
+
+		$image  = $dom->getElementsByTagName( 'img' )[0];
+		$source = $image->getAttribute( 'src' );
+
+		return str_replace( $source, $new_image, $html );
 	}
 }

@@ -83,17 +83,6 @@ class Text {
 	}
 
 	/**
-	 * Get the Font URL.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string
-	 */
-	public function get_font_url(): string {
-		return trailingslashit( plugin_dir_path( __FILE__ ) . '/fonts' ) . $this->get_watermark( 'font' ) . '.otf';
-	}
-
-	/**
 	 * Get the Font.
 	 *
 	 * @since 1.0.0
@@ -174,5 +163,20 @@ class Text {
 		}
 
 		return $text_box;
+	}
+
+	/**
+	 * Get the Font URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function get_font_url(): string {
+		return sprintf(
+			'%s/fonts/%s.otf',
+			plugin_dir_path( __DIR__ ),
+			$this->get_watermark( 'font' ),
+		);
 	}
 }

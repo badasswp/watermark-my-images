@@ -2,14 +2,17 @@
 /**
  * Watermarker Class.
  *
- * This is responsible for all the chocolatey goodness happening
- * behind the scene on the plugin.
+ * This is responsible for all the chocolatey goodness
+ * happening behind the scenes.
  *
  * @package WatermarkMyImages
  */
 
 namespace WatermarkMyImages\Core;
 
+use Imagine\Gd\Imagine;
+use Imagine\Image\Point;
+use WatermarkMyImages\Text;
 use WatermarkMyImages\Abstracts\Service;
 
 class Watermarker {

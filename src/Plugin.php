@@ -140,9 +140,9 @@ class Plugin {
 	 * @throws \Exception $e When unable to create Text Drawer object.
 	 * @throws \Exception $e When unable to save Watermark Image.
 	 *
-	 * @return string
+	 * @return string[]
 	 */
-	public function get_watermark(): string {
+	public function get_watermark(): array {
 		$img_absolute_path = get_attached_file( $this->image_id );
 
 		if ( ! file_exists( $img_absolute_path ) ) {

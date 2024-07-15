@@ -138,6 +138,8 @@ class Plugin {
 	 *
 	 * @throws \Exception $e When unable to datect Image ID.
 	 * @throws \Exception $e When unable to create Text Drawer object.
+	 * @throws \Exception $e When unable to open Image resource.
+	 * @throws \Exception $e When unable to paste Text on Image resource.
 	 * @throws \Exception $e When unable to save Watermark Image.
 	 *
 	 * @return string[]
@@ -165,8 +167,27 @@ class Plugin {
 			);
 		}
 
-		$image = ( new Imagine() )->open( $img_absolute_path );
-		$image->paste( $text, new Point( 0, 0 ) );
+		try {
+			$image = ( new Imagine() )->open( $img_absolute_path );
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
+
+		try {
+			$image->paste( $text, new Point( 0, 0 ) );
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to paste Text on Image resource, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
 
 		try {
 			$image->save( $this->get_watermark_abs_path() );

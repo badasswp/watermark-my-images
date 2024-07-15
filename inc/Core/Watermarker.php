@@ -21,7 +21,7 @@ class Watermarker {
 	 * @param Service $service
 	 */
 	public function __construct( Service $service ) {
-		$this->image_id = $service->image_id;
+		$this->service = $service;
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Watermarker {
 	 * @return string[]
 	 */
 	public function get_watermark(): array {
-		$img_absolute_path = get_attached_file( $this->image_id );
+		$img_absolute_path = get_attached_file( $this->service->image_id );
 
 		if ( ! file_exists( $img_absolute_path ) ) {
 			throw new \Exception(
@@ -110,11 +110,11 @@ class Watermarker {
 	 * @return string
 	 */
 	public function get_watermark_abs_path(): string {
-		$img_absolute_path = get_attached_file( $this->image_id );
+		$img_absolute_path = get_attached_file( $this->service->image_id );
 
 		return str_replace(
 			pathinfo( $img_absolute_path, PATHINFO_BASENAME ),
-			'watermark-my-images-' . $this->image_id . '.jpg',
+			'watermark-my-images-' . $this->service->image_id . '.jpg',
 			$img_absolute_path
 		);
 	}
@@ -127,11 +127,11 @@ class Watermarker {
 	 * @return string
 	 */
 	public function get_watermark_rel_path(): string {
-		$url = wp_get_attachment_url( $this->image_id );
+		$url = wp_get_attachment_url( $this->service->image_id );
 
 		return str_replace(
 			substr( $url, strrpos( $url, '/' ) ),
-			'watermark-my-images-' . $this->image_id . '.jpg',
+			'watermark-my-images-' . $this->service->image_id . '.jpg',
 			$url
 		);
 	}

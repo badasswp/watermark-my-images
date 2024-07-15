@@ -192,8 +192,10 @@ class Plugin {
 	 * @return string
 	 */
 	public function get_watermark_abs_path(): string {
+		$img_absolute_path = get_attached_file( $this->image_id );
+
 		return str_replace(
-			pathinfo( get_attached_file( $this->image_id ), PATHINFO_BASENAME ),
+			pathinfo( $img_absolute_path, PATHINFO_BASENAME ),
 			'watermark-my-images-' . $this->image_id . '.jpg',
 			$img_absolute_path
 		);

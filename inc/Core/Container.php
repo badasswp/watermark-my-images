@@ -35,6 +35,7 @@ class Container implements Registrable {
 		static::$services = [
 			Admin::class,
 			Attachment::class,
+			MetaData::class,
 			PageLoad::class,
 			WooCommerce::class,
 		];

@@ -8,6 +8,7 @@
 namespace WatermarkMyImages\Services;
 
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Interfaces\Registrable;
 
 class Attachment extends Service implements Registrable {
 	/**

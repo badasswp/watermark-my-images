@@ -9,6 +9,7 @@ namespace WatermarkMyImages\Services;
 
 use DOMDocument;
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Interfaces\Registrable;
 
 class WooCommerce extends Service implements Registrable {
 	/**

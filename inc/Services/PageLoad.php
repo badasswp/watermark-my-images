@@ -8,6 +8,7 @@
 namespace WatermarkMyImages\Services;
 
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Interfaces\Registrable;
 
 class PageLoad extends Service implements Registrable {
 	/**

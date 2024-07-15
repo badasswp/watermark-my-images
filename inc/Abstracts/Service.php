@@ -37,9 +37,9 @@ abstract class Service implements Registrable {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var integer
+	 * @var integer|null
 	 */
-	public int $image_id;
+	public $image_id;
 
 	/**
 	 * Establish Singleton instance.
@@ -64,6 +64,7 @@ abstract class Service implements Registrable {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->image_id    = null;
 		$this->watermarker = new Watermarker( $this );
 	}
 

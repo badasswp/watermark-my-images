@@ -29,11 +29,11 @@ class Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return static
+	 * @return Plugin
 	 */
-	public function get_instance(): static {
+	public static function get_instance(): Plugin {
 		if ( is_null( static::$instance ) ) {
-			static::$instance = new static();
+			static::$instance = new self();
 		}
 
 		return static::$instance;

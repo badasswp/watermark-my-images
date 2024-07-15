@@ -11,9 +11,11 @@
 namespace WatermarkMyImages\Core;
 
 use WatermarkMyImages\Services\Admin;
+use WatermarkMyImages\Services\MetaData;
 use WatermarkMyImages\Services\PageLoad;
 use WatermarkMyImages\Services\Attachment;
 use WatermarkMyImages\Services\WooCommerce;
+
 use WatermarkMyImages\Interfaces\Registrable;
 
 class Container implements Registrable {

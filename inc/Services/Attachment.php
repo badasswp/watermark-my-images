@@ -2,7 +2,7 @@
 /**
  * Attachment Class.
  *
- * This class is responsible for loading Attachment-specific
+ * This class is responsible for loading Attachment specific
  * logic for plugin use.
  *
  * @package WatermarkMyImages

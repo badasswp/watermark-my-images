@@ -136,6 +136,10 @@ class Plugin {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @throws \Exception $e When unable to datect Image ID.
+	 * @throws \Exception $e When unable to create Text Drawer object.
+	 * @throws \Exception $e When unable to save Watermark Image.
+	 *
 	 * @return string
 	 */
 	public function get_watermark(): string {
@@ -163,7 +167,17 @@ class Plugin {
 
 		$image = ( new Imagine() )->open( $img_absolute_path );
 		$image->paste( $text, new Point( 0, 0 ) );
-		$image->save( $img_absolute_path );
+
+		try {
+			$image->save( $this->get_watermark_abs_path() );
+		} catch ( \Exception $e ) {
+			throw new \Exception(
+				sprintf(
+					esc_html__( 'Unable to save to Watermark image, %s', 'watermark-my-images' ),
+					$e->getMessage()
+				)
+			);
+		}
 
 		return [
 			'abs' => $img_absolute_path,

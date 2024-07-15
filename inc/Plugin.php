@@ -72,7 +72,7 @@ class Plugin {
 		$image_watermark = get_post_meta( $this->image_id, 'watermark_my_images', true );
 
 		// Bail out, if it exist.
-		if ( file_exists( $image_watermark['abs'] ) ) {
+		if ( file_exists( $image_watermark['abs'] ?? '' ) ) {
 			return $this->get_image_html( $image_html, $image_watermark['rel'] );
 		}
 

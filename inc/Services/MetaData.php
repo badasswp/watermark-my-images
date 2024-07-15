@@ -10,7 +10,7 @@ namespace WatermarkMyImages\Services;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Interfaces\Registrable;
 
-class Attachment extends Service implements Registrable {
+class MetaData extends Service implements Registrable {
 	/**
 	 * Bind to WP.
 	 *

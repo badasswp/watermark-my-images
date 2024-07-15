@@ -10,6 +10,7 @@
 
 namespace WatermarkMyImages\Abstracts;
 
+use WatermarkMyImages\Core\Watermarker;
 use WatermarkMyImages\Interfaces\Registrable;
 
 abstract class Service implements Registrable {
@@ -21,6 +22,15 @@ abstract class Service implements Registrable {
 	 * @var array
 	 */
 	protected static array $instances;
+
+	/**
+	 * Watermarker Instance.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var Watermarker
+	 */
+	public Watermarker $watermarker;
 
 	/**
 	 * Establish Singleton instance.
@@ -37,6 +47,15 @@ abstract class Service implements Registrable {
 		}
 
 		return static::$instances[ $instance ];
+	}
+
+	/**
+	 * Set up.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		$this->watermarker = new Watermarker( $this );
 	}
 
 	/**

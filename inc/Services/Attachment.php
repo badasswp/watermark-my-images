@@ -19,7 +19,7 @@ class Attachment extends Service implements Registrable {
 	 * @return void
 	 */
 	public function register(): void {
-		add_filter( 'add_attachment', [ $this, 'add_watermark_on_add_attachment' ], 10, 1 );
+		add_action( 'add_attachment', [ $this, 'add_watermark_on_add_attachment' ], 10, 1 );
 	}
 
 	/**

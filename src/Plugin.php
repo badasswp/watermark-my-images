@@ -159,7 +159,7 @@ class Plugin {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
-					esc_html__( 'Unable to create Text object, %s' ),
+					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
 			);

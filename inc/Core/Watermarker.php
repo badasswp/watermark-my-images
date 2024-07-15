@@ -2,7 +2,7 @@
 /**
  * Watermarker Class.
  *
- * This is responsible for all the magic goodness happening
+ * This is responsible for all the chocolatey goodness happening
  * behind the scene on the plugin.
  *
  * @package WatermarkMyImages

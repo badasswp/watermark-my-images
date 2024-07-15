@@ -16,6 +16,5 @@ class PageLoad extends Service implements Registrable {
 	 * @return void
 	 */
 	public function register(): void {
-
 	}
 }

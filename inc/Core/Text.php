@@ -174,7 +174,7 @@ class Text {
 	 */
 	public function get_font_url(): string {
 		return sprintf(
-			'../%s/fonts/%s.otf',
+			'%s/../fonts/%s.otf',
 			plugin_dir_path( __DIR__ ),
 			$this->get_watermark( 'font' ),
 		);

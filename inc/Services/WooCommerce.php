@@ -2,6 +2,9 @@
 /**
  * WooCommerce Class.
  *
+ * This class is responsible for loading WooCommerce specific
+ * logic for plugin use.
+ *
  * @package WatermarkMyImages
  */
 

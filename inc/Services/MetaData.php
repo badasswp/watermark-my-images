@@ -1,6 +1,9 @@
 <?php
 /**
- * Attachment Class.
+ * MetaData Class.
+ *
+ * This class is responsible for loading MetaData specific
+ * logic for plugin use.
  *
  * @package WatermarkMyImages
  */

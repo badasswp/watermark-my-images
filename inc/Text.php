@@ -11,8 +11,8 @@
 namespace WatermarkMyImages;
 
 use Imagine\Gd\Font;
+use Imagine\Gd\Image;
 use Imagine\Image\Box;
-use Imagine\Gd\Drawer;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Image\Palette\RGB;
@@ -119,9 +119,9 @@ class Text {
 	 * @throws \Exception $e When Imagine object is unable to create Text Box.
 	 * @throws \Exception $e When Drawer is unable to draw Text on Text Box.
 	 *
-	 * @return Drawer
+	 * @return Image
 	 */
-	public function get_text(): Drawer {
+	public function get_text(): Image {
 		try {
 			$bg_color = ( new RGB() )->color( $this->get_watermark( 'bg_color' ), 100 );
 		} catch ( \Exception $e ) {

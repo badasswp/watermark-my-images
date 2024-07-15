@@ -8,7 +8,7 @@
  * @package WatermarkMyImages
  */
 
-namespace WatermarkMyImages;
+namespace WatermarkMyImages\Core;
 
 use Imagine\Gd\Font;
 use Imagine\Gd\Image;

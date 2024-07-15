@@ -47,7 +47,7 @@ class Container implements Registrable {
 	 *
 	 * @return void
 	 */
-	public function register() {
+	public function register(): void {
 		foreach ( static::$services as $service ) {
 			( $service::get_instance() )->register();
 		}

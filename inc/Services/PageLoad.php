@@ -7,6 +7,8 @@
 
 namespace WatermarkMyImages\Services;
 
+use WatermarkMyImages\Abstracts\Service;
+
 class PageLoad extends Service implements Registrable {
 	/**
 	 * Bind to WP.

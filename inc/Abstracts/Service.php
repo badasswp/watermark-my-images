@@ -33,6 +33,15 @@ abstract class Service implements Registrable {
 	public Watermarker $watermarker;
 
 	/**
+	 * Image ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var integer
+	 */
+	public int $image_id;
+
+	/**
 	 * Establish Singleton instance.
 	 *
 	 * @since 1.0.0

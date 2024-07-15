@@ -68,5 +68,5 @@ abstract class Service implements Registrable {
 	 *
 	 * @return void
 	 */
-	abstract public function register();
+	abstract public function register(): void;
 }

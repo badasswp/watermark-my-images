@@ -126,6 +126,10 @@ class Text {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @throws \Exception $e When RGB Palette is unable to create Text color.
+	 * @throws \Exception $e When Imagine object is unable to create Text Box.
+	 * @throws \Exception $e When Drawer is unable to draw Text on Text Box.
+	 *
 	 * @return Drawer
 	 */
 	public function get_text(): Drawer {

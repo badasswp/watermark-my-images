@@ -12,6 +12,7 @@ namespace WatermarkMyImages;
 
 use DOMDocument;
 use Imagine\Gd\Imagine;
+use Imagine\Image\Point;
 use WatermarkMyImages\Text;
 
 class Plugin {

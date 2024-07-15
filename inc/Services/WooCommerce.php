@@ -76,7 +76,7 @@ class WooCommerce extends Service implements Registrable {
 		 *
 		 * @return void
 		 */
-		do_action( 'watermark_my_images_on_woo_product_get_image', $response, $watermark, $id = $this->image_id );
+		do_action( 'watermark_my_images_on_woo_product_get_image', $response, $watermark ?? [], $id = $this->image_id );
 
 		return $image_html;
 	}

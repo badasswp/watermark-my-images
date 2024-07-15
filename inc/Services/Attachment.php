@@ -72,6 +72,6 @@ class Attachment extends Service implements Registrable {
 		 *
 		 * @return void
 		 */
-		do_action( 'watermark_my_images_on_add_attachment', $response, $watermark, $id = $this->image_id );
+		do_action( 'watermark_my_images_on_add_attachment', $response, $watermark ?? [], $id = $this->image_id );
 	}
 }

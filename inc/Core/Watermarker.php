@@ -130,7 +130,7 @@ class Watermarker {
 		$url = wp_get_attachment_url( $this->service->image_id );
 
 		return str_replace(
-			substr( $url, strrpos( $url, '/' ) ),
+			substr( $url, strrpos( $url, '/' ) + 1 ),
 			'watermark-my-images-' . $this->service->image_id . '.jpg',
 			$url
 		);

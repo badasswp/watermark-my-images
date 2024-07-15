@@ -12,7 +12,6 @@ namespace WatermarkMyImages\Core;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
-use WatermarkMyImages\Text;
 use WatermarkMyImages\Abstracts\Service;
 
 class Watermarker {

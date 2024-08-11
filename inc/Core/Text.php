@@ -34,10 +34,10 @@ class Text {
 	 */
 	public function __construct() {
 		$this->args = [
+			'size'     => 60,
 			'tx_color' => '#FFF',
 			'bg_color' => '#BBB',
 			'font'     => 'Arial',
-			'size'     => 12,
 			'position' => [ 0, 0 ],
 			'label'    => 'WATERMARK',
 		];
@@ -135,7 +135,10 @@ class Text {
 
 		try {
 			$text_box = ( new Imagine() )->create(
-				new Box( 85, 35 ),
+				new Box(
+					$this->get_watermark( 'size' ) * ( strlen( $this->get_watermark( 'label' ) ) - 0.5 ),
+					$this->get_watermark( 'size' )
+				),
 				$bg_color
 			);
 		} catch ( \Exception $e ) {

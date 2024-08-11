@@ -1,4 +1,4 @@
-name: WatermarMyImages CI
+name: WatermarkMyImages CI
 
 on:
   push:

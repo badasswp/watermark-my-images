@@ -5,7 +5,7 @@ Insert Watermarks into your WP images.
 
 ## Why Watermark My Images?
 
-In this day & age of social media and fast sharing of information, it's easy for your intellectual assets to get hijacked and you never get the credit you deserve for your work. This plugin helps you insert watermarks on your site images, article thumbnails, and your product photos, so you don't have to worry about anyone stealing your image assets ever again!
+In this age of social media, it is easy for your intellectual assets to get hijacked and you never get the credit you deserve for your work. This plugin prevents that by helping you insert watermarks on your site images, article thumbnails, and your product photos, so you don't have to worry about anyone stealing your image assets ever again!
 
 ### Hooks
 

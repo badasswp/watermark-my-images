@@ -44,14 +44,14 @@ class Text {
 	}
 
 	/**
-	 * Get Watermark Text Options.
+	 * Get Watermark Text Option.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $option e.g. 'size'.
 	 * @return string
 	 */
-	public function get_watermark( $option ): string {
+	public function get_option( $option ): string {
 		return $this->get_options()[ $option ] ?? '';
 	}
 
@@ -93,7 +93,7 @@ class Text {
 	 */
 	public function get_font(): Font {
 		try {
-			$tx_color = ( new RGB() )->color( $this->get_watermark( 'tx_color' ), 100 );
+			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), 100 );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -105,7 +105,7 @@ class Text {
 
 		return new Font(
 			$this->get_font_url(),
-			$this->get_watermark( 'size' ),
+			$this->get_option( 'size' ),
 			$tx_color
 		);
 	}
@@ -123,7 +123,7 @@ class Text {
 	 */
 	public function get_text(): Image {
 		try {
-			$bg_color = ( new RGB() )->color( $this->get_watermark( 'bg_color' ), 100 );
+			$bg_color = ( new RGB() )->color( $this->get_option( 'bg_color' ), 100 );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -136,8 +136,8 @@ class Text {
 		try {
 			$text_box = ( new Imagine() )->create(
 				new Box(
-					$this->get_watermark( 'size' ) * ( strlen( $this->get_watermark( 'label' ) ) - 0.5 ),
-					$this->get_watermark( 'size' )
+					$this->get_option( 'size' ) * ( strlen( $this->get_option( 'label' ) ) - 0.5 ),
+					$this->get_option( 'size' )
 				),
 				$bg_color
 			);
@@ -152,7 +152,7 @@ class Text {
 
 		try {
 			$text_box->draw()->text(
-				$this->get_watermark( 'label' ),
+				$this->get_option( 'label' ),
 				$this->get_font(),
 				new Point( 0, 0 )
 			);
@@ -179,7 +179,7 @@ class Text {
 		return sprintf(
 			'%s/../fonts/%s.otf',
 			plugin_dir_path( __DIR__ ),
-			$this->get_watermark( 'font' ),
+			$this->get_option( 'font' ),
 		);
 	}
 }

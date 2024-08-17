@@ -43,7 +43,7 @@ This custom hook (filter) helps you filter the text options for your watermark. 
 ```php
 add_filter( 'watermark_my_images_text', [ $this, 'text_options' ], 10, 1 );
 
-public function text_options( $options ) {
+public function text_options( $options ): array {
     $options = wp_parse_args(
         [
             'tx_color' => '#FFF',

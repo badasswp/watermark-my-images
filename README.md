@@ -9,6 +9,33 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 ### Hooks
 
+#### `watermark_my_images_on_add_attachment`
+
+This custom hook (action) fires when the watermark is added on attachment upload. For e.g. to log errors, you could do:
+
+```php
+add_action( 'watermark_my_images_on_add_attachment', [ $this, 'log_errors' ], 10, 3 );
+
+public function log_errors( $response, $watermark, $id ): void {
+    if ( is_wp_error( $response ) ) {
+        error_log(
+            sprintf(
+                'Fatal Error: Failure converting Watermark Image, %s. Image ID: %d',
+                $response->get_error_message(),
+                $id
+            )
+        )
+    }
+}
+```
+
+**Parameters**
+
+- response _`{string|\WP_Error}`_ By default this an image URL of the watermarked image or WP Error object.
+- watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
+- id _`{int}`_ By default this will be the Image ID.
+<br/>
+
 #### `watermark_my_images_text`
 
 This custom hook (filter) helps you filter the text options for your watermark. For e.g. if you want a white text on a black background, you could pass like so:

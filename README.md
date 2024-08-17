@@ -31,7 +31,7 @@ public function log_errors( $response, $watermark, $id ): void {
 
 **Parameters**
 
-- response _`{string|\WP_Error}`_ By default this an image URL of the watermarked image or WP Error object.
+- response _`{string|\WP_Error}`_ By default this will be the image URL of the watermarked image or WP Error object.
 - watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
 - id _`{int}`_ By default this will be the Image ID.
 <br/>

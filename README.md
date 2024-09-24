@@ -62,3 +62,23 @@ public function text_options( $options ): array {
 
 - options _`{mixed[]}`_ By default this will be an array.
 <br/>
+
+#### `watermark_my_images_on_woo_product_get_image`
+
+This custom hook (action) fires when the watermark is added on attachment upload. For e.g. to log errors, you could do:
+
+```php
+add_action( 'watermark_my_images_on_add_attachment', [ $this, 'log_errors' ], 10, 3 );
+
+public function log_errors( $response, $watermark, $id ): void {
+    if ( is_wp_error( $response ) ) {
+        error_log(
+            sprintf(
+                'Fatal Error: Failure converting Watermark Image, %s. Image ID: %d',
+                $response->get_error_message(),
+                $id
+            )
+        )
+    }
+}
+```

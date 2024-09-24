@@ -65,10 +65,10 @@ public function text_options( $options ): array {
 
 #### `watermark_my_images_on_woo_product_get_image`
 
-This custom hook (action) fires when the watermark is added on attachment upload. For e.g. to log errors, you could do:
+This custom hook (action) fires when the watermark to a WooCommerce image. For e.g:
 
 ```php
-add_action( 'watermark_my_images_on_add_attachment', [ $this, 'log_errors' ], 10, 3 );
+add_action( 'watermark_my_images_on_woo_product_get_image', [ $this, 'log_errors' ], 10, 3 );
 
 public function log_errors( $response, $watermark, $id ): void {
     if ( is_wp_error( $response ) ) {
@@ -82,3 +82,10 @@ public function log_errors( $response, $watermark, $id ): void {
     }
 }
 ```
+
+**Parameters**
+
+- response _`{string|\WP_Error}`_ By default this will be the image URL of the watermarked image or WP Error object.
+- watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
+- id _`{int}`_ By default this will be the Image ID.
+<br/>

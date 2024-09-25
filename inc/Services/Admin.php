@@ -37,8 +37,8 @@ class Admin extends Service implements Registrable {
 	 */
 	public function register_options_menu(): void {
 		add_menu_page(
-			__( Options::get_page_title(), Options::get_page_slug() ),
-			__( Options::get_page_title(), Options::get_page_slug() ),
+			Options::get_page_title(),
+			Options::get_page_title(),
 			'manage_options',
 			Options::get_page_slug(),
 			[ $this, 'register_options_page' ],
@@ -63,7 +63,10 @@ class Admin extends Service implements Registrable {
 				<p>%s</p>
 				%s
 			</section>',
-			( new Form( Options::FORM ) )->get_options()
+			array_map(
+				'__',
+				( new Form( Options::$form ) )->get_options()
+			)
 		);
 	}
 

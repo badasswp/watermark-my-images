@@ -93,6 +93,7 @@ class Attachment extends Service implements Registrable {
 	 * @return void
 	 */
 	public function remove_watermark_on_delete_attachment( $image_id ): void {
+		// Bail out, if it is not an image.
 		if ( ! wp_attachment_is_image( $image_id ) ) {
 			return;
 		}

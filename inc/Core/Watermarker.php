@@ -52,7 +52,7 @@ class Watermarker {
 				sprintf(
 					/* translators: Image ID. */
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
-					$this->image_id
+					esc_html( $this->image_id )
 				)
 			);
 		}
@@ -64,11 +64,10 @@ class Watermarker {
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
-					$e->getMessage()
+					esc_html( $e->getMessage() )
 				),
 				500,
 				'Text Object',
-				$e
 			);
 		}
 
@@ -79,7 +78,7 @@ class Watermarker {
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
-					$e->getMessage()
+					esc_html( $e->getMessage() )
 				)
 			);
 		}
@@ -91,7 +90,7 @@ class Watermarker {
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to paste Text on Image resource, %s', 'watermark-my-images' ),
-					$e->getMessage()
+					esc_html( $e->getMessage() )
 				)
 			);
 		}
@@ -103,7 +102,7 @@ class Watermarker {
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to save to Watermark image, %s', 'watermark-my-images' ),
-					$e->getMessage()
+					esc_html( $e->getMessage() )
 				)
 			);
 		}

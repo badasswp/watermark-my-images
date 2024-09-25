@@ -54,14 +54,14 @@ class Options {
 	 *
 	 * @return void
 	 */
-    public static function init(): void {
-        static::$form = [
-            'page'   => static::get_form_page(),
-            'notice' => static::get_form_notice(),
-            'fields' => static::get_form_fields(),
-            'submit' => static::get_form_submit(),
-        ];
-    }
+	public static function init(): void {
+		static::$form = [
+			'page'   => static::get_form_page(),
+			'notice' => static::get_form_notice(),
+			'fields' => static::get_form_fields(),
+			'submit' => static::get_form_submit(),
+		];
+	}
 
 	/**
 	 * Form Page.
@@ -124,16 +124,16 @@ class Options {
 	 */
 	public static function get_form_fields() {
 		return [
-			'text_options' => [
+			'text_options'  => [
 				'heading'  => 'Text Options',
 				'controls' => [
-					'label'   => [
+					'label'      => [
 						'control'     => 'text',
 						'placeholder' => 'WATERMARK',
 						'label'       => 'Text Label',
 						'summary'     => 'e.g. WATERMARK',
 					],
-					'size'   => [
+					'size'       => [
 						'control'     => 'text',
 						'placeholder' => '60',
 						'label'       => 'Text Size',
@@ -151,13 +151,13 @@ class Options {
 						'label'       => 'Background Color',
 						'summary'     => 'e.g. #FFF',
 					],
-					'tx_opacity'   => [
+					'tx_opacity' => [
 						'control'     => 'text',
 						'placeholder' => '100',
 						'label'       => 'Text Opacity (%)',
 						'summary'     => 'e.g. 100',
 					],
-					'bg_opacity'   => [
+					'bg_opacity' => [
 						'control'     => 'text',
 						'placeholder' => '0',
 						'label'       => 'Background Opacity (%)',
@@ -165,7 +165,7 @@ class Options {
 					],
 				],
 			],
-			'image_options'  => [
+			'image_options' => [
 				'heading'  => 'Image Options',
 				'controls' => [
 					'upload'    => [
@@ -178,7 +178,7 @@ class Options {
 						'label'   => 'Add Watermark on Page Load',
 						'summary' => 'This is useful for existing images.',
 					],
-					'logs' => [
+					'logs'      => [
 						'control' => 'checkbox',
 						'label'   => 'Log errors for Failed Watermarks',
 						'summary' => 'Enable this option to log errors.',

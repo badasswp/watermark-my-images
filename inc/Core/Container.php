@@ -10,6 +10,7 @@
 
 namespace WatermarkMyImages\Core;
 
+use WatermarkMyImages\Services\Boot;
 use WatermarkMyImages\Services\Admin;
 use WatermarkMyImages\Services\MetaData;
 use WatermarkMyImages\Services\PageLoad;
@@ -37,6 +38,7 @@ class Container implements Registrable {
 		static::$services = [
 			Admin::class,
 			Attachment::class,
+			Boot::class,
 			MetaData::class,
 			PageLoad::class,
 			WooCommerce::class,

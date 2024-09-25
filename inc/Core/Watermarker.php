@@ -143,7 +143,7 @@ class Watermarker {
 	 * Get Text Position.
 	 *
 	 * This method gets the position for the Text
-	 * will be pasted on the Image.
+	 * that will be pasted on the Image.
 	 *
 	 * @since 1.0.0
 	 *

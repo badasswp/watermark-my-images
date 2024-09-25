@@ -65,7 +65,7 @@ class Text {
 	 */
 	private function get_options(): array {
 		$options = wp_parse_args(
-			get_option( 'watermark_my_images', [] )['text'] ?? [],
+			get_option( 'watermark_my_images', [] ) ?? [],
 			$this->args
 		);
 

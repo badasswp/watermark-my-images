@@ -16,6 +16,7 @@ use Imagine\Gd\Image as Text_Object;
 use Imagine\Image\ImageInterface as Image_Object;
 
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Exceptions\TextException;
 
 class Watermarker {
 	/**
@@ -58,11 +59,14 @@ class Watermarker {
 		try {
 			$text = ( new Text() )->get_text();
 		} catch ( \Exception $e ) {
-			throw new \Exception(
+			throw new TextException(
 				sprintf(
 					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
 					$e->getMessage()
-				)
+				),
+				500,
+				'Text Object',
+				$e
 			);
 		}
 

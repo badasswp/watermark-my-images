@@ -165,7 +165,7 @@ class Watermarker {
 		 * Filter Text Position.
 		 *
 		 * This filter is responsible for manipulating the text
-		 * text position before it pasted.
+		 * text position before it is pasted.
 		 *
 		 * @since 1.0.0
 		 *

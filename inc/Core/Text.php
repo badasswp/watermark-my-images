@@ -98,6 +98,7 @@ class Text {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text color, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
@@ -128,6 +129,7 @@ class Text {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Background color, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
@@ -145,6 +147,7 @@ class Text {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text Box, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
@@ -160,6 +163,7 @@ class Text {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to draw Text, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)

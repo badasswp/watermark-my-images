@@ -46,7 +46,7 @@ class Attachment extends Service implements Registrable {
 			return;
 		}
 
-		// Bail out, if it exist.
+		// Bail out, if watermark image exist.
 		if ( file_exists( $image_watermark['abs'] ?? '' ) ) {
 			return;
 		}

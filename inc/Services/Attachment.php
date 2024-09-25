@@ -25,6 +25,7 @@ class Attachment extends Service implements Registrable {
 		add_action( 'add_attachment', [ $this, 'add_watermark_on_add_attachment' ], 10, 1 );
 		add_action( 'delete_attachment', [ $this, 'remove_watermark_on_delete_attachment' ], 10, 1 );
 		add_filter( 'attachment_fields_to_edit', [ $this, 'add_watermark_attachment_fields' ], 10, 2 );
+		add_filter( 'wp_prepare_attachment_for_js', [ $this, 'show_watermark_images_on_wp_media_modal' ], 10, 3 );
 	}
 
 	/**
@@ -143,5 +144,37 @@ class Attachment extends Service implements Registrable {
 		];
 
 		return $fields;
+	}
+
+	/**
+	 * Show Watermark Images.
+	 *
+	 * This displays the Watermarked images on the WP
+	 * Medial modal window.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed[]     $response   Image Attachment data to be sent to JS.
+	 * @param \WP_Post    $attachment Attachment ID or object.
+	 * @param array|false $meta       Array of attachment meta data, or false if there is none.
+	 *
+	 * @return void
+	 */
+	public function show_watermark_images_on_wp_media_modal( $response, $attachment, $meta ) {
+		$image_watermark = get_post_meta( $attachment->ID, 'watermark_my_images', true );
+
+		// Bail out, if it is not an image.
+		if ( ! wp_attachment_is_image( $attachment->ID ) ) {
+			return $response;
+		}
+
+		// Bail out, if watermark image does NOT exist.
+		if ( ! file_exists( $image_watermark['abs'] ?? '' ) ) {
+			return $response;
+		}
+
+		$response['sizes']['full']['url'] = $image_watermark['rel'] ?? '';
+
+		return $response;
 	}
 }

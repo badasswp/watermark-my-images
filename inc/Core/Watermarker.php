@@ -12,6 +12,9 @@ namespace WatermarkMyImages\Core;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
+use Imagine\Gd\Image as Text_Object;
+use Imagine\Image\ImageInterface as Image_Object;
+
 use WatermarkMyImages\Abstracts\Service;
 
 class Watermarker {
@@ -75,7 +78,7 @@ class Watermarker {
 		}
 
 		try {
-			$image->paste( $text, new Point( 0, 0 ) );
+			$image->paste( $text, $this->get_position( $image, $text ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -134,5 +137,38 @@ class Watermarker {
 			'/watermark-my-images-' . $this->service->image_id . '.jpg',
 			$url
 		);
+	}
+
+	/**
+	 * Get Position.
+	 *
+	 * This method gets the position for the Text
+	 * will be pasted on the Image.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Image_Object $image Image Object.
+	 * @param Text_Object  $text  Text Object.
+	 *
+	 * @return Point
+	 */
+	private function get_position( $image, $text ): Point {
+		// Get Sizes.
+		$text_size  = $text->getSize();
+		$image_size = $image->getSize();
+
+		// Get Text Width & Height.
+		$text_width  = $text_size->getWidth();
+		$text_height = $text_size->getHeight();
+
+		// Get Image Width & Height.
+		$image_width  = $image_size->getWidth();
+		$image_height = $image_size->getHeight();
+
+		// Get Positions.
+		$posx = ( $image_width - $text_width ) / 2;
+		$posy = ( $image_height - $text_height ) / 2;
+
+		return new Point( $posx, $posy );
 	}
 }

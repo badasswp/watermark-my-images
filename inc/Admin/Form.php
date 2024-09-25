@@ -43,14 +43,8 @@ class Form {
 	 */
 	public function get_options(): array {
 		return [
-			'title'   => esc_html__(
-				$this->options['page']['title'] ?? '',
-				'watermark-my-images'
-			),
-			'summary' => esc_html__(
-				$this->options['page']['summary'] ?? '',
-				'watermark-my-images'
-			),
+			'title'   => $this->options['page']['title'] ?? '',
+			'summary' => $this->options['page']['summary'] ?? '',
 			'form'    => $this->get_form(),
 		];
 	}
@@ -151,7 +145,7 @@ class Form {
 				case 'heading':
 					$form_group .= sprintf(
 						'<div class="badasswp-form-group-heading">%s</div>',
-						esc_html__( $value, 'watermark-my-images' ),
+						$value,
 					);
 					break;
 
@@ -183,18 +177,9 @@ class Form {
 
 		foreach ( $arg as $name => $control ) {
 			$group_block = [
-				'label'   => esc_html__(
-					$control['label'] ?? '',
-					'watermark-my-images'
-				),
-				'control' => __(
-					$this->get_form_control( $control, $name ),
-					'watermark-my-images'
-				),
-				'summary' => esc_html__(
-					$control['summary'] ?? '',
-					'watermark-my-images'
-				),
+				'label'   => $control['label'] ?? '',
+				'control' => $this->get_form_control( $control, $name ),
+				'summary' => $control['summary'] ?? '',
 			];
 
 			$form_group_body .= vsprintf(
@@ -361,18 +346,9 @@ class Form {
 		$nonce_action = $this->options['submit']['nonce']['action'] ?? '';
 
 		$submit = [
-			'heading'      => esc_html__(
-				$heading,
-				'watermark-my-images'
-			),
-			'button_name'  => esc_attr__(
-				$button_name,
-				'watermark-my-images'
-			),
-			'button_label' => esc_html__(
-				$button_label,
-				'watermark-my-images'
-			),
+			'heading'      => $heading,
+			'button_name'  => $button_name,
+			'button_label' => $button_label,
 			'nonce_fields' => wp_nonce_field( $nonce_action, $nonce_name, true, false ),
 		];
 
@@ -411,7 +387,7 @@ class Form {
 				'<div class="badasswp-form-notice">
 					<span>%s</span>
 				</div>',
-				esc_html__( $notice_label, 'watermark-my-images' )
+				$notice_label
 			);
 		}
 

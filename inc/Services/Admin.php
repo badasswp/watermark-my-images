@@ -109,7 +109,7 @@ class Admin extends Service implements Registrable {
 		}
 
 		// Get Form Values.
-		foreach( $form_fields as $field ) {
+		foreach ( $form_fields as $field ) {
 			$form_values[] = sanitize_text_field( wp_unslash( $_POST[ $field ] ?? '' ) );
 		}
 

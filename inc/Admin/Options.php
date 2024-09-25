@@ -200,7 +200,7 @@ class Options {
 	 */
 	public static function get_form_notice() {
 		return [
-			'label' => esc_html__( 'Settings Saved.', 'watermark-my-images' )
+			'label' => esc_html__( 'Settings Saved.', 'watermark-my-images' ),
 		];
 	}
 }

@@ -38,7 +38,6 @@ class Text {
 			'tx_color'   => '#000',
 			'bg_color'   => '#FFF',
 			'font'       => 'Arial',
-			'position'   => [ 0, 0 ],
 			'label'      => 'WATERMARK',
 			'tx_opacity' => 100,
 			'bg_opacity' => 0,

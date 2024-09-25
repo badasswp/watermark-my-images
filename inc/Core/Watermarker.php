@@ -161,6 +161,19 @@ class Watermarker {
 		$posx = ( $image_size->getWidth() - $text_size->getWidth() ) / 2;
 		$posy = ( $image_size->getHeight() - $text_size->getHeight() ) / 2;
 
-		return new Point( $posx, $posy );
+		/**
+		 * Filter Text Position.
+		 *
+		 * This filter is responsible for manipulating the text
+		 * text position before it pasted.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed[] $position Text Position (x, y).
+		 * @return mixed[]
+		 */
+		list( $posx, $posy ) = (array) apply_filters( 'watermark_my_images_text_position', [ $posx, $posy ] );
+
+		return new Point( (int) $posx, (int) $posy );
 	}
 }

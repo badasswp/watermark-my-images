@@ -89,3 +89,20 @@ public function text_options( $options ): array {
 
 - options _`{mixed[]}`_ By default this will be an array.
 <br/>
+
+#### `watermark_my_images_text_position`
+
+This custom hook (filter) helps you filter the text position of the watermark like so:
+
+```php
+add_filter( 'watermark_my_images_text_position', [ $this, 'text_position' ], 10, 1 );
+
+public function text_position( $position ): array {
+    return [0, 0];
+}
+```
+
+**Parameters**
+
+- position _`{integer[]}`_ By default this will be an array containing x and y positions.
+<br/>

@@ -53,8 +53,8 @@ class WooCommerce extends Service implements Registrable {
 
 		try {
 			$watermark  = $this->watermarker->get_watermark();
-			$response   = $this->get_image_html( $image_html, $watermark['rel'] );
-			$image_html = $response;
+			$response   = $watermark['rel'] ?? '';
+			$image_html = $this->get_image_html( $image_html, $watermark['rel'] );
 		} catch ( \Exception $e ) {
 			$response = new \WP_Error(
 				'watermark-log-error',
@@ -70,7 +70,7 @@ class WooCommerce extends Service implements Registrable {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string|\WP_Error $response  Image HTML or WP Error.
+		 * @param string|\WP_Error $response  Image URL or WP Error.
 		 * @param string[]         $watermark Array containing abs and rel paths to new images.
 		 * @param int              $id        Image ID.
 		 *

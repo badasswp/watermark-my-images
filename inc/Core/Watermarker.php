@@ -157,17 +157,9 @@ class Watermarker {
 		$text_size  = $text->getSize();
 		$image_size = $image->getSize();
 
-		// Get Text Width & Height.
-		$text_width  = $text_size->getWidth();
-		$text_height = $text_size->getHeight();
-
-		// Get Image Width & Height.
-		$image_width  = $image_size->getWidth();
-		$image_height = $image_size->getHeight();
-
 		// Get Positions.
-		$posx = ( $image_width - $text_width ) / 2;
-		$posy = ( $image_height - $text_height ) / 2;
+		$posx = ( $image_size->getWidth() - $text_size->getWidth() ) / 2;
+		$posy = ( $image_size->getHeight() - $text_size->getHeight() ) / 2;
 
 		return new Point( $posx, $posy );
 	}

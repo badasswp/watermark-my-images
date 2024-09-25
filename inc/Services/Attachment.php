@@ -51,6 +51,8 @@ class Attachment extends Service implements Registrable {
 			return;
 		}
 
+		$this->image_id = $image_id;
+
 		try {
 			$watermark = $this->watermarker->get_watermark();
 			$response  = $watermark['rel'] ?? '';

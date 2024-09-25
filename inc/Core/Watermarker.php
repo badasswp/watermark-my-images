@@ -35,7 +35,7 @@ class Watermarker {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @throws \Exception $e When unable to datect Image ID.
+	 * @throws \Exception $e When unable to detect Image ID.
 	 * @throws \Exception $e When unable to create Text Drawer object.
 	 * @throws \Exception $e When unable to open Image resource.
 	 * @throws \Exception $e When unable to paste Text on Image resource.

@@ -112,7 +112,7 @@ class Watermarker {
 	 *
 	 * @return string
 	 */
-	public function get_watermark_abs_path(): string {
+	private function get_watermark_abs_path(): string {
 		$img_absolute_path = get_attached_file( $this->service->image_id );
 
 		return str_replace(
@@ -129,7 +129,7 @@ class Watermarker {
 	 *
 	 * @return string
 	 */
-	public function get_watermark_rel_path(): string {
+	private function get_watermark_rel_path(): string {
 		$url = wp_get_attachment_url( $this->service->image_id );
 
 		return str_replace(

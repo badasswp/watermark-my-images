@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Watermark My Images\n"
 "POT-Creation-Date: 2024-09-25 21:34+0100\n"
-"PO-Revision-Date: 2024-09-25 21:39+0100\n"
+"PO-Revision-Date: 2024-09-25 21:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -42,6 +42,18 @@ msgstr "badasswp"
 #. Author URI of the plugin/theme
 msgid "https://github.com/badasswp"
 msgstr "https://github.com/badasswp"
+
+#: inc/Admin/Options.php:128
+msgid "Text Options"
+msgstr "Textoptionen"
+
+#: inc/Admin/Options.php:169
+msgid "Image Options"
+msgstr "Bildoptionen"
+
+#: inc/Admin/Options.php:103
+msgid "Actions"
+msgstr "Aktionen"
 
 #: inc/Admin/Options.php:106
 msgid "Save Changes"

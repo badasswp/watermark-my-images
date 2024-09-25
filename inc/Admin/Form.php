@@ -89,7 +89,7 @@ class Form {
 	 */
 	public function get_form_action(): string {
 		return esc_url(
-			sanitize_text_field( $_SERVER['REQUEST_URI'] )
+			sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) )
 		);
 	}
 
@@ -381,8 +381,16 @@ class Form {
 	public function get_form_notice(): string {
 		$notice_label = $this->options['notice']['label'] ?? '';
 		$button_name  = $this->options['submit']['button']['name'] ?? '';
+		$nonce_name   = $this->options['submit']['nonce']['name'] ?? '';
+		$nonce_action = $this->options['submit']['nonce']['action'] ?? '';
 
-		if ( isset( $_POST[ $button_name ] ) ) {
+		if (
+			isset( $_POST[ $button_name ] ) &&
+			wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST[ $nonce_name ] ?? '' ) ),
+				$nonce_action
+			)
+		) {
 			return sprintf(
 				'<div class="badasswp-form-notice">
 					<span>%s</span>

@@ -34,12 +34,14 @@ class Text {
 	 */
 	public function __construct() {
 		$this->args = [
-			'size'     => 60,
-			'tx_color' => '#FFF',
-			'bg_color' => '#BBB',
-			'font'     => 'Arial',
-			'position' => [ 0, 0 ],
-			'label'    => 'WATERMARK',
+			'size'       => 60,
+			'tx_color'   => '#000',
+			'bg_color'   => '#BBB',
+			'font'       => 'Arial',
+			'position'   => [ 0, 0 ],
+			'label'      => 'WATERMARK',
+			'tx_opacity' => 100,
+			'bg_opacity' => 0,
 		];
 	}
 
@@ -93,7 +95,7 @@ class Text {
 	 */
 	public function get_font(): Font {
 		try {
-			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), 100 );
+			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -123,7 +125,7 @@ class Text {
 	 */
 	public function get_text(): Image {
 		try {
-			$bg_color = ( new RGB() )->color( $this->get_option( 'bg_color' ), 100 );
+			$bg_color = ( new RGB() )->color( $this->get_option( 'bg_color' ), (int) $this->get_option( 'bg_opacity' ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(

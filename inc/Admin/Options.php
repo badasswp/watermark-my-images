@@ -100,10 +100,10 @@ class Options {
 	 */
 	public static function get_form_submit(): array {
 		return [
-			'heading' => 'Actions',
+			'heading' => esc_html( 'Actions', 'watermark-my-images' ),
 			'button'  => [
 				'name'  => 'watermark_my_images_save_settings',
-				'label' => 'Save Changes',
+				'label' => esc_html__( 'Save Changes', 'watermark-my-images' ),
 			],
 			'nonce'   => [
 				'name'   => 'watermark_my_images_settings_nonce',
@@ -128,40 +128,40 @@ class Options {
 				'heading'  => 'Text Options',
 				'controls' => [
 					'label'      => [
-						'control'     => 'text',
-						'placeholder' => 'WATERMARK',
-						'label'       => 'Text Label',
-						'summary'     => 'e.g. WATERMARK',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( 'WATERMARK', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Text Label', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. WATERMARK', 'watermark-my-images' ),
 					],
 					'size'       => [
-						'control'     => 'text',
-						'placeholder' => '60',
-						'label'       => 'Text Size',
-						'summary'     => 'e.g. 60',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( '60', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Text Size', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. 60', 'watermark-my-images' ),
 					],
 					'tx_color'   => [
-						'control'     => 'text',
-						'placeholder' => '#000',
-						'label'       => 'Text Color',
-						'summary'     => 'e.g. #000',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( '#000', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Text Color', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. #000', 'watermark-my-images' ),
 					],
 					'bg_color'   => [
-						'control'     => 'text',
-						'placeholder' => '#FFF',
-						'label'       => 'Background Color',
-						'summary'     => 'e.g. #FFF',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( '#FFF', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Background Color', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. #FFF', 'watermark-my-images' ),
 					],
 					'tx_opacity' => [
-						'control'     => 'text',
-						'placeholder' => '100',
-						'label'       => 'Text Opacity (%)',
-						'summary'     => 'e.g. 100',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( '100', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Text Opacity (%)', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. 100', 'watermark-my-images' ),
 					],
 					'bg_opacity' => [
-						'control'     => 'text',
-						'placeholder' => '0',
-						'label'       => 'Background Opacity (%)',
-						'summary'     => 'e.g. 0',
+						'control'     => esc_attr( 'text' ),
+						'placeholder' => esc_attr__( '0', 'watermark-my-images' ),
+						'label'       => esc_html__( 'Background Opacity (%)', 'watermark-my-images' ),
+						'summary'     => esc_html__( 'e.g. 0', 'watermark-my-images' ),
 					],
 				],
 			],
@@ -169,19 +169,19 @@ class Options {
 				'heading'  => 'Image Options',
 				'controls' => [
 					'upload'    => [
-						'control' => 'checkbox',
-						'label'   => 'Add Watermark on Image Upload',
-						'summary' => 'This is useful for new images.',
+						'control' => esc_attr( 'checkbox' ),
+						'label'   => esc_html__( 'Add Watermark on Image Upload', 'watermark-my-images' ),
+						'summary' => esc_html__( 'This is useful for new images.', 'watermark-my-images' ),
 					],
 					'page_load' => [
-						'control' => 'checkbox',
-						'label'   => 'Add Watermark on Page Load',
-						'summary' => 'This is useful for existing images.',
+						'control' => esc_attr( 'checkbox' ),
+						'label'   => esc_html__( 'Add Watermark on Page Load', 'watermark-my-images' ),
+						'summary' => esc_html__( 'This is useful for existing images.', 'watermark-my-images' ),
 					],
 					'logs'      => [
-						'control' => 'checkbox',
-						'label'   => 'Log errors for Failed Watermarks',
-						'summary' => 'Enable this option to log errors.',
+						'control' => esc_attr( 'checkbox' ),
+						'label'   => esc_html__( 'Log errors for Failed Watermarks', 'watermark-my-images' ),
+						'summary' => esc_html__( 'Enable this option to log errors.', 'watermark-my-images' ),
 					],
 				],
 			],
@@ -200,7 +200,7 @@ class Options {
 	 */
 	public static function get_form_notice() {
 		return [
-			'label' => 'Settings Saved.',
+			'label' => esc_html__( 'Settings Saved.', 'watermark-my-images' )
 		];
 	}
 }

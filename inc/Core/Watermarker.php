@@ -78,7 +78,7 @@ class Watermarker {
 		}
 
 		try {
-			$image->paste( $text, $this->get_position( $image, $text ) );
+			$image->paste( $text, $this->get_text_position( $image, $text ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -140,7 +140,7 @@ class Watermarker {
 	}
 
 	/**
-	 * Get Position.
+	 * Get Text Position.
 	 *
 	 * This method gets the position for the Text
 	 * will be pasted on the Image.
@@ -152,7 +152,7 @@ class Watermarker {
 	 *
 	 * @return Point
 	 */
-	private function get_position( $image, $text ): Point {
+	private function get_text_position( $image, $text ): Point {
 		// Get Sizes.
 		$text_size  = $text->getSize();
 		$image_size = $image->getSize();

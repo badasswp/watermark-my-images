@@ -48,7 +48,7 @@ class Watermarker {
 		$img_absolute_path = get_attached_file( $this->service->image_id );
 
 		if ( ! file_exists( $img_absolute_path ) ) {
-			throw new \Exception(
+			throw new \InvalidArgumentException(
 				sprintf(
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
 					$this->image_id

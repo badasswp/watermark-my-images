@@ -23,27 +23,15 @@ class TextException extends \Exception {
 	protected $context;
 
 	/**
-	 * Original Exception.
-	 *
-	 * The original exception that caused this error (optional).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var \Exception
-	 */
-	protected $exception;
-
-	/**
 	 * Setup.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string          $message   The exception message.
-	 * @param int             $code      The exception code.
-	 * @param string|null     $context   Additional context about where the exception occurred.
-	 * @param \Exception|null $exception The original exception (optional).
+	 * @param string      $message   The exception message.
+	 * @param int         $code      The exception code.
+	 * @param string|null $context   Additional context about where the exception occurred.
 	 */
-	public function __construct( $message, $code = 0, $context = null, \Exception $exception = null ) {
+	public function __construct( $message, $code = 0, $context = null ) {
 		$this->context   = $context;
 		$this->exception = $exception;
 
@@ -70,16 +58,5 @@ class TextException extends \Exception {
 	 */
 	public function getContext() {
 		return $this->context;
-	}
-
-	/**
-	 * Get the Original Exception.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return \Exception|null
-	 */
-	public function getOriginalException() {
-		return $this->exception;
 	}
 }

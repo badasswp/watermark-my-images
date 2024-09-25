@@ -53,7 +53,7 @@ class Text {
 	 * @param string $option e.g. 'size'.
 	 * @return string
 	 */
-	public function get_option( $option ): string {
+	private function get_option( $option ): string {
 		return $this->get_options()[ $option ] ?? '';
 	}
 
@@ -64,7 +64,7 @@ class Text {
 	 *
 	 * @return mixed[]
 	 */
-	public function get_options(): array {
+	private function get_options(): array {
 		$options = wp_parse_args(
 			get_option( 'watermark_my_images', [] )['text'] ?? [],
 			$this->args
@@ -93,7 +93,7 @@ class Text {
 	 *
 	 * @return Font
 	 */
-	public function get_font(): Font {
+	private function get_font(): Font {
 		try {
 			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
 		} catch ( \Exception $e ) {
@@ -177,7 +177,7 @@ class Text {
 	 *
 	 * @return string
 	 */
-	public function get_font_url(): string {
+	private function get_font_url(): string {
 		return sprintf(
 			'%s/../fonts/%s.otf',
 			plugin_dir_path( __DIR__ ),

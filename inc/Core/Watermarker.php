@@ -50,6 +50,7 @@ class Watermarker {
 		if ( ! file_exists( $img_absolute_path ) ) {
 			throw new \InvalidArgumentException(
 				sprintf(
+					/* translators: Image ID. */
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
 					$this->image_id
 				)
@@ -61,6 +62,7 @@ class Watermarker {
 		} catch ( \Exception $e ) {
 			throw new TextException(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				),
@@ -75,6 +77,7 @@ class Watermarker {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
@@ -86,6 +89,7 @@ class Watermarker {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to paste Text on Image resource, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)
@@ -97,6 +101,7 @@ class Watermarker {
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
+					/* translators: Exception error message. */
 					esc_html__( 'Unable to save to Watermark image, %s', 'watermark-my-images' ),
 					$e->getMessage()
 				)

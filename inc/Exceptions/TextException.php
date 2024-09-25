@@ -31,21 +31,21 @@ class TextException extends \Exception {
 	 *
 	 * @var \Exception
 	 */
-	protected $originalException;
+	protected $exception;
 
 	/**
 	 * Setup.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string          $message           The exception message.
-	 * @param int             $code              The exception code.
-	 * @param string|null     $context           Additional context about where the exception occurred.
-	 * @param \Exception|null $originalException The original exception (optional).
+	 * @param string          $message   The exception message.
+	 * @param int             $code      The exception code.
+	 * @param string|null     $context   Additional context about where the exception occurred.
+	 * @param \Exception|null $exception The original exception (optional).
 	 */
-	public function __construct( $message, $code = 0, $context = null, \Exception $originalException = null ) {
-		$this->context           = $context;
-		$this->originalException = $originalException;
+	public function __construct( $message, $code = 0, $context = null, \Exception $exception = null ) {
+		$this->context   = $context;
+		$this->exception = $exception;
 
 		// Log the error for debugging purposes.
 		error_log(
@@ -80,6 +80,6 @@ class TextException extends \Exception {
 	 * @return \Exception|null
 	 */
 	public function getOriginalException() {
-		return $this->originalException;
+		return $this->exception;
 	}
 }

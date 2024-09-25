@@ -103,7 +103,7 @@ class Attachment extends Service implements Registrable {
 		$main_image = get_post_meta( $image_id, 'watermark_my_images', true );
 
 		if ( file_exists( $main_image['abs'] ?? '' ) ) {
-			unlink( $main_image['abs'] );
+			wp_delete_file( $main_image['abs'] );
 
 			/**
 			 * Fires after Watermark Image has been deleted.

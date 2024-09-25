@@ -100,7 +100,7 @@ class Options {
 	 */
 	public static function get_form_submit(): array {
 		return [
-			'heading' => esc_html( 'Actions', 'watermark-my-images' ),
+			'heading' => esc_html__( 'Actions', 'watermark-my-images' ),
 			'button'  => [
 				'name'  => 'watermark_my_images_save_settings',
 				'label' => esc_html__( 'Save Changes', 'watermark-my-images' ),
@@ -125,7 +125,7 @@ class Options {
 	public static function get_form_fields() {
 		return [
 			'text_options'  => [
-				'heading'  => 'Text Options',
+				'heading'  => esc_html__( 'Text Options', 'watermark-my-images' ),
 				'controls' => [
 					'label'      => [
 						'control'     => esc_attr( 'text' ),
@@ -166,7 +166,7 @@ class Options {
 				],
 			],
 			'image_options' => [
-				'heading'  => 'Image Options',
+				'heading'  => esc_html__( 'Image Options', 'watermark-my-images' ),
 				'controls' => [
 					'upload'    => [
 						'control' => esc_attr( 'checkbox' ),

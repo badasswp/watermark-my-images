@@ -81,19 +81,26 @@ class Admin extends Service implements Registrable {
 	 * @return void
 	 */
 	public function register_options_init(): void {
-		$form_fields          = [];
+		// Form data.
+		$form_fields = [];
+		$form_values = [];
+
+		// Button & WP Nonces.
 		$form_button_name     = Options::get_submit_button_name();
 		$form_settings_nonce  = Options::get_submit_nonce_name();
 		$form_settings_action = Options::get_submit_nonce_action();
 
+		// Bail out early, if save button or nonce is not set.
 		if ( ! isset( $_POST[ $form_button_name ] ) || ! isset( $_POST[ $form_settings_nonce ] ) ) {
 			return;
 		}
 
+		// Bail out early, if nonce is not verified.
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $form_settings_nonce ] ) ), $form_settings_action ) ) {
 			return;
 		}
 
+		// Get Form Fields.
 		foreach ( Options::get_fields() as $field ) {
 			$form_fields = array_merge(
 				array_keys( $field['controls'] ?? [] ),
@@ -101,17 +108,13 @@ class Admin extends Service implements Registrable {
 			);
 		}
 
-		$options = array_combine(
-			$form_fields,
-			array_map(
-				function ( $field ) {
-					return sanitize_text_field( $_POST[ $field ] ?? '' );
-				},
-				$form_fields
-			)
-		);
+		// Get Form Values.
+		foreach( $form_fields as $field ) {
+			$form_values[] = sanitize_text_field( wp_unslash( $_POST[ $field ] ?? '' ) );
+		}
 
-		update_option( Options::get_page_option(), $options );
+		// Update Plugin options.
+		update_option( Options::get_page_option(), array_combine( $form_fields, $form_values ) );
 	}
 
 	/**

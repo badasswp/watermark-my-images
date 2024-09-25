@@ -36,7 +36,7 @@ class Text {
 		$this->args = [
 			'size'       => 60,
 			'tx_color'   => '#000',
-			'bg_color'   => '#BBB',
+			'bg_color'   => '#FFF',
 			'font'       => 'Arial',
 			'position'   => [ 0, 0 ],
 			'label'      => 'WATERMARK',

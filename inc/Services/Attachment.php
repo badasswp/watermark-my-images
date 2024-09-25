@@ -39,8 +39,7 @@ class Attachment extends Service implements Registrable {
 	 * @return void
 	 */
 	public function add_watermark_on_add_attachment( $image_id ): void {
-		$image_html     = wp_get_attachment_url( $image_id );
-		$this->image_id = $image_id;
+		$image_watermark = get_post_meta( $image_id, 'watermark_my_images', true );
 
 		$image_watermark = get_post_meta( $this->image_id, 'watermark_my_images', true );
 

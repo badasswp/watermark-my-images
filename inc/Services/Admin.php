@@ -43,7 +43,7 @@ class Admin extends Service implements Registrable {
 			Options::get_page_slug(),
 			[ $this, 'register_options_page' ],
 			'dashicons-format-image',
-			10
+			100
 		);
 	}
 

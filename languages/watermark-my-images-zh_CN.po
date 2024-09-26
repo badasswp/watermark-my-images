@@ -1,0 +1,218 @@
+# Copyright (C) badasswp
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Watermark My Images\n"
+"POT-Creation-Date: 2024-09-25 21:34+0100\n"
+"PO-Revision-Date: 2024-09-26 11:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: watermark-my-images.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#. Plugin Name of the plugin/theme
+#: inc/Admin/Options.php:79
+msgid "Watermark My Images"
+msgstr "为我的图像添加水印"
+
+#. Description of the plugin/theme
+#: inc/Admin/Options.php:83
+msgid "Insert Watermarks into your WP images."
+msgstr "将水印插入您的 WP 图像中。"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/badasswp/watermark-my-images"
+msgstr "https://github.com/badasswp/watermark-my-images"
+
+#. Author of the plugin/theme
+msgid "badasswp"
+msgstr "badasswp"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/badasswp"
+msgstr "https://github.com/badasswp"
+
+#: inc/Admin/Options.php:128
+msgid "Text Options"
+msgstr "文字选项"
+
+#: inc/Admin/Options.php:169
+msgid "Image Options"
+msgstr "图像选项"
+
+#: inc/Admin/Options.php:103
+msgid "Actions"
+msgstr "操作"
+
+#: inc/Admin/Options.php:106
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: inc/Admin/Options.php:132
+msgid "WATERMARK"
+msgstr "水印"
+
+#: inc/Admin/Options.php:133
+msgid "Text Label"
+msgstr "文本标签"
+
+#: inc/Admin/Options.php:134
+msgid "e.g. WATERMARK"
+msgstr "例如：WATERMARK"
+
+#: inc/Admin/Options.php:138
+msgid "60"
+msgstr "60"
+
+#: inc/Admin/Options.php:139
+msgid "Text Size"
+msgstr "字体大小"
+
+#: inc/Admin/Options.php:140
+msgid "e.g. 60"
+msgstr "例如60"
+
+#: inc/Admin/Options.php:144
+msgid "#000"
+msgstr "#000"
+
+#: inc/Admin/Options.php:145
+msgid "Text Color"
+msgstr "文本颜色"
+
+#: inc/Admin/Options.php:146
+msgid "e.g. #000"
+msgstr "例：#000"
+
+#: inc/Admin/Options.php:150
+msgid "#FFF"
+msgstr "#FFF"
+
+#: inc/Admin/Options.php:151
+msgid "Background Color"
+msgstr "背景颜色"
+
+#: inc/Admin/Options.php:152
+msgid "e.g. #FFF"
+msgstr "例如 #FFF"
+
+#: inc/Admin/Options.php:156
+msgid "100"
+msgstr "100"
+
+#: inc/Admin/Options.php:157
+msgid "Text Opacity (%)"
+msgstr "文本不透明度 （%）"
+
+#: inc/Admin/Options.php:158
+msgid "e.g. 100"
+msgstr "例如：100"
+
+#: inc/Admin/Options.php:162
+msgid "0"
+msgstr "0"
+
+#: inc/Admin/Options.php:163
+msgid "Background Opacity (%)"
+msgstr "背景不透明度（%）"
+
+#: inc/Admin/Options.php:164
+msgid "e.g. 0"
+msgstr "例如 0"
+
+#: inc/Admin/Options.php:173
+msgid "Add Watermark on Image Upload"
+msgstr "在图片上传时添加水印"
+
+#: inc/Admin/Options.php:174
+msgid "This is useful for new images."
+msgstr "这对于新图像很有用。"
+
+#: inc/Admin/Options.php:178
+msgid "Add Watermark on Page Load"
+msgstr "在页面加载时添加水印"
+
+#: inc/Admin/Options.php:179
+msgid "This is useful for existing images."
+msgstr "这对于现有图像很有用。"
+
+#: inc/Admin/Options.php:183
+msgid "Log errors for Failed Watermarks"
+msgstr "Failed Watermarks 的日志错误"
+
+#: inc/Admin/Options.php:184
+msgid "Enable this option to log errors."
+msgstr "启用此选项可记录错误。"
+
+#: inc/Admin/Options.php:203
+msgid "Settings Saved."
+msgstr "设置已保存。"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:102
+#, php-format
+msgid "Unable to create Text color, %s"
+msgstr "无法创建文本颜色、%s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:133
+#, php-format
+msgid "Unable to create Background color, %s"
+msgstr "无法创建背景颜色，%s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:151
+#, php-format
+msgid "Unable to create Text Box, %s"
+msgstr "无法创建文本框，%s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:167
+#, php-format
+msgid "Unable to draw Text, %s"
+msgstr "无法绘制文本、%s"
+
+#. translators: Image ID.
+#: inc/Core/Watermarker.php:54
+#, php-format
+msgid "Unable to create Image watermark, file does not exist for Image ID: %d."
+msgstr "无法创建图像水印，图像 ID 的文件不存在：%d。"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:66
+#, php-format
+msgid "Unable to create Text object, %s"
+msgstr "无法创建 Text 对象，%s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:80
+#, php-format
+msgid "Unable to open Image Resource, %s"
+msgstr "无法打开图像资源、%s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:92
+#, php-format
+msgid "Unable to paste Text on Image resource, %s"
+msgstr "无法在图像资源上粘贴文本 %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:104
+#, php-format
+msgid "Unable to save to Watermark image, %s"
+msgstr "无法保存到水印图像，%s"
+
+#: watermark-my-images.php:29
+msgid "Fatal Error: Composer is NOT installed!"
+msgstr "致命错误：未安装 Composer！"

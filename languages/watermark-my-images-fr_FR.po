@@ -1,0 +1,218 @@
+# Copyright (C) badasswp
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Watermark My Images\n"
+"POT-Creation-Date: 2024-09-25 21:34+0100\n"
+"PO-Revision-Date: 2024-09-26 11:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: watermark-my-images.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#. Plugin Name of the plugin/theme
+#: inc/Admin/Options.php:79
+msgid "Watermark My Images"
+msgstr "Filigraner mes images"
+
+#. Description of the plugin/theme
+#: inc/Admin/Options.php:83
+msgid "Insert Watermarks into your WP images."
+msgstr "Insérez des filigranes dans vos images WP."
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/badasswp/watermark-my-images"
+msgstr "https://github.com/badasswp/watermark-my-images"
+
+#. Author of the plugin/theme
+msgid "badasswp"
+msgstr "badasswp"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/badasswp"
+msgstr "https://github.com/badasswp"
+
+#: inc/Admin/Options.php:128
+msgid "Text Options"
+msgstr "Options de texte"
+
+#: inc/Admin/Options.php:169
+msgid "Image Options"
+msgstr "Options des Images"
+
+#: inc/Admin/Options.php:103
+msgid "Actions"
+msgstr "Actions"
+
+#: inc/Admin/Options.php:106
+msgid "Save Changes"
+msgstr "Sauvegarder les Changements"
+
+#: inc/Admin/Options.php:132
+msgid "WATERMARK"
+msgstr "FILIGRANE"
+
+#: inc/Admin/Options.php:133
+msgid "Text Label"
+msgstr "Badge de texte"
+
+#: inc/Admin/Options.php:134
+msgid "e.g. WATERMARK"
+msgstr "par exemple FILIGRANE"
+
+#: inc/Admin/Options.php:138
+msgid "60"
+msgstr "60"
+
+#: inc/Admin/Options.php:139
+msgid "Text Size"
+msgstr "Taille du texte"
+
+#: inc/Admin/Options.php:140
+msgid "e.g. 60"
+msgstr "ex. 60"
+
+#: inc/Admin/Options.php:144
+msgid "#000"
+msgstr "#000"
+
+#: inc/Admin/Options.php:145
+msgid "Text Color"
+msgstr "Couleur du texte"
+
+#: inc/Admin/Options.php:146
+msgid "e.g. #000"
+msgstr "par exemple #000"
+
+#: inc/Admin/Options.php:150
+msgid "#FFF"
+msgstr "#FFF"
+
+#: inc/Admin/Options.php:151
+msgid "Background Color"
+msgstr "Couleur de fond"
+
+#: inc/Admin/Options.php:152
+msgid "e.g. #FFF"
+msgstr "par exemple #FFF"
+
+#: inc/Admin/Options.php:156
+msgid "100"
+msgstr "100"
+
+#: inc/Admin/Options.php:157
+msgid "Text Opacity (%)"
+msgstr "Opacité du texte (%)"
+
+#: inc/Admin/Options.php:158
+msgid "e.g. 100"
+msgstr "par exemple 100"
+
+#: inc/Admin/Options.php:162
+msgid "0"
+msgstr "0"
+
+#: inc/Admin/Options.php:163
+msgid "Background Opacity (%)"
+msgstr "Opacité de l'Arrière-plan (%)"
+
+#: inc/Admin/Options.php:164
+msgid "e.g. 0"
+msgstr "ex : 0"
+
+#: inc/Admin/Options.php:173
+msgid "Add Watermark on Image Upload"
+msgstr "Ajouter un filigrane lors du téléchargement d’une image"
+
+#: inc/Admin/Options.php:174
+msgid "This is useful for new images."
+msgstr "Ceci est utile pour les nouvelles images."
+
+#: inc/Admin/Options.php:178
+msgid "Add Watermark on Page Load"
+msgstr "Ajouter un filigrane au chargement de la page"
+
+#: inc/Admin/Options.php:179
+msgid "This is useful for existing images."
+msgstr "Ceci est utile pour les images existantes."
+
+#: inc/Admin/Options.php:183
+msgid "Log errors for Failed Watermarks"
+msgstr "Erreurs de journal pour les filigranes échoués"
+
+#: inc/Admin/Options.php:184
+msgid "Enable this option to log errors."
+msgstr "Activez cette option pour consigner les erreurs."
+
+#: inc/Admin/Options.php:203
+msgid "Settings Saved."
+msgstr "Paramètres Sauvegardés."
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:102
+#, php-format
+msgid "Unable to create Text color, %s"
+msgstr "Impossible de créer la couleur du texte, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:133
+#, php-format
+msgid "Unable to create Background color, %s"
+msgstr "Impossible de créer une couleur d’arrière-plan, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:151
+#, php-format
+msgid "Unable to create Text Box, %s"
+msgstr "Impossible de créer une zone de texte, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:167
+#, php-format
+msgid "Unable to draw Text, %s"
+msgstr "Impossible de dessiner du texte, %s"
+
+#. translators: Image ID.
+#: inc/Core/Watermarker.php:54
+#, php-format
+msgid "Unable to create Image watermark, file does not exist for Image ID: %d."
+msgstr "Impossible de créer un filigrane d’image, le fichier n’existe pas pour l’ID d’image : %d."
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:66
+#, php-format
+msgid "Unable to create Text object, %s"
+msgstr "Impossible de créer un objet Texte, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:80
+#, php-format
+msgid "Unable to open Image Resource, %s"
+msgstr "Impossible d’ouvrir la ressource d’image, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:92
+#, php-format
+msgid "Unable to paste Text on Image resource, %s"
+msgstr "Impossible de coller du texte sur la ressource image, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:104
+#, php-format
+msgid "Unable to save to Watermark image, %s"
+msgstr "Impossible d’enregistrer dans l’image en filigrane, %s"
+
+#: watermark-my-images.php:29
+msgid "Fatal Error: Composer is NOT installed!"
+msgstr "Erreur fatale : Composer n’est PAS installé !"

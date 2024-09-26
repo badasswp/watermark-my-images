@@ -1,0 +1,218 @@
+# Copyright (C) badasswp
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Watermark My Images\n"
+"POT-Creation-Date: 2024-09-25 21:34+0100\n"
+"PO-Revision-Date: 2024-09-26 11:26+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: watermark-my-images.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#. Plugin Name of the plugin/theme
+#: inc/Admin/Options.php:79
+msgid "Watermark My Images"
+msgstr "Водяной знак Мои изображения"
+
+#. Description of the plugin/theme
+#: inc/Admin/Options.php:83
+msgid "Insert Watermarks into your WP images."
+msgstr "Вставляйте водяные знаки в свои изображения WP."
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/badasswp/watermark-my-images"
+msgstr "https://github.com/badasswp/watermark-my-images"
+
+#. Author of the plugin/theme
+msgid "badasswp"
+msgstr "badasswp"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/badasswp"
+msgstr "https://github.com/badasswp"
+
+#: inc/Admin/Options.php:128
+msgid "Text Options"
+msgstr "Настройки текста"
+
+#: inc/Admin/Options.php:169
+msgid "Image Options"
+msgstr "Опции изображения"
+
+#: inc/Admin/Options.php:103
+msgid "Actions"
+msgstr "Действия"
+
+#: inc/Admin/Options.php:106
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: inc/Admin/Options.php:132
+msgid "WATERMARK"
+msgstr "ВОДЯНОЙ ЗНАК"
+
+#: inc/Admin/Options.php:133
+msgid "Text Label"
+msgstr "Текст метки"
+
+#: inc/Admin/Options.php:134
+msgid "e.g. WATERMARK"
+msgstr "например, ВОДЯНОЙ ЗНАК"
+
+#: inc/Admin/Options.php:138
+msgid "60"
+msgstr "60"
+
+#: inc/Admin/Options.php:139
+msgid "Text Size"
+msgstr "Размер текста"
+
+#: inc/Admin/Options.php:140
+msgid "e.g. 60"
+msgstr "например, 60"
+
+#: inc/Admin/Options.php:144
+msgid "#000"
+msgstr "#000"
+
+#: inc/Admin/Options.php:145
+msgid "Text Color"
+msgstr "Цвет текста"
+
+#: inc/Admin/Options.php:146
+msgid "e.g. #000"
+msgstr "например, #000"
+
+#: inc/Admin/Options.php:150
+msgid "#FFF"
+msgstr "#FFF"
+
+#: inc/Admin/Options.php:151
+msgid "Background Color"
+msgstr "Цвет фона"
+
+#: inc/Admin/Options.php:152
+msgid "e.g. #FFF"
+msgstr "Например, #FFF"
+
+#: inc/Admin/Options.php:156
+msgid "100"
+msgstr "100"
+
+#: inc/Admin/Options.php:157
+msgid "Text Opacity (%)"
+msgstr "Непрозрачность текста (%)"
+
+#: inc/Admin/Options.php:158
+msgid "e.g. 100"
+msgstr "например: 100"
+
+#: inc/Admin/Options.php:162
+msgid "0"
+msgstr "0"
+
+#: inc/Admin/Options.php:163
+msgid "Background Opacity (%)"
+msgstr "НеПрозрачность фона (%)"
+
+#: inc/Admin/Options.php:164
+msgid "e.g. 0"
+msgstr "например 0"
+
+#: inc/Admin/Options.php:173
+msgid "Add Watermark on Image Upload"
+msgstr "Добавить водяной знак при загрузке изображения"
+
+#: inc/Admin/Options.php:174
+msgid "This is useful for new images."
+msgstr "Это полезно для новых изображений."
+
+#: inc/Admin/Options.php:178
+msgid "Add Watermark on Page Load"
+msgstr "Добавить водяной знак при загрузке страницы"
+
+#: inc/Admin/Options.php:179
+msgid "This is useful for existing images."
+msgstr "Это полезно для существующих изображений."
+
+#: inc/Admin/Options.php:183
+msgid "Log errors for Failed Watermarks"
+msgstr "Регистрация ошибок для неудачных водяных знаков"
+
+#: inc/Admin/Options.php:184
+msgid "Enable this option to log errors."
+msgstr "Включите эту опцию, чтобы регистрировать ошибки."
+
+#: inc/Admin/Options.php:203
+msgid "Settings Saved."
+msgstr "Настройки сохранены."
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:102
+#, php-format
+msgid "Unable to create Text color, %s"
+msgstr "Не удается создать цвет текста, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:133
+#, php-format
+msgid "Unable to create Background color, %s"
+msgstr "Не удается создать цвет фона, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:151
+#, php-format
+msgid "Unable to create Text Box, %s"
+msgstr "Не удается создать текстовое поле, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Text.php:167
+#, php-format
+msgid "Unable to draw Text, %s"
+msgstr "Не удается нарисовать текст, %s"
+
+#. translators: Image ID.
+#: inc/Core/Watermarker.php:54
+#, php-format
+msgid "Unable to create Image watermark, file does not exist for Image ID: %d."
+msgstr "Не удается создать водяной знак изображения, файл для идентификатора изображения: %d не существует."
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:66
+#, php-format
+msgid "Unable to create Text object, %s"
+msgstr "Не удается создать объект Text, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:80
+#, php-format
+msgid "Unable to open Image Resource, %s"
+msgstr "Не удается открыть Image Resource, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:92
+#, php-format
+msgid "Unable to paste Text on Image resource, %s"
+msgstr "Не удается вставить текст на ресурс изображения, %s"
+
+#. translators: Exception error message.
+#: inc/Core/Watermarker.php:104
+#, php-format
+msgid "Unable to save to Watermark image, %s"
+msgstr "Не удается сохранить изображение с водяным знаком, %s"
+
+#: watermark-my-images.php:29
+msgid "Fatal Error: Composer is NOT installed!"
+msgstr "Фатальная ошибка: Composer НЕ установлен!"

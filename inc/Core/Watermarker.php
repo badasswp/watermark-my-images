@@ -135,9 +135,9 @@ class Watermarker {
 		$basename = pathinfo( $this->file, PATHINFO_BASENAME );
 
 		return str_replace(
-			pathinfo( $img_absolute_path, PATHINFO_BASENAME ),
-			'watermark-my-images-' . $this->service->image_id . '.jpg',
-			$img_absolute_path
+			$basename,
+			sprintf( '%s-watermark-my-images.jpg', $basename ),
+			$this->file
 		);
 	}
 
@@ -149,11 +149,12 @@ class Watermarker {
 	 * @return string
 	 */
 	private function get_watermark_rel_path(): string {
-		$url = wp_get_attachment_url( $this->service->image_id );
+		$url      = wp_get_attachment_url( $this->service->image_id );
+		$basename = pathinfo( $url, PATHINFO_BASENAME );
 
 		return str_replace(
-			substr( $url, strrpos( $url, '/' ) ),
-			'/watermark-my-images-' . $this->service->image_id . '.jpg',
+			$basename,
+			sprintf( '%s-watermark-my-images.jpg', $basename ),
 			$url
 		);
 	}

@@ -29,12 +29,23 @@ class Watermarker {
 	}
 
 	/**
+	 * Image absolute file path.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @var string
+	 */
+	public string $file;
+
+	/**
 	 * Get Watermark.
 	 *
 	 * This method is responsible for handling custom
 	 * watermarking operations.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param string|null $file Absolute path to Image file.
 	 *
 	 * @throws \Exception $e When unable to detect Image ID.
 	 * @throws \Exception $e When unable to create Text Drawer object.
@@ -44,10 +55,10 @@ class Watermarker {
 	 *
 	 * @return string[]
 	 */
-	public function get_watermark(): array {
-		$img_absolute_path = get_attached_file( $this->service->image_id );
+	public function get_watermark( $file = null ): array {
+		$this->file = is_null( $file ) ? get_attached_file( $this->service->image_id ) : $file;
 
-		if ( ! file_exists( $img_absolute_path ) ) {
+		if ( ! file_exists( $this->file ) ) {
 			throw new \InvalidArgumentException(
 				sprintf(
 					/* translators: Image ID. */
@@ -72,7 +83,7 @@ class Watermarker {
 		}
 
 		try {
-			$image = ( new Imagine() )->open( $img_absolute_path );
+			$image = ( new Imagine() )->open( $this->file );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -121,7 +132,7 @@ class Watermarker {
 	 * @return string
 	 */
 	private function get_watermark_abs_path(): string {
-		$img_absolute_path = get_attached_file( $this->service->image_id );
+		$basename = pathinfo( $this->file, PATHINFO_BASENAME );
 
 		return str_replace(
 			pathinfo( $img_absolute_path, PATHINFO_BASENAME ),

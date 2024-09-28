@@ -141,7 +141,7 @@ class Attachment extends Service implements Registrable {
 				 *
 				 * @return void
 				 */
-				do_action( 'watermark_my_images_metadata_delete', $meta_watermarked_image, $image_id );
+				do_action( 'watermark_my_images_on_metadata_delete', $meta_watermarked_image, $image_id );
 			}
 		}
 	}

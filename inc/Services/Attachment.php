@@ -259,4 +259,23 @@ class Attachment extends Service implements Registrable {
 			$metadata
 		);
 	}
+
+	/**
+	 * Get the Watermarked Image for Image meta data.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param string $url Relative Path.
+	 * @return string
+	 */
+	private function get_meta_watermark_image( $url ): string {
+		$base_name = pathinfo( $url, PATHINFO_BASENAME );
+		$file_name = pathinfo( $url, PATHINFO_FILENAME );
+
+		return str_replace(
+			$base_name,
+			sprintf( '%s-watermark-my-images.jpg', $file_name ),
+			$url
+		);
+	}
 }

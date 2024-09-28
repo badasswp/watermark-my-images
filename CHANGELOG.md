@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+* Fix Text height relative to Image width.
+* Implement New Image & Text class methods.
+* More Comprehensive Unit tests.
+* Tie Plugin options to Attachment service.
+* Tested up to WP 6.6.2.
+
 ## 1.0.0
 * Initial release
 * Add Watermarks to Images.

@@ -23,7 +23,7 @@ class Attachment extends Service implements Registrable {
 	 */
 	public function register(): void {
 		add_action( 'add_attachment', [ $this, 'add_watermark_on_add_attachment' ], 10, 1 );
-		add_action( 'delete_attachment', [ $this, 'remove_watermark_on_delete_attachment' ], 10, 1 );
+		add_action( 'delete_attachment', [ $this, 'remove_watermark_on_attachment_delete' ], 10, 1 );
 		add_filter( 'attachment_fields_to_edit', [ $this, 'add_watermark_attachment_fields' ], 10, 2 );
 		add_filter( 'wp_generate_attachment_metadata', [ $this, 'add_watermark_to_metadata' ], 10, 3 );
 		add_filter( 'wp_prepare_attachment_for_js', [ $this, 'show_watermark_images_on_wp_media_modal' ], 10, 3 );
@@ -94,7 +94,7 @@ class Attachment extends Service implements Registrable {
 	 * @param int $image_id Image ID.
 	 * @return void
 	 */
-	public function remove_watermark_on_delete_attachment( $image_id ): void {
+	public function remove_watermark_on_attachment_delete( $image_id ): void {
 		// Bail out, if it is not an image.
 		if ( ! wp_attachment_is_image( $image_id ) ) {
 			return;
@@ -116,7 +116,7 @@ class Attachment extends Service implements Registrable {
 			 *
 			 * @return void
 			 */
-			do_action( 'watermark_my_images_on_delete_attachment', $main_image['abs'], $image_id );
+			do_action( 'watermark_my_images_on_attachment_delete', $main_image['abs'], $image_id );
 		}
 
 		// Get Attachment metadata.

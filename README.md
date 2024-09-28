@@ -160,7 +160,7 @@ add_action( 'watermark_my_images_on_attachment_delete', [ $this, 'delete_wm_imag
 
 public function delete_wm_image( $watermarked_image, $attachment_id ): void {
     if ( file_exists( $watermarked_image ) ) {
-        unlink( $watermarked_image );
+        wp_delete_file( $watermarked_image );
     }
 }
 ```

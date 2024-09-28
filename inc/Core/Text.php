@@ -141,7 +141,7 @@ class Text {
 		try {
 			$text_box = ( new Imagine() )->create(
 				new Box(
-					$this->get_option( 'size' ) * ( strlen( $this->get_option( 'label' ) ) - 0.5 ),
+					$this->get_text_length(),
 					$this->get_option( 'size' )
 				),
 				$bg_color
@@ -206,5 +206,25 @@ class Text {
 		$image_size = getimagesize( Watermarker::$file )[0] ?? 0;
 
 		return floor( $image_size / ( $ratio * 8.5 ) );
+	}
+
+	/**
+	 * Get Text Length.
+	 *
+	 * This method is responsible for getting the precise
+	 * character length.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @return float
+	 */
+	private function get_text_length(): float {
+		return array_reduce(
+			str_split( strtoupper( $this->get_option( 'label' ) ) ),
+			function ( $carry, $char ) {
+				return $carry + $this->get_char_ratio( $char ) * $this->get_option( 'size' );
+			},
+			0
+		);
 	}
 }

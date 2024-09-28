@@ -176,7 +176,7 @@ class Attachment extends Service implements Registrable {
 
 		$metadata['sizes']['full']['url'] = $image_watermark['rel'] ?? '';
 
-		return $response;
+		return $this->get_watermark_metadata( $metadata );
 	}
 
 	/**
@@ -216,5 +216,47 @@ class Attachment extends Service implements Registrable {
 		}
 
 		return $metadata;
+	}
+
+	/**
+	 * Get Watermark Metadata.
+	 *
+	 * Mutate Meta data array and get the Watermarked Images
+	 * for all Image meta data.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param mixed[] $metadata Meta data array.
+	 * @return mixed[]
+	 */
+	private function get_watermark_metadata( $metadata ): array {
+		return wp_parse_args(
+			[
+				'sizes' => wp_parse_args(
+					[
+						'thumbnail' => wp_parse_args(
+							[
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['thumbnail']['url'] ?? '' )
+							],
+							$metadata['sizes']['thumbnail'] ?? [],
+						),
+						'medium' => wp_parse_args(
+							[
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['medium']['url'] ?? '' )
+							],
+							$metadata['sizes']['medium'] ?? [],
+						),
+						'large' => wp_parse_args(
+							[
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['large']['url'] ?? '' )
+							],
+							$metadata['sizes']['large'] ?? [],
+						),
+					],
+					$metadata['sizes'] ?? []
+				)
+			],
+			$metadata
+		);
 	}
 }

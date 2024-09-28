@@ -151,12 +151,12 @@ public function custom_form_fields( $fields ): array {
 - fields _`{array}`_ By default this will be an associative array containing key, value options of each field option.
 <br/>
 
-#### `watermark_my_images_on_delete_attachment`
+#### `watermark_my_images_on_attachment_delete`
 
 This custom hook (action) fires immediately after a Watermarked image is deleteed.
 
 ```php
-add_action( 'watermark_my_images_on_delete_attachment', [ $this, 'delete_wm_image' ], 10, 2 );
+add_action( 'watermark_my_images_on_attachment_delete', [ $this, 'delete_wm_image' ], 10, 2 );
 
 public function delete_wm_image( $watermarked_image, $attachment_id ): void {
     if ( file_exists( $watermarked_image ) ) {

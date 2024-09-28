@@ -221,13 +221,15 @@ class Text {
 	 * @return float
 	 */
 	private function get_text_length(): float {
-		return array_reduce(
+		$length = array_reduce(
 			str_split( strtoupper( $this->get_option( 'label' ) ) ),
 			function ( $carry, $char ) {
 				return $carry + $this->get_char_ratio( $char ) * $this->get_option( 'size' );
 			},
 			0
 		);
+
+		return $length + ( ( strlen( $this->get_option( 'label' ) ) - 1 ) * ( $this->get_option( 'size' ) * 0.1 ) );
 	}
 
 	/**

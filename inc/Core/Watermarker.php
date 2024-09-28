@@ -35,7 +35,7 @@ class Watermarker {
 	 *
 	 * @var string
 	 */
-	public string $file;
+	public static string $file;
 
 	/**
 	 * Get Watermark.
@@ -56,9 +56,9 @@ class Watermarker {
 	 * @return string[]
 	 */
 	public function get_watermark( $file = null ): array {
-		$this->file = is_null( $file ) ? get_attached_file( $this->service->image_id ) : $file;
+		static::$file = is_null( $file ) ? get_attached_file( $this->service->image_id ) : $file;
 
-		if ( ! file_exists( $this->file ) ) {
+		if ( ! file_exists( static::$file ) ) {
 			throw new \InvalidArgumentException(
 				sprintf(
 					/* translators: Image ID. */
@@ -132,12 +132,13 @@ class Watermarker {
 	 * @return string
 	 */
 	private function get_watermark_abs_path(): string {
-		$basename = pathinfo( $this->file, PATHINFO_BASENAME );
+		$base_name = pathinfo( static::$file, PATHINFO_BASENAME );
+		$file_name = pathinfo( static::$file, PATHINFO_FILENAME );
 
 		return str_replace(
-			$basename,
-			sprintf( '%s-watermark-my-images.jpg', $basename ),
-			$this->file
+			$base_name,
+			sprintf( '%s-watermark-my-images.jpg', $file_name ),
+			static::$file
 		);
 	}
 

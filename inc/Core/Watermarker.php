@@ -81,14 +81,16 @@ class Watermarker {
 		}
 
 		try {
-			$image = ( new Imagine() )->open( $this->file );
+			$text = ( new Text() )->get_text();
 		} catch ( \Exception $e ) {
-			throw new \Exception(
+			throw new TextException(
 				sprintf(
 					/* translators: Exception error message. */
-					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
+					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
 					esc_html( $e->getMessage() )
-				)
+				),
+				500,
+				'Text Object',
 			);
 		}
 

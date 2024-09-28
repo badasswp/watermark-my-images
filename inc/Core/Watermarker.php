@@ -69,16 +69,14 @@ class Watermarker {
 		}
 
 		try {
-			$text = ( new Text() )->get_text();
+			$image = ( new Image() )->get_image();
 		} catch ( \Exception $e ) {
-			throw new TextException(
+			throw new \Exception(
 				sprintf(
 					/* translators: Exception error message. */
-					esc_html__( 'Unable to create Text object, %s', 'watermark-my-images' ),
+					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
 					esc_html( $e->getMessage() )
-				),
-				500,
-				'Text Object',
+				)
 			);
 		}
 

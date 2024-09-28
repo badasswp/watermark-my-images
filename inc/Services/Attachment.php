@@ -118,6 +118,32 @@ class Attachment extends Service implements Registrable {
 			 */
 			do_action( 'watermark_my_images_on_delete_attachment', $main_image['abs'], $image_id );
 		}
+
+		// Get Attachment metadata.
+		$metadata = wp_get_attachment_metadata( $image_id );
+
+		foreach ( $metadata['sizes'] ?? [] as $img ) {
+			$url_prefix = substr( $main_image['abs'] ?? '', 0, strrpos( $main_image['abs'] ?? '', '/' ) );
+			$meta_image = $this->get_meta_watermark_image( $img['file'] ?? '' );
+
+			$meta_watermarked_image = trailingslashit( $url_prefix ) . $meta_image;
+
+			if ( file_exists( $meta_watermarked_image ) ) {
+				wp_delete_file( $meta_watermarked_image );
+
+				/**
+				 * Fires after Watermark Metadata Image has been deleted.
+				 *
+				 * @since 1.0.1
+				 *
+				 * @param string $meta_watermarked_image Absolute path to WebP image.
+				 * @param int    $image_id               Image ID.
+				 *
+				 * @return void
+				 */
+				do_action( 'watermark_my_images_metadata_delete', $meta_watermarked_image, $image_id );
+			}
+		}
 	}
 
 	/**

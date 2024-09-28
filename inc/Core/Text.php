@@ -244,7 +244,7 @@ class Text {
 	private function get_char_ratio( $char ): float {
 		$ratio = 1;
 
-		switch( $char ) {
+		switch ( $char ) {
 			case 'A':
 			case 'G':
 				$ratio = 0.917;

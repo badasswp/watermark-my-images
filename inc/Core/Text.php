@@ -299,12 +299,15 @@ class Text {
 
 			case 'V':
 				$ratio = 0.867;
+				break;
 
 			case 'W':
 				$ratio = 1.283;
+				break;
 
 			case 'I':
 				$ratio = 0.133;
+				break;
 
 			default:
 				$ratio = 1;

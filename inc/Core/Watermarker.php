@@ -95,7 +95,7 @@ class Watermarker {
 		}
 
 		try {
-			$image->paste( $text, $this->get_text_position( $image, $text ) );
+			$image->paste( $text, $this->get_position( $image, $text ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -173,14 +173,14 @@ class Watermarker {
 	 *
 	 * @return Point
 	 */
-	private function get_text_position( $image, $text ): Point {
-		// Get Sizes.
-		$text_size  = $text->getSize();
-		$image_size = $image->getSize();
+	private function get_position( $image, $text ): Point {
+		$width = ( $image->getSize()->getWidth() - $text->getSize()->getWidth() );
+		$width = $width > 0 ? $width : 0;
 
-		// Get Positions.
-		$posx = ( $image_size->getWidth() - $text_size->getWidth() ) / 2;
-		$posy = ( $image_size->getHeight() - $text_size->getHeight() ) / 2;
+		$height = ( $image->getSize()->getHeight() - $text->getSize()->getHeight() );
+		$height = $height > 0 ? $height : 0;
+
+		$position = [ $width / 2, $height / 2 ];
 
 		/**
 		 * Filter Text Position.
@@ -193,7 +193,7 @@ class Watermarker {
 		 * @param mixed[] $position Text Position (x, y).
 		 * @return mixed[]
 		 */
-		list( $posx, $posy ) = (array) apply_filters( 'watermark_my_images_text_position', [ $posx, $posy ] );
+		list( $posx, $posy ) = (array) apply_filters( 'watermark_my_images_text_position', $position );
 
 		return new Point( (int) $posx, (int) $posy );
 	}

@@ -4,6 +4,7 @@
 * Fix Text height relative to Image width.
 * Implement New Image & Text class methods.
 * Implement Watermark addition & deletion for Image Metadata.
+* Custom Hooks - `watermark_my_images_metadata_delete`.
 * More Comprehensive Unit tests.
 * Tie Plugin options to Attachment service.
 * Tested up to WP 6.6.2.

@@ -17,6 +17,8 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Image\Palette\RGB;
 
+use WatermarkMyImages\Core\Watermarker;
+
 class Text {
 	/**
 	 * Text Args.
@@ -226,5 +228,89 @@ class Text {
 			},
 			0
 		);
+	}
+
+	/**
+	 * Get Character Ratio.
+	 *
+	 * This method is responsible for getting the precise
+	 * character widths.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param string $char
+	 * @return float
+	 */
+	private function get_char_ratio( $char ): float {
+		$ratio = 1;
+
+		switch( $char ) {
+			case 'A':
+			case 'G':
+				$ratio = 0.917;
+				break;
+
+			case 'B':
+			case 'H':
+			case 'N':
+			case 'S':
+			case 'T':
+			case 'U':
+			case 'Z':
+				$ratio = 0.8;
+				break;
+
+			case 'C':
+			case 'Y':
+				$ratio = 0.9;
+				break;
+
+			case 'D':
+			case 'R':
+			case 'X':
+				$ratio = 0.833;
+				break;
+
+			case 'E':
+				$ratio = 0.7;
+				break;
+
+			case 'F':
+			case 'L':
+				$ratio = 0.667;
+				break;
+
+			case 'J':
+				$ratio = 0.6;
+				break;
+
+			case 'K':
+				$ratio = 0.817;
+				break;
+
+			case 'O':
+			case 'Q':
+				$ratio = 0.967;
+				break;
+
+			case 'P':
+				$ratio = 0.75;
+				break;
+
+			case 'V':
+				$ratio = 0.867;
+
+			case 'W':
+				$ratio = 1.283;
+
+			case 'I':
+				$ratio = 0.133;
+
+			default:
+				$ratio = 1;
+				break;
+		}
+
+		return $ratio;
 	}
 }

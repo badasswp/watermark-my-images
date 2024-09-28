@@ -191,10 +191,10 @@ class Text {
 	}
 
 	/**
-	 * Get Text Size.
+	 * Get Size (Text Height).
 	 *
-	 * This is the relative proportion in %. This overrides
-	 * the original size in px.
+	 * This refers to the height of the Text character.
+	 * It uses the % of the image width.
 	 *
 	 * @since 1.0.0
 	 *

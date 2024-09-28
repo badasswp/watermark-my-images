@@ -262,25 +262,25 @@ class Attachment extends Service implements Registrable {
 					[
 						'thumbnail' => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['thumbnail']['url'] ?? '' )
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['thumbnail']['url'] ?? '' ),
 							],
 							$metadata['sizes']['thumbnail'] ?? [],
 						),
-						'medium' => wp_parse_args(
+						'medium'    => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['medium']['url'] ?? '' )
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['medium']['url'] ?? '' ),
 							],
 							$metadata['sizes']['medium'] ?? [],
 						),
-						'large' => wp_parse_args(
+						'large'     => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['large']['url'] ?? '' )
+								'url' => $this->get_meta_watermark_image( $metadata['sizes']['large']['url'] ?? '' ),
 							],
 							$metadata['sizes']['large'] ?? [],
 						),
 					],
 					$metadata['sizes'] ?? []
-				)
+				),
 			],
 			$metadata
 		);

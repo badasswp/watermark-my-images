@@ -69,6 +69,8 @@ class Text {
 			$this->args
 		);
 
+		$options['size'] = $this->get_size( $options );
+
 		/**
 		 * Filter Text Options.
 		 *
@@ -186,5 +188,23 @@ class Text {
 			plugin_dir_path( __DIR__ ),
 			$this->get_option( 'font' ),
 		);
+	}
+
+	/**
+	 * Get Text Size.
+	 *
+	 * This is the relative proportion in %. This overrides
+	 * the original size in px.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed[] $options Text Options.
+	 * @return integer
+	 */
+	private function get_size( $options ): int {
+		$ratio      = 100 / ( $options['size'] ?? 1 );
+		$image_size = getimagesize( Watermarker::$file )[0] ?? 0;
+
+		return floor( $image_size / ( $ratio * 8.5 ) );
 	}
 }

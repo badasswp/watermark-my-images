@@ -155,26 +155,26 @@ class Attachment extends Service implements Registrable {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed[]     $response   Image Attachment data to be sent to JS.
+	 * @param mixed[]     $metadata   Image Attachment data to be sent to JS.
 	 * @param \WP_Post    $attachment Attachment ID or object.
 	 * @param array|false $meta       Array of attachment meta data, or false if there is none.
 	 *
 	 * @return void
 	 */
-	public function show_watermark_images_on_wp_media_modal( $response, $attachment, $meta ) {
+	public function show_watermark_images_on_wp_media_modal( $metadata, $attachment, $meta ) {
 		$image_watermark = get_post_meta( $attachment->ID, 'watermark_my_images', true );
 
 		// Bail out, if it is not an image.
 		if ( ! wp_attachment_is_image( $attachment->ID ) ) {
-			return $response;
+			return $metadata;
 		}
 
 		// Bail out, if watermark image does NOT exist.
 		if ( ! file_exists( $image_watermark['abs'] ?? '' ) ) {
-			return $response;
+			return $metadata;
 		}
 
-		$response['sizes']['full']['url'] = $image_watermark['rel'] ?? '';
+		$metadata['sizes']['full']['url'] = $image_watermark['rel'] ?? '';
 
 		return $response;
 	}

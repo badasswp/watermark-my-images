@@ -124,7 +124,7 @@ class Attachment extends Service implements Registrable {
 
 		foreach ( $metadata['sizes'] ?? [] as $img ) {
 			$url_prefix = pathinfo( ( $main_image['abs'] ?? '' ), PATHINFO_DIRNAME );
-			$meta_image = $this->get_meta_watermark_image( $img['file'] ?? '' );
+			$meta_image = wmi_get_equivalent( $img['file'] ?? '' );
 
 			$meta_watermarked_image = trailingslashit( $url_prefix ) . $meta_image;
 

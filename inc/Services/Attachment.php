@@ -262,19 +262,19 @@ class Attachment extends Service implements Registrable {
 					[
 						'thumbnail' => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['thumbnail']['url'] ?? '' ),
+								'url' => wmi_get_equivalent( $metadata['sizes']['thumbnail']['url'] ?? '' ),
 							],
 							$metadata['sizes']['thumbnail'] ?? [],
 						),
 						'medium'    => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['medium']['url'] ?? '' ),
+								'url' => wmi_get_equivalent( $metadata['sizes']['medium']['url'] ?? '' ),
 							],
 							$metadata['sizes']['medium'] ?? [],
 						),
 						'large'     => wp_parse_args(
 							[
-								'url' => $this->get_meta_watermark_image( $metadata['sizes']['large']['url'] ?? '' ),
+								'url' => wmi_get_equivalent( $metadata['sizes']['large']['url'] ?? '' ),
 							],
 							$metadata['sizes']['large'] ?? [],
 						),
@@ -283,25 +283,6 @@ class Attachment extends Service implements Registrable {
 				),
 			],
 			$metadata
-		);
-	}
-
-	/**
-	 * Get the Watermarked Image for Image meta data.
-	 *
-	 * @since 1.0.1
-	 *
-	 * @param string $url Relative Path.
-	 * @return string
-	 */
-	private function get_meta_watermark_image( $url ): string {
-		$base_name = pathinfo( $url, PATHINFO_BASENAME );
-		$file_name = pathinfo( $url, PATHINFO_FILENAME );
-
-		return str_replace(
-			$base_name,
-			sprintf( '%s-watermark-my-images.jpg', $file_name ),
-			$url
 		);
 	}
 }

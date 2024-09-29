@@ -105,6 +105,8 @@ class Attachment extends Service implements Registrable {
 
 		// Get parent image URL.
 		$abs_url = get_attached_file( $attachment_id );
+
+		// Get Image directory path.
 		$img_url = pathinfo( $abs_url, PATHINFO_DIRNAME );
 
 		// Convert srcset images.

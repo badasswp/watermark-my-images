@@ -38,4 +38,5 @@ if ( ! file_exists( $autoload ) ) {
 require_once $autoload;
 
 // Get instance and Run plugin.
+require_once __DIR__ . '/inc/Helpers/functions.php';
 ( \WatermarkMyImages\Plugin::get_instance() )->run();

@@ -27,7 +27,7 @@ class Form {
 	 *
 	 * @param mixed[] $options Admin Options.
 	 */
-	protected function __construct( $options ) {
+	public function __construct( $options ) {
 		$this->options = $options;
 	}
 

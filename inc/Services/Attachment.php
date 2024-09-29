@@ -98,6 +98,11 @@ class Attachment extends Service implements Registrable {
 	 * @return mixed[]
 	 */
 	public function add_watermark_to_metadata( $metadata, $attachment_id, $context ): array {
+		// Bail out, if it is not an image.
+		if ( ! wp_attachment_is_image( $attachment_id ) ) {
+			return $metadata;
+		}
+
 		// Get parent image URL.
 		$abs_url = get_attached_file( $attachment_id );
 		$img_url = pathinfo( $abs_url, PATHINFO_DIRNAME );

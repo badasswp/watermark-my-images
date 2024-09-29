@@ -132,14 +132,7 @@ class Watermarker {
 	 * @return string
 	 */
 	private function get_watermark_abs_path(): string {
-		$base_name = pathinfo( static::$file, PATHINFO_BASENAME );
-		$file_name = pathinfo( static::$file, PATHINFO_FILENAME );
-
-		return str_replace(
-			$base_name,
-			sprintf( '%s-watermark-my-images.jpg', $file_name ),
-			static::$file
-		);
+		return wmi_get_equivalent( static::$file );
 	}
 
 	/**
@@ -154,15 +147,9 @@ class Watermarker {
 			return '';
 		}
 
-		$url       = wp_get_attachment_url( $this->service->image_id );
-		$base_name = pathinfo( $url, PATHINFO_BASENAME );
-		$file_name = pathinfo( $url, PATHINFO_FILENAME );
+		$url = wp_get_attachment_url( $this->service->image_id );
 
-		return str_replace(
-			$base_name,
-			sprintf( '%s-watermark-my-images.jpg', $file_name ),
-			$url
-		);
+		return wmi_get_equivalent( $url );
 	}
 
 	/**

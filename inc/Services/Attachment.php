@@ -262,7 +262,7 @@ class Attachment extends Service implements Registrable {
 	 * @param mixed[] $metadata Meta data array.
 	 * @return mixed[]
 	 */
-	private function get_watermark_metadata( $metadata ): array {
+	protected function get_watermark_metadata( $metadata ): array {
 		return wp_parse_args(
 			[
 				'sizes' => wp_parse_args(

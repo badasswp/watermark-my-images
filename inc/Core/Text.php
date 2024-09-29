@@ -54,7 +54,7 @@ class Text {
 	 * @param string $option e.g. 'size'.
 	 * @return string
 	 */
-	private function get_option( $option ): string {
+	protected function get_option( $option ): string {
 		return $this->get_options()[ $option ] ?? '';
 	}
 
@@ -65,7 +65,7 @@ class Text {
 	 *
 	 * @return mixed[]
 	 */
-	private function get_options(): array {
+	protected function get_options(): array {
 		$options = wp_parse_args(
 			get_option( 'watermark_my_images', [] ) ?? [],
 			$this->args
@@ -96,7 +96,7 @@ class Text {
 	 *
 	 * @return Font
 	 */
-	private function get_font(): Font {
+	protected function get_font(): Font {
 		try {
 			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
 		} catch ( \Exception $e ) {
@@ -184,7 +184,7 @@ class Text {
 	 *
 	 * @return string
 	 */
-	private function get_font_url(): string {
+	protected function get_font_url(): string {
 		return sprintf(
 			'%s/../fonts/%s.otf',
 			plugin_dir_path( __DIR__ ),
@@ -203,7 +203,7 @@ class Text {
 	 * @param mixed[] $options Text Options.
 	 * @return integer
 	 */
-	private function get_size( $options ): int {
+	protected function get_size( $options ): int {
 		$ratio      = 100 / ( $options['size'] ?? 1 );
 		$image_size = getimagesize( Watermarker::$file )[0] ?? 0;
 
@@ -220,7 +220,7 @@ class Text {
 	 *
 	 * @return float
 	 */
-	private function get_text_length(): float {
+	protected function get_text_length(): float {
 		$length = array_reduce(
 			str_split( strtoupper( $this->get_option( 'label' ) ) ),
 			function ( $carry, $char ) {
@@ -243,7 +243,7 @@ class Text {
 	 * @param string $char
 	 * @return float
 	 */
-	private function get_char_ratio( $char ): float {
+	protected function get_char_ratio( $char ): float {
 		$ratio = 1;
 
 		switch ( $char ) {

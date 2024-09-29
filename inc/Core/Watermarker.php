@@ -131,7 +131,7 @@ class Watermarker {
 	 *
 	 * @return string
 	 */
-	private function get_watermark_abs_path(): string {
+	protected function get_watermark_abs_path(): string {
 		return wmi_get_equivalent( static::$file );
 	}
 
@@ -142,7 +142,7 @@ class Watermarker {
 	 *
 	 * @return string
 	 */
-	private function get_watermark_rel_path(): string {
+	protected function get_watermark_rel_path(): string {
 		if ( ! $this->service->image_id ) {
 			return '';
 		}
@@ -165,7 +165,7 @@ class Watermarker {
 	 *
 	 * @return Point
 	 */
-	private function get_position( $image, $text ): Point {
+	protected function get_position( $image, $text ): Point {
 		$width = ( $image->getSize()->getWidth() - $text->getSize()->getWidth() );
 		$width = $width > 0 ? $width : 0;
 

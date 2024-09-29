@@ -123,7 +123,7 @@ class Attachment extends Service implements Registrable {
 		$metadata = wp_get_attachment_metadata( $image_id );
 
 		foreach ( $metadata['sizes'] ?? [] as $img ) {
-			$url_prefix = substr( $main_image['abs'] ?? '', 0, strrpos( $main_image['abs'] ?? '', '/' ) );
+			$url_prefix = pathinfo( ( $main_image['abs'] ?? '' ), PATHINFO_DIRNAME );
 			$meta_image = $this->get_meta_watermark_image( $img['file'] ?? '' );
 
 			$meta_watermarked_image = trailingslashit( $url_prefix ) . $meta_image;
@@ -222,7 +222,7 @@ class Attachment extends Service implements Registrable {
 	public function add_watermark_to_metadata( $metadata, $attachment_id, $context ): array {
 		// Get parent image URL.
 		$abs_url = get_attached_file( $attachment_id );
-		$img_url = (string) substr( $abs_url, 0, strrpos( $abs_url, '/' ) );
+		$img_url = pathinfo( $abs_url, PATHINFO_DIRNAME );
 
 		// Convert srcset images.
 		foreach ( $metadata['sizes'] ?? [] as $img ) {

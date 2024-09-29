@@ -27,7 +27,7 @@ class Form {
 	 *
 	 * @param mixed[] $options Admin Options.
 	 */
-	public function __construct( $options ) {
+	protected function __construct( $options ) {
 		$this->options = $options;
 	}
 
@@ -59,7 +59,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form(): string {
+	protected function get_form(): string {
 		$form = [
 			'form_action' => $this->get_form_action(),
 			'form_notice' => $this->get_form_notice(),
@@ -87,7 +87,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form_action(): string {
+	protected function get_form_action(): string {
 		return esc_url(
 			sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) )
 		);
@@ -103,7 +103,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form_main(): string {
+	protected function get_form_main(): string {
 		$form_fields = '';
 
 		/**
@@ -137,7 +137,7 @@ class Form {
 	 * @param mixed[] $arg Form group array.
 	 * @return string
 	 */
-	public function get_form_group( $arg ): string {
+	protected function get_form_group( $arg ): string {
 		$form_group = '';
 
 		foreach ( $arg as $key => $value ) {
@@ -172,7 +172,7 @@ class Form {
 	 * @param mixed[] $arg Form Group Body args.
 	 * @return string
 	 */
-	public function get_form_group_body( $arg ): string {
+	protected function get_form_group_body( $arg ): string {
 		$form_group_body = '';
 
 		foreach ( $arg as $name => $control ) {
@@ -206,7 +206,7 @@ class Form {
 	 * @param string $name Option Key name.
 	 * @return string
 	 */
-	public function get_setting( $name ) {
+	protected function get_setting( $name ) {
 		return get_option( ( $this->options['page']['option'] ?? '' ), [] )[ $name ] ?? '';
 	}
 
@@ -223,7 +223,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form_control( $arg, $name ): string {
+	protected function get_form_control( $arg, $name ): string {
 		$control = '';
 
 		switch ( $arg['control'] ?? '' ) {
@@ -256,7 +256,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_text_control( $arg, $name ): string {
+	protected function get_text_control( $arg, $name ): string {
 		return sprintf(
 			'<input type="text" placeholder="%1$s" value="%2$s" name="%3$s"/>',
 			$arg['placeholder'] ?? '',
@@ -278,7 +278,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_select_control( $arg, $name ): string {
+	protected function get_select_control( $arg, $name ): string {
 		$options = '';
 
 		foreach ( $arg['options'] ?? [] as $key => $value ) {
@@ -314,7 +314,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_checkbox_control( $arg, $name ): string {
+	protected function get_checkbox_control( $arg, $name ): string {
 		$is_checked = ! empty( $this->get_setting( $name ) ) ? 'checked' : '';
 
 		return sprintf(
@@ -338,7 +338,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form_submit(): string {
+	protected function get_form_submit(): string {
 		$heading      = $this->options['submit']['heading'] ?? '';
 		$button_name  = $this->options['submit']['button']['name'] ?? '';
 		$button_label = $this->options['submit']['button']['label'] ?? '';
@@ -378,7 +378,7 @@ class Form {
 	 *
 	 * @return string
 	 */
-	public function get_form_notice(): string {
+	protected function get_form_notice(): string {
 		$notice_label = $this->options['notice']['label'] ?? '';
 		$button_name  = $this->options['submit']['button']['name'] ?? '';
 		$nonce_name   = $this->options['submit']['nonce']['name'] ?? '';

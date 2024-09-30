@@ -32,8 +32,7 @@ class TextException extends \Exception {
 	 * @param string|null $context   Additional context about where the exception occurred.
 	 */
 	public function __construct( $message, $code = 0, $context = null ) {
-		$this->context   = $context;
-		$this->exception = $exception;
+		$this->context = $context;
 
 		// Log the error for debugging purposes.
 		error_log(

@@ -13,7 +13,7 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 #### `watermark_my_images_on_add_image`
 
-This custom hook (action) fires when the watermark is added on attachment upload. For e.g. to log errors, you could do:
+This custom hook (action) fires when the watermark is added to the uploaded image. For e.g. to log errors, you could do:
 
 ```php
 add_action( 'watermark_my_images_on_add_image', [ $this, 'log_errors' ], 10, 3 );
@@ -36,6 +36,34 @@ public function log_errors( $response, $watermark, $id ): void {
 - response _`{string|\WP_Error}`_ By default this will be the image URL of the watermarked image or WP Error object.
 - watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
 - id _`{int}`_ By default this will be the Image ID.
+<br/>
+
+#### `watermark_my_images_on_add_image_crops`
+
+This custom hook (action) fires when the watermark is added to one of the crops of the uploaded image. For e.g. to log errors, you could do:
+
+```php
+add_action( 'watermark_my_images_on_add_image_crops', [ $this, 'log_errors' ], 10, 4 );
+
+public function log_errors( $response, $watermark, $id, $crop ): void {
+    if ( is_wp_error( $response ) ) {
+        error_log(
+            sprintf(
+                'Fatal Error: Failure converting Watermark Image, %s. Image Crop: %s',
+                $response->get_error_message(),
+                $crop
+            )
+        )
+    }
+}
+```
+
+**Parameters**
+
+- response _`{string|\WP_Error}`_ By default this will be the image URL of the watermarked image or WP Error object.
+- watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
+- id _`{int}`_ By default this will be the Image ID.
+- crop _`{string}`_ By default this will be a crop of the Image for e.g. `150 x 150`, `300 x 300` and so on.
 <br/>
 
 #### `watermark_my_images_on_delete_image`

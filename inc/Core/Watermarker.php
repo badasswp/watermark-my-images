@@ -17,6 +17,7 @@ use Imagine\Image\ImageInterface as Image_Object;
 
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Exceptions\TextException;
+use WatermarkMyImages\Exceptions\ImageException;
 
 class Watermarker {
 	/**
@@ -71,12 +72,14 @@ class Watermarker {
 		try {
 			$image = ( new Image() )->get_image();
 		} catch ( \Exception $e ) {
-			throw new \Exception(
+			throw new \ImageException(
 				sprintf(
 					/* translators: Exception error message. */
-					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),
+					esc_html__( 'Unable to create Image object, %s', 'watermark-my-images' ),
 					esc_html( $e->getMessage() )
-				)
+				),
+				500,
+				'Image Object',
 			);
 		}
 

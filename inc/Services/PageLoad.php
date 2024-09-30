@@ -147,6 +147,19 @@ class PageLoad extends Service implements Registrable {
 			);
 		}
 
+		/**
+		 * Fire after Watermark is completed.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string|\WP_Error $response  Image URL or WP Error.
+		 * @param string[]         $watermark Array containing abs and rel paths to new images.
+		 * @param int              $id        Image ID.
+		 *
+		 * @return void
+		 */
+		do_action( 'watermark_my_images_on_page_load', $response, $watermark ?? [], $image_id );
+
 		// Replace image metadata with watermark.
 		if ( ! is_wp_error( $response ) && file_exists( $watermark['abs'] ?? '' ) ) {
 			$new_image_html = str_replace( $img_url, $response, $img_html );

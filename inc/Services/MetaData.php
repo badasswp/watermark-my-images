@@ -23,6 +23,7 @@ class MetaData extends Service implements Registrable {
 	 */
 	public function register(): void {
 		add_action( 'watermark_my_images_on_add_attachment', [ $this, 'add_watermark_metadata' ], 10, 3 );
+		add_action( 'watermark_my_images_on_page_load', [ $this, 'add_watermark_metadata' ], 10, 3 );
 		add_action( 'watermark_my_images_on_woo_product_get_image', [ $this, 'add_watermark_metadata' ], 10, 3 );
 	}
 
@@ -39,7 +40,14 @@ class MetaData extends Service implements Registrable {
 	 * @return void
 	 */
 	public function add_watermark_metadata( $html, $watermark, $id ): void {
-		if ( ! is_wp_error( $html ) ) {
+		// Bail out early, if \WP_Error.
+		if ( is_wp_error( $html ) ) {
+			return;
+		}
+
+		// Save if Post meta doesn't exist.
+		$watermark = get_post_meta( $id, 'watermark_my_images', true );
+		if ( empty( $watermark['abs'] ) ) {
 			update_post_meta(
 				$id,
 				'watermark_my_images',

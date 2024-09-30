@@ -50,8 +50,8 @@ class Logger extends Service implements Registrable {
 			wp_insert_post(
 				[
 					'post_type'    => 'wmi_error',
-					'post_title'   => 'Watermark error log, ID - ' . $attachment_id,
-					'post_content' => (string) $webp->get_error_message(),
+					'post_title'   => 'Watermark error log, ID - ' . $id,
+					'post_content' => (string) $url->get_error_message(),
 					'post_status'  => 'publish',
 				]
 			);

@@ -40,7 +40,13 @@ class PageLoad extends Service implements Registrable {
 	 * @return string
 	 */
 	public function register_wp_get_attachment_image( $html, $attachment_id, $size, $icon, $attr ): string {
+		// Bail out, if empty.
 		if ( empty( $html ) ) {
+			return $html;
+		}
+
+		// Bail out, if not enabled in Options.
+		if ( ! wmi_get_settings( 'page_load' ) ) {
 			return $html;
 		}
 

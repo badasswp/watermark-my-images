@@ -115,6 +115,7 @@ class Attachment extends Service implements Registrable {
 
 			try {
 				$watermark = $this->watermarker->get_watermark( $img_file );
+				$response  = $watermark['rel'] ?? '';
 			} catch ( \Exception $e ) {
 				$response = new \WP_Error(
 					'watermark-log-error',
@@ -124,6 +125,20 @@ class Attachment extends Service implements Registrable {
 					)
 				);
 			}
+
+			/**
+			 * Fire after Watermark is completed.
+			 *
+			 * @since 1.0.1
+			 *
+			 * @param string|\WP_Error $response  Image URL or WP Error.
+			 * @param string[]         $watermark Array containing abs and rel paths to new images.
+			 * @param int              $id        Image ID.
+			 * @param string           $img_file  Absolute path to Image crop.
+			 *
+			 * @return void
+			 */
+			do_action( 'watermark_my_images_on_add_image_crops', $response, $watermark ?? [], $attachment_id, $img_file );
 		}
 
 		return $metadata;

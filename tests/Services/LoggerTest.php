@@ -48,4 +48,22 @@ class LoggerTest extends TestCase {
 
 		$this->assertConditionsMet();
 	}
+
+	public function test_log_watermark_errors_bails_out_if_it_is_not_wp_error() {
+		$url = 'image-1-watermark-my-images.jpg';
+
+		\WP_Mock::userFunction( 'get_option' )
+			->once()
+			->with( 'watermark_my_images', [] )
+			->andReturn( [ 'logs' => true ] );
+
+		\WP_Mock::userFunction( 'is_wp_error' )
+			->once()
+			->with( 'image-1-watermark-my-images.jpg' )
+			->andReturn( false );
+
+		$this->logger->log_watermark_errors( $url, [], 1 );
+
+		$this->assertConditionsMet();
+	}
 }

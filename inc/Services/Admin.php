@@ -57,6 +57,7 @@ class Admin extends Service implements Registrable {
 	 * @return void
 	 */
 	public function register_options_page(): void {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		vprintf(
 			'<section class="wrap">
 				<h1>%s</h1>

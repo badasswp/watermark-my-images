@@ -10,7 +10,7 @@
 
 namespace WatermarkMyImages\Abstracts;
 
-use WatermarkMyImages\Core\Watermarker;
+use WatermarkMyImages\Engine\Watermarker;
 use WatermarkMyImages\Interfaces\Registrable;
 
 abstract class Service implements Registrable {

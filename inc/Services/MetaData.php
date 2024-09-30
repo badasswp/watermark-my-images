@@ -33,15 +33,15 @@ class MetaData extends Service implements Registrable {
 	 * This method is responsible for capturing meta-data
 	 * if watermarking was successful.
 	 *
-	 * @param string|\WP_Error $html      Image HTML or WP_Error.
+	 * @param string|\WP_Error $url       Image URL or WP_Error.
 	 * @param string[]         $watermark Watermark paths.
 	 * @param int              $id        Image ID.
 	 *
 	 * @return void
 	 */
-	public function add_watermark_metadata( $html, $watermark, $id ): void {
+	public function add_watermark_metadata( $url, $watermark, $id ): void {
 		// Bail out early, if \WP_Error.
-		if ( is_wp_error( $html ) ) {
+		if ( is_wp_error( $url ) ) {
 			return;
 		}
 

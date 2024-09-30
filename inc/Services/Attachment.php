@@ -44,6 +44,11 @@ class Attachment extends Service implements Registrable {
 	public function add_watermark_on_add_attachment( $image_id ): void {
 		$image_watermark = get_post_meta( $image_id, 'watermark_my_images', true );
 
+		// Bail out, if not enabled in Options.
+		if ( ! wmi_get_settings( 'upload' ) ) {
+			return;
+		}
+
 		// Bail out, if it is not an image.
 		if ( ! wp_attachment_is_image( $image_id ) ) {
 			return;

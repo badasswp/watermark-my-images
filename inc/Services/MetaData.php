@@ -22,7 +22,7 @@ class MetaData extends Service implements Registrable {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'watermark_my_images_on_image_add', [ $this, 'add_watermark_metadata' ], 10, 3 );
+		add_action( 'watermark_my_images_on_add_image', [ $this, 'add_watermark_metadata' ], 10, 3 );
 		add_action( 'watermark_my_images_on_page_load', [ $this, 'add_watermark_metadata' ], 10, 3 );
 		add_action( 'watermark_my_images_on_woo_product_get_image', [ $this, 'add_watermark_metadata' ], 10, 3 );
 	}

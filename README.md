@@ -11,12 +11,12 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 ### Hooks
 
-#### `watermark_my_images_on_image_add`
+#### `watermark_my_images_on_add_image`
 
 This custom hook (action) fires when the watermark is added on attachment upload. For e.g. to log errors, you could do:
 
 ```php
-add_action( 'watermark_my_images_on_image_add', [ $this, 'log_errors' ], 10, 3 );
+add_action( 'watermark_my_images_on_add_image', [ $this, 'log_errors' ], 10, 3 );
 
 public function log_errors( $response, $watermark, $id ): void {
     if ( is_wp_error( $response ) ) {
@@ -151,12 +151,12 @@ public function custom_form_fields( $fields ): array {
 - fields _`{array}`_ By default this will be an associative array containing key, value options of each field option.
 <br/>
 
-#### `watermark_my_images_on_image_delete`
+#### `watermark_my_images_on_delete_image`
 
 This custom hook (action) fires immediately after a Watermarked image is deleteed.
 
 ```php
-add_action( 'watermark_my_images_on_image_delete', [ $this, 'delete_wm_image' ], 10, 2 );
+add_action( 'watermark_my_images_on_delete_image', [ $this, 'delete_wm_image' ], 10, 2 );
 
 public function delete_wm_image( $watermarked_image, $attachment_id ): void {
     if ( file_exists( $watermarked_image ) ) {
@@ -171,12 +171,12 @@ public function delete_wm_image( $watermarked_image, $attachment_id ): void {
 - attachment_id _`{int}`_ By default this is the Image ID.
 <br/>
 
-#### `watermark_my_images_on_image_crops_delete`
+#### `watermark_my_images_on_delete_image_crops`
 
 This custom hook (action) fires immediately after a watermarked metadata image is deleteed.
 
 ```php
-add_action( 'watermark_my_images_on_image_crops_delete', [ $this, 'delete_wm_image' ], 10, 2 );
+add_action( 'watermark_my_images_on_delete_image_crops', [ $this, 'delete_wm_image' ], 10, 2 );
 
 public function delete_wm_image( $watermarked_image, $attachment_id ): void {
     if ( file_exists( $watermarked_image ) ) {

@@ -80,7 +80,7 @@ class Attachment extends Service implements Registrable {
 		 *
 		 * @return void
 		 */
-		do_action( 'watermark_my_images_on_image_add', $response, $watermark ?? [], $id = $this->image_id );
+		do_action( 'watermark_my_images_on_add_image', $response, $watermark ?? [], $id = $this->image_id );
 	}
 
 	/**
@@ -162,7 +162,7 @@ class Attachment extends Service implements Registrable {
 			 *
 			 * @return void
 			 */
-			do_action( 'watermark_my_images_on_image_delete', $main_image['abs'], $image_id );
+			do_action( 'watermark_my_images_on_delete_image', $main_image['abs'], $image_id );
 		}
 
 		// Get Attachment metadata.
@@ -187,7 +187,7 @@ class Attachment extends Service implements Registrable {
 				 *
 				 * @return void
 				 */
-				do_action( 'watermark_my_images_on_image_crops_delete', $meta_watermarked_image, $image_id );
+				do_action( 'watermark_my_images_on_delete_image_crops', $meta_watermarked_image, $image_id );
 			}
 		}
 	}

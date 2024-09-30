@@ -66,7 +66,7 @@ class Watermarker {
 				sprintf(
 					/* translators: Image ID. */
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
-					esc_html( $this->image_id )
+					esc_html( $this->service->image_id )
 				)
 			);
 		}

@@ -31,6 +31,14 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 == Changelog ==
 
+= 1.0.2 =
+* Ignore PHPCS warning for Admin options page.
+* Implement Image, Paste & Save Exception classes.
+* Tie Plugin options to Attachment & PageLoad service.
+* Added Unit tests coverage.
+* Fix bugs & linting issues.
+* Tested up to WP 6.6.2.
+
 = 1.0.1 =
 * Fix Text height relative to Image width.
 * Implement New Image & Text class methods.

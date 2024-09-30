@@ -162,7 +162,7 @@ class PageLoad extends Service implements Registrable {
 
 		// Replace image metadata with watermark.
 		if ( ! is_wp_error( $response ) && file_exists( $watermark['abs'] ?? '' ) ) {
-			$new_image_html = str_replace( $img_url, $response, $img_html );
+			return str_replace( $img_url, $response, $img_html );
 		}
 
 		return $img_html;

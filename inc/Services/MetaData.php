@@ -45,9 +45,9 @@ class MetaData extends Service implements Registrable {
 			return;
 		}
 
-		// Save if Post meta doesn't exist.
-		$watermark = get_post_meta( $id, 'watermark_my_images', true );
-		if ( empty( $watermark['abs'] ) ) {
+		// Save only if Watermark post meta doesn't exist.
+		$watermark_post_meta = get_post_meta( $id, 'watermark_my_images', true );
+		if ( empty( $watermark_post_meta['abs'] ) ) {
 			update_post_meta(
 				$id,
 				'watermark_my_images',

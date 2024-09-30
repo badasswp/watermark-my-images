@@ -15,6 +15,9 @@ Insert Watermarks into your WP images.
 1. Go to 'Plugins > Add New' on your WordPress admin dashboard.
 2. Search for 'Watermark My Images' plugin from the official WordPress plugin repository.
 3. Click 'Install Now' and then 'Activate'.
+4. Go to the Watermark My Images options page and set your Text and Image options.
+5. Proceed to upload any image of your choice and you should see your Watermark now attached to it.
+6. Happy Watermarking!
 
 == Description ==
 

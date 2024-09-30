@@ -8,12 +8,10 @@
  * @package WatermarkMyImages
  */
 
-namespace WatermarkMyImages\Core;
+namespace WatermarkMyImages\Engine;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\ImageInterface as Image_Object;
-
-use WatermarkMyImages\Core\Watermarker;
 
 class Image {
 	/**

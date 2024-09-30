@@ -8,7 +8,7 @@
  * @package WatermarkMyImages
  */
 
-namespace WatermarkMyImages\Core;
+namespace WatermarkMyImages\Engine;
 
 use Imagine\Gd\Font;
 use Imagine\Gd\Image;
@@ -16,8 +16,6 @@ use Imagine\Image\Box;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Image\Palette\RGB;
-
-use WatermarkMyImages\Core\Watermarker;
 
 class Text {
 	/**

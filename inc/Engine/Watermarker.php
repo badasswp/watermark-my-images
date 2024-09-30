@@ -8,7 +8,7 @@
  * @package WatermarkMyImages
  */
 
-namespace WatermarkMyImages\Core;
+namespace WatermarkMyImages\Engine;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
@@ -48,11 +48,11 @@ class Watermarker {
 	 *
 	 * @param string|null $file Absolute path to Image file.
 	 *
-	 * @throws \Exception $e When unable to detect Image ID.
-	 * @throws \Exception $e When unable to create Text Drawer object.
-	 * @throws \Exception $e When unable to open Image resource.
-	 * @throws \Exception $e When unable to paste Text on Image resource.
-	 * @throws \Exception $e When unable to save Watermark Image.
+	 * @throws \Exception     $e When unable to detect Image ID.
+	 * @throws ImageException $e When unable to create Image object.
+	 * @throws TextException  $e When unable to create Text Drawer object.
+	 * @throws \Exception     $e When unable to paste Text on Image resource.
+	 * @throws \Exception     $e When unable to save Watermark Image.
 	 *
 	 * @return string[]
 	 */
@@ -60,7 +60,7 @@ class Watermarker {
 		static::$file = is_null( $file ) ? get_attached_file( $this->service->image_id ) : $file;
 
 		if ( ! file_exists( static::$file ) ) {
-			throw new \InvalidArgumentException(
+			throw new \Exception(
 				sprintf(
 					/* translators: Image ID. */
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
@@ -72,7 +72,7 @@ class Watermarker {
 		try {
 			$image = ( new Image() )->get_image();
 		} catch ( \Exception $e ) {
-			throw new \ImageException(
+			throw new ImageException(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Image object, %s', 'watermark-my-images' ),

@@ -66,4 +66,43 @@ class LoggerTest extends TestCase {
 
 		$this->assertConditionsMet();
 	}
+
+	public function test_log_watermark_errors_passes() {
+		$url = Mockery::mock( '\WP_Error' )->makePartial();
+		$url->shouldAllowMockingProtectedMethods();
+
+		$url->shouldReceive( 'get_error_message' )
+			->andReturn( 'Unable to create Image Object.' );
+
+		\WP_Mock::userFunction( 'get_option' )
+			->once()
+			->with( 'watermark_my_images', [] )
+			->andReturn( [ 'logs' => true ] );
+
+		\WP_Mock::userFunction(
+			'is_wp_error',
+			[
+				'times'  => 1,
+				'return' => function ( $url ) {
+					return $url instanceof \WP_Error;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction( 'wp_insert_post' )
+			->once()
+			->with(
+				[
+					'post_type'    => 'wmi_error',
+					'post_title'   => 'Watermark error log, ID - 1',
+					'post_content' => 'Unable to create Image Object.',
+					'post_status'  => 'publish',
+				]
+			)
+			->andReturn( 100 );
+
+		$this->logger->log_watermark_errors( $url, [], 1 );
+
+		$this->assertConditionsMet();
+	}
 }

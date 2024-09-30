@@ -16,8 +16,10 @@ use Imagine\Gd\Image as Text_Object;
 use Imagine\Image\ImageInterface as Image_Object;
 
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Exceptions\SaveException;
 use WatermarkMyImages\Exceptions\TextException;
 use WatermarkMyImages\Exceptions\ImageException;
+use WatermarkMyImages\Exceptions\PasteException;
 
 class Watermarker {
 	/**
@@ -100,24 +102,28 @@ class Watermarker {
 		try {
 			$image->paste( $text, $this->get_position( $image, $text ) );
 		} catch ( \Exception $e ) {
-			throw new \Exception(
+			throw new PasteException(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to paste Text on Image resource, %s', 'watermark-my-images' ),
 					esc_html( $e->getMessage() )
-				)
+				),
+				500,
+				'Paste Activity',
 			);
 		}
 
 		try {
 			$image->save( $this->get_watermark_abs_path() );
 		} catch ( \Exception $e ) {
-			throw new \Exception(
+			throw new SaveException(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to save to Watermark image, %s', 'watermark-my-images' ),
 					esc_html( $e->getMessage() )
-				)
+				),
+				500,
+				'Save Activity',
 			);
 		}
 

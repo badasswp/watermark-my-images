@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../inc/Helpers/functions.php';
 
 /**
  * @covers wmi_get_settings
+ * @covers wmi_get_equivalent
  */
 class FunctionsTest extends TestCase {
 	public function test_wmi_get_settings() {

@@ -5,6 +5,7 @@ namespace WatermarkMyImages\Tests\Abstracts;
 use Mockery;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Engine\Watermarker;
 
 /**
  * @covers \WatermarkMyImages\Abstracts\Service::__construct
@@ -34,6 +35,12 @@ class ServiceTest extends TestCase {
 
 		$this->assertSame( $instance1, $instance2 );
 		$this->assertSame( $instance2, $instance3 );
+	}
+
+	public function test_watermarker_is_instance_of_Watermarker_engine() {
+		$instance = ConcreteService::get_instance();
+
+		$this->assertInstanceOf( Watermarker::class, $instance->watermarker );
 	}
 }
 

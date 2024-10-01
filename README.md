@@ -13,7 +13,7 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 #### `watermark_my_images_on_add_image`
 
-This custom hook (action) fires when the watermark is added to the uploaded image. For e.g. to log errors, you could do:
+This custom hook (action) fires after the watermark is added to the uploaded image. For e.g. to log errors, you could do:
 
 ```php
 add_action( 'watermark_my_images_on_add_image', [ $this, 'log_errors' ], 10, 3 );
@@ -22,7 +22,7 @@ public function log_errors( $response, $watermark, $id ): void {
     if ( is_wp_error( $response ) ) {
         error_log(
             sprintf(
-                'Fatal Error: Failure converting Watermark Image, %s. Image ID: %d',
+                'Fatal Error: Failure adding Watermark Image, %s. Image ID: %d',
                 $response->get_error_message(),
                 $id
             )
@@ -40,7 +40,7 @@ public function log_errors( $response, $watermark, $id ): void {
 
 #### `watermark_my_images_on_add_image_crops`
 
-This custom hook (action) fires when the watermark is added to one of the crops of the uploaded image. For e.g. to log errors, you could do:
+This custom hook (action) fires after the watermark is added to one of the crops of the uploaded image. For e.g. to log errors, you could do:
 
 ```php
 add_action( 'watermark_my_images_on_add_image_crops', [ $this, 'log_errors' ], 10, 4 );
@@ -49,7 +49,7 @@ public function log_errors( $response, $watermark, $id, $crop ): void {
     if ( is_wp_error( $response ) ) {
         error_log(
             sprintf(
-                'Fatal Error: Failure converting Watermark Image, %s. Image Crop: %s',
+                'Fatal Error: Failure adding Watermark Image, %s. Image Crop: %s',
                 $response->get_error_message(),
                 $crop
             )
@@ -106,6 +106,33 @@ public function delete_wm_image( $watermarked_image, $attachment_id ): void {
 - attachment_id _`{int}`_ By default this is the Image ID.
 <br/>
 
+#### `watermark_my_images_on_page_load`
+
+This custom hook (action) fires after the watermark is added to an image during page load. For e.g. to log errors, you could do:
+
+```php
+add_action( 'watermark_my_images_on_page_load', [ $this, 'log_errors' ], 10, 3 );
+
+public function log_errors( $response, $watermark, $id ): void {
+    if ( is_wp_error( $response ) ) {
+        error_log(
+            sprintf(
+                'Fatal Error: Failure adding Watermark Image, %s. Image ID: %d',
+                $response->get_error_message(),
+                $id
+            )
+        )
+    }
+}
+```
+
+**Parameters**
+
+- response _`{string|\WP_Error}`_ By default this will be the image URL of the watermarked image or WP Error object.
+- watermark _`{string[]}`_ By default this will be a string array, containing the absolute and relative paths of the watermarked image.
+- id _`{int}`_ By default this will be the Image ID.
+<br/>
+
 #### `watermark_my_images_on_woo_product_get_image`
 
 This custom hook (action) fires when the watermark to a WooCommerce image. For e.g:
@@ -117,7 +144,7 @@ public function log_errors( $response, $watermark, $id ): void {
     if ( is_wp_error( $response ) ) {
         error_log(
             sprintf(
-                'Fatal Error: Failure converting Watermark Image, %s. Image ID: %d',
+                'Fatal Error: Failure adding Watermark Image, %s. Image ID: %d',
                 $response->get_error_message(),
                 $id
             )

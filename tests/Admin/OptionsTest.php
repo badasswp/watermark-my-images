@@ -41,4 +41,32 @@ class OptionsTest extends TestCase {
 			]
 		);
 	}
+
+	public function test_get_form_submit() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		$form_submit = Options::get_form_submit();
+
+		$this->assertSame(
+			$form_submit,
+			[
+				'heading' => 'Actions',
+				'button'  => [
+					'name'  => 'watermark_my_images_save_settings',
+					'label' => 'Save Changes',
+				],
+				'nonce'   => [
+					'name'   => 'watermark_my_images_settings_nonce',
+					'action' => 'watermark_my_images_settings_action',
+				],
+			]
+		);
+	}
 }

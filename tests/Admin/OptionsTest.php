@@ -9,6 +9,8 @@ use WatermarkMyImages\Admin\Options;
 /**
  * @covers \WatermarkMyImages\Admin\Options::__construct
  * @covers \WatermarkMyImages\Admin\Options::get_form_page
+ * @covers \WatermarkMyImages\Admin\Options::get_form_submit
+ * @covers \WatermarkMyImages\Admin\Options::get_form_notice
  */
 class OptionsTest extends TestCase {
 	public function setUp(): void {

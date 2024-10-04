@@ -8,6 +8,10 @@
  * @package WatermarkMyImages
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Get Plugin Options.
  *

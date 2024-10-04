@@ -23,7 +23,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times' => 2,
+				'times'  => 2,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -47,7 +47,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times' => 2,
+				'times'  => 2,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -76,7 +76,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times' => 1,
+				'times'  => 1,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},

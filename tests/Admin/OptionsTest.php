@@ -23,6 +23,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
+				'times' => 2,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -46,6 +47,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
+				'times' => 2,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -66,6 +68,27 @@ class OptionsTest extends TestCase {
 					'name'   => 'watermark_my_images_settings_nonce',
 					'action' => 'watermark_my_images_settings_action',
 				],
+			]
+		);
+	}
+
+	public function test_get_form_notice() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'times' => 1,
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		$form_notice = Options::get_form_notice();
+
+		$this->assertSame(
+			$form_notice,
+			[
+				'label' => 'Settings Saved.',
 			]
 		);
 	}

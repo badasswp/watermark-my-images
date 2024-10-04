@@ -15,7 +15,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	wp_die();
+	exit;
 }
 
 $autoload = __DIR__ . '/vendor/autoload.php';

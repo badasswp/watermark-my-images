@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+* Prevent direct access that can lead to Security issues.
+* Tested up to WP 6.6.2.
+
 ## 1.0.3
 * Remove `icc` files (non-GPL files).
 * Added more Unit tests.

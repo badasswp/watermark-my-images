@@ -8,3 +8,4 @@ phpunit.xml
 README.md
 tests
 assets
+/vendor/imagine/imagine/src/resources

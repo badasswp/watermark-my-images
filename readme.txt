@@ -31,6 +31,12 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 == Changelog ==
 
+= 1.0.3 =
+* Remove `icc` files (non-GPL files).
+* Added more Unit tests.
+* Fix bugs & linting issues.
+* Tested up to WP 6.6.2.
+
 = 1.0.2 =
 * Ignore PHPCS warning for Admin options page.
 * Implement Image, Paste & Save Exception classes.

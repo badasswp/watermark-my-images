@@ -3,7 +3,9 @@
 namespace WatermarkMyImages\Tests\Engine;
 
 use Mockery;
+use Exception;
 use WP_Mock\Tools\TestCase;
+
 use WatermarkMyImages\Engine\Image;
 use WatermarkMyImages\Engine\Watermarker;
 
@@ -18,11 +20,16 @@ class ImageTest extends TestCase {
 	public function setUp(): void {
 		\WP_Mock::setUp();
 
-		$this->image = new Image();
+		$this->image       = new Image();
+		Watermarker::$file = __DIR__ . '/sample.png';
+
+		$this->create_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
+
+		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function test_get_image() {

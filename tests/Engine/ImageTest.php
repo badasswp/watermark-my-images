@@ -36,9 +36,6 @@ class ImageTest extends TestCase {
 		$imagine      = Mockery::mock( Imagine::class )->makePartial();
 		$image_object = Mockery::mock( Image_Object::class )->makePartial();
 
-		$this->create_mock_image( __DIR__ . '/sample.png' );
-		Watermarker::$file = __DIR__ . '/sample.png';
-
 		$imagine->shouldReceive( 'open' )
 			->with( __DIR__ . '/sample.png' )
 			->andReturn( $image_object );
@@ -47,8 +44,6 @@ class ImageTest extends TestCase {
 
 		$this->assertInstanceOf( Image_Object::class, $image_resource );
 		$this->assertConditionsMet();
-
-		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	/*public function test_get_image_throws_exception() {

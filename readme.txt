@@ -26,8 +26,9 @@ In this age of social media, it is easy for your intellectual assets to get hija
 == Screenshots ==
 
 1. WooCommerce Watermarked Images - Watermark your WooCommerce Product Images.
-2. Watermark Text Options - Configure your plugin text options here.
-3. Watermark Image Options - Configure your plugin image options here.
+2. Watermarked Images - Watermark your images by simply uploading them.
+3. Watermark Text Options - Configure your plugin text options here.
+4. Watermark Image Options - Configure your plugin image options here.
 
 == Changelog ==
 

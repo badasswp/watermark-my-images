@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+* Change function name `wmi_get_settings` to `wmig_get_settings`.
+* Change function name `wmi_get_equivalent` to `wmig_get_equivalent`.
+* Added more Unit tests.
+* Tested up to WP 6.6.2.
+
 ## 1.0.4
 * Prevent direct access that can lead to Security issues.
 * Tested up to WP 6.6.2.

@@ -89,13 +89,11 @@ class ImageTest extends TestCase {
 		$height = 200;
 		$image  = imagecreatetruecolor( $width, $height );
 
-
 		// Set background color.
 		$bg_color = imagecolorallocate( $image, 255, 255, 255 );
 		imagefill( $image, 0, 0, $bg_color );
 		imagejpeg( $image, $image_file_name );
 	}
-
 
 	public function destroy_mock_image( $image_file_name ) {
 		if ( file_exists( $image_file_name ) ) {

@@ -46,18 +46,12 @@ class ImageTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
-	/*public function test_get_image_throws_exception() {
-		$imagine      = Mockery::mock( Imagine::class )->makePartial();
-		$image_object = Mockery::mock( Image_Object::class )->makePartial();
+	public function test_get_image_throws_exception() {
+		$imagine_mock = $this->createMock( Imagine::class );
+		$imagine_mock->method( 'open' )
+			->will( $this->throwException( new Exception( 'File not found' ) ) );
 
-		$this->create_mock_image( __DIR__ . '/sample.png' );
-		Watermarker::$file = __DIR__ . '/sample.png';
-
-		$imagine->shouldReceive( 'open' )
-			->with( __DIR__ . '/sample.png' )
-			->andReturn( $image_object );
-
-		\WP_Mock::userfunction(
+		\WP_Mock::userFunction(
 			'esc_html__',
 			[
 				'times'  => 1,
@@ -67,7 +61,7 @@ class ImageTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::userfunction(
+		\WP_Mock::userFunction(
 			'esc_html',
 			[
 				'times'  => 1,
@@ -77,13 +71,17 @@ class ImageTest extends TestCase {
 			]
 		);
 
-		$image_resource = $this->image->get_image();
+		$reflection = new \ReflectionClass( $this->image );
+		$property   = $reflection->getProperty( 'imagine' );
 
-		$this->assertInstanceOf( Image_Object::class, $image_resource );
-		$this->assertConditionsMet();
+		$property->setAccessible( true );
+		$property->setValue( $this->image, $imagine_mock );
 
-		$this->destroy_mock_image( __DIR__ . '/sample.png' );
-	}*/
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( 'Unable to open Image Resource, File not found' );
+
+		$this->image->get_image();
+	}
 
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.

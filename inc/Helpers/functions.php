@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return mixed
  */
-function wmi_get_settings( $option, $fallback = '' ) {
+function wmig_set_settings( $option, $fallback = '' ) {
 	return get_option( 'watermark_my_images', [] )[ $option ] ?? $fallback;
 }
 
@@ -37,7 +37,7 @@ function wmi_get_settings( $option, $fallback = '' ) {
  * @param string $url Passed in URL.
  * @return string
  */
-function wmi_get_equivalent( $url ): string {
+function wmig_set_equivalent( $url ): string {
 	$base_name = pathinfo( $url, PATHINFO_BASENAME );
 	$file_name = pathinfo( $url, PATHINFO_FILENAME );
 

@@ -42,7 +42,7 @@ class Logger extends Service implements Registrable {
 	 * @return void
 	 */
 	public function log_watermark_errors( $url, $watermark, $id ): void {
-		if ( ! wmi_get_settings( 'logs' ) ) {
+		if ( ! wmig_set_settings( 'logs' ) ) {
 			return;
 		}
 

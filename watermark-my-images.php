@@ -14,6 +14,8 @@
  * @package WatermarkMyImages
  */
 
+namespace badasswp\WatermarkMyImages;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

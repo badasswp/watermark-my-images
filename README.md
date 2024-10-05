@@ -3,7 +3,11 @@ Insert Watermarks into your WP images.
 
 <img width="1018" alt="screenshot-1" src="https://github.com/user-attachments/assets/2f8218c9-2dd1-4d6f-9998-f7c84c5b070a">
 
----
+## Download
+
+Download from [WordPress plugin repository](https://wordpress.org/plugins/watermark-my-images/).
+
+You can also get the latest version from any of our [release tags](https://github.com/badasswp/watermark-my-images/releases).
 
 ## Why Watermark My Images?
 

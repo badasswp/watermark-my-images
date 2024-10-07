@@ -23,4 +23,19 @@ class TextTest extends TestCase {
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
 	}
+
+	public function test_args_is_set() {
+		$this->assertSame(
+			$this->text->args,
+			[
+				'size'       => 60,
+				'tx_color'   => '#000',
+				'bg_color'   => '#FFF',
+				'font'       => 'Arial',
+				'label'      => 'WATERMARK',
+				'tx_opacity' => 100,
+				'bg_opacity' => 0,
+			]
+		);
+	}
 }

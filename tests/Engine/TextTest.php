@@ -4,6 +4,7 @@ namespace WatermarkMyImages\Tests\Engine;
 
 use Mockery;
 use Exception;
+use ReflectionClass;
 use WP_Mock\Tools\TestCase;
 
 use WatermarkMyImages\Engine\Text;
@@ -37,5 +38,27 @@ class TextTest extends TestCase {
 				'bg_opacity' => 0,
 			]
 		);
+	}
+
+	public function test_get_option() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$text->shouldReceive( 'get_options' )
+			->with()
+			->andReturn(
+				[
+					'size'       => 60,
+					'tx_color'   => '#000',
+					'bg_color'   => '#FFF',
+					'font'       => 'Arial',
+					'label'      => 'WATERMARK',
+					'tx_opacity' => 100,
+					'bg_opacity' => 0,
+				]
+			);
+
+		$this->assertSame( '60', $text->get_option( 'size' ) );
+		$this->assertConditionsMet();
 	}
 }

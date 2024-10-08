@@ -202,7 +202,7 @@ class Text {
 	 * @return integer
 	 */
 	protected function get_size( $options ): int {
-		$ratio      = 100 / ( $options['size'] ?? 1 );
+		$ratio      = 100 / absint( $options['size'] ?? 100 );
 		$image_size = getimagesize( Watermarker::$file )[0] ?? 0;
 
 		return floor( $image_size / ( $ratio * 8.5 ) );

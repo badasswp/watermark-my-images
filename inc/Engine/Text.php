@@ -80,7 +80,9 @@ class Text {
 		 * @param mixed[] $options Text Options.
 		 * @return mixed[]
 		 */
-		return (array) apply_filters( 'watermark_my_images_text', $options );
+		$filtered_options = apply_filters( 'watermark_my_images_text', $options );
+
+		return wp_parse_args( $filtered_options, $this->args );
 	}
 
 	/**

@@ -84,10 +84,10 @@ class TextTest extends TestCase {
 		\WP_Mock::userFunction(
 			'wp_parse_args',
 			[
-				'times' => 1,
-				'return' => function( $args, $default ) {
+				'times'  => 1,
+				'return' => function ( $args, $default ) {
 					return array_merge( $default, $args );
-				}
+				},
 			]
 		);
 
@@ -136,10 +136,10 @@ class TextTest extends TestCase {
 		\WP_Mock::userFunction(
 			'wp_parse_args',
 			[
-				'times' => 1,
-				'return' => function( $args, $default ) {
+				'times'  => 1,
+				'return' => function ( $args, $default ) {
 					return array_merge( $default, $args );
-				}
+				},
 			]
 		);
 
@@ -201,10 +201,10 @@ class TextTest extends TestCase {
 		\WP_Mock::userFunction(
 			'wp_parse_args',
 			[
-				'times' => 1,
-				'return' => function( $args, $default ) {
+				'times'  => 1,
+				'return' => function ( $args, $default ) {
 					return array_merge( $default, $args );
-				}
+				},
 			]
 		);
 

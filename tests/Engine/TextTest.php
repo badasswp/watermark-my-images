@@ -85,8 +85,8 @@ class TextTest extends TestCase {
 			'wp_parse_args',
 			[
 				'times'  => 1,
-				'return' => function ( $args, $default ) {
-					return array_merge( $default, $args );
+				'return' => function ( $args, $default_args ) {
+					return array_merge( $default_args, $args );
 				},
 			]
 		);
@@ -137,8 +137,8 @@ class TextTest extends TestCase {
 			'wp_parse_args',
 			[
 				'times'  => 1,
-				'return' => function ( $args, $default ) {
-					return array_merge( $default, $args );
+				'return' => function ( $args, $default_args ) {
+					return array_merge( $default_args, $args );
 				},
 			]
 		);
@@ -209,8 +209,8 @@ class TextTest extends TestCase {
 			'wp_parse_args',
 			[
 				'times'  => 1,
-				'return' => function ( $args, $default ) {
-					return array_merge( $default, $args );
+				'return' => function ( $args, $default_args ) {
+					return array_merge( $default_args, $args );
 				},
 			]
 		);

@@ -157,10 +157,7 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::expectFilter(
-			'watermark_my_images_text',
-			$options_with_size_updated
-		);
+		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
 
 		$options = $text->get_options();
 
@@ -194,6 +191,16 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
+		$filtered_options = [
+			'size'       => 75,
+			'tx_color'   => '#FFF',
+			'bg_color'   => '#F00',
+			'font'       => 'Arial',
+			'label'      => 'Copyright',
+			'tx_opacity' => 100,
+			'bg_opacity' => 0,
+		];
+
 		\WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
@@ -208,30 +215,20 @@ class TextTest extends TestCase {
 			]
 		);
 
-		$text->shouldReceive( 'get_size' )
-			->with( $options )
-			->andReturn( 60 );
-
 		\WP_Mock::onFilter( 'watermark_my_images_text' )
 			->with( $options )
-			->reply(
-				[
-					'size'       => 75,
-					'tx_color'   => '#FFF',
-					'bg_color'   => '#F00',
-					'font'       => 'Arial',
-					'label'      => 'Copyright',
-					'tx_opacity' => 100,
-					'bg_opacity' => 0,
-				]
-			);
+			->reply( $filtered_options );
+
+		$text->shouldReceive( 'get_size' )
+			->with( $filtered_options )
+			->andReturn( 60 );
 
 		$options = $text->get_options();
 
 		$this->assertSame(
 			$options,
 			[
-				'size'       => 75,
+				'size'       => 60,
 				'tx_color'   => '#FFF',
 				'bg_color'   => '#F00',
 				'font'       => 'Arial',

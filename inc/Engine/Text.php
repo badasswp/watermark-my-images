@@ -66,9 +66,6 @@ class Text {
 	protected function get_options(): array {
 		$options = get_option( 'watermark_my_images', [] );
 
-		// Modify the Text size.
-		$options['size'] = $this->get_size( $options );
-
 		/**
 		 * Filter Text Options.
 		 *
@@ -80,7 +77,10 @@ class Text {
 		 * @param mixed[] $options Text Options.
 		 * @return mixed[]
 		 */
-		$filtered_options = apply_filters( 'watermark_my_images_text', $options );
+		$filtered_options = (array) apply_filters( 'watermark_my_images_text', $options );
+
+		// Modify the Text size.
+		$filtered_options['size'] = $this->get_size( $filtered_options );
 
 		return wp_parse_args( $filtered_options, $this->args );
 	}

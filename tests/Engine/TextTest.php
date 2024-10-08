@@ -61,4 +61,56 @@ class TextTest extends TestCase {
 		$this->assertSame( '60', $text->get_option( 'size' ) );
 		$this->assertConditionsMet();
 	}
+
+	public function test_get_options_passes() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+		$text->args = [];
+
+		$options = [
+			'size'       => 60,
+			'tx_color'   => '#000',
+			'bg_color'   => '#FFF',
+			'font'       => 'Arial',
+			'label'      => 'WATERMARK',
+			'tx_opacity' => 100,
+			'bg_opacity' => 0,
+		];
+
+		\WP_Mock::userFunction( 'get_option' )
+			->with( 'watermark_my_images', [] )
+			->andReturn( $options );
+
+		\WP_Mock::userFunction(
+			'wp_parse_args',
+			[
+				'times' => 1,
+				'return' => function( $args, $default ) {
+					return array_merge( $default, $args );
+				}
+			]
+		);
+
+		$text->shouldReceive( 'get_size' )
+			->with( $options )
+			->andReturn( 60 );
+
+		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
+
+		$options = $text->get_options();
+
+		$this->assertSame(
+			$options,
+			[
+				'size'       => 60,
+				'tx_color'   => '#000',
+				'bg_color'   => '#FFF',
+				'font'       => 'Arial',
+				'label'      => 'WATERMARK',
+				'tx_opacity' => 100,
+				'bg_opacity' => 0,
+			]
+		);
+		$this->assertConditionsMet();
+	}
 }

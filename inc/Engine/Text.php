@@ -64,11 +64,9 @@ class Text {
 	 * @return mixed[]
 	 */
 	protected function get_options(): array {
-		$options = wp_parse_args(
-			get_option( 'watermark_my_images', [] ) ?? [],
-			$this->args
-		);
+		$options = get_option( 'watermark_my_images', [] );
 
+		// Modify the Text size.
 		$options['size'] = $this->get_size( $options );
 
 		/**

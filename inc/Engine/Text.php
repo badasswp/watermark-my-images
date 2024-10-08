@@ -79,7 +79,7 @@ class Text {
 		 */
 		$filtered_options = (array) apply_filters( 'watermark_my_images_text', $options );
 
-		// Adjust the relative text height based on Image width.
+		// Adjust the text height based on Image width.
 		$filtered_options['size'] = $this->get_size( $filtered_options );
 
 		return wp_parse_args( $filtered_options, $this->args );

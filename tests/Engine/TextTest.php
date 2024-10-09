@@ -10,8 +10,8 @@ use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Engine\Text;
 use WatermarkMyImages\Engine\Watermarker;
 
-use Imagine\Gd\Font as Font;
-use Imagine\Image\Palette\RGB as RGB;
+use Imagine\Gd\Font;
+use Imagine\Image\Palette\RGB;
 use Imagine\Image\Palette\Color\RGB as TextColor;
 
 /**
@@ -252,7 +252,7 @@ class TextTest extends TestCase {
 		$rgb->shouldAllowMockingProtectedMethods();
 
 		$tx_color_obj = new TextColor( $rgb, [ 255, 255, 255 ], 100 );
-		$tx_color = Mockery::mock( $tx_color_obj )->makePartial();
+		$tx_color     = Mockery::mock( $tx_color_obj )->makePartial();
 
 		$text->shouldReceive( 'get_option' )
 			->with( 'tx_color' )

@@ -10,6 +10,10 @@ use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Engine\Text;
 use WatermarkMyImages\Engine\Watermarker;
 
+use Imagine\Gd\Font as Font;
+use Imagine\Image\Palette\RGB as RGB;
+use Imagine\Image\Palette\Color\RGB as TextColor;
+
 /**
  * @covers \WatermarkMyImages\Engine\Text::__construct
  */
@@ -237,6 +241,42 @@ class TextTest extends TestCase {
 				'bg_opacity' => 0,
 			]
 		);
+		$this->assertConditionsMet();
+	}
+
+	public function test_get_font_passes() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$rgb = Mockery::mock( RGB::class )->makePartial();
+		$rgb->shouldAllowMockingProtectedMethods();
+
+		$tx_color_obj = new TextColor( $rgb, [ 255, 255, 255 ], 100 );
+		$tx_color = Mockery::mock( $tx_color_obj )->makePartial();
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'tx_color' )
+			->andReturn( '#FFF' );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'tx_opacity' )
+			->andReturn( '100' );
+
+		$rgb->shouldReceive( 'color' )
+			->with( 'tx_color', 100 )
+			->andReturn( $tx_color );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'size' )
+			->andReturn( 60 );
+
+		$text->shouldReceive( 'get_font_url' )
+			->with()
+			->andReturn( '/var/www/wp-content/plugins/watermark-my-images/fonts/Arial.otf' );
+
+		$tx_font = $text->get_font();
+
+		$this->assertInstanceOf( Font::class, $tx_font );
 		$this->assertConditionsMet();
 	}
 }

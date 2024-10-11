@@ -302,7 +302,7 @@ class TextTest extends TestCase {
 
 	public function test_get_size_passes() {
 		$options = [
-			'size' => 50
+			'size' => 50,
 		];
 
 		$text = Mockery::mock( Text::class )->makePartial();
@@ -400,82 +400,84 @@ class TextTest extends TestCase {
 			->with( 'label' )
 			->andReturn( 'WATERMARK' );
 
-		$text->shouldReceive('get_char_ratio')
-			->andReturnUsing( function( $char ) {
-				$ratio = 1;
+		$text->shouldReceive( 'get_char_ratio' )
+			->andReturnUsing(
+				function ( $char ) {
+					$ratio = 1;
 
-				switch ( $char ) {
-					case 'A':
-					case 'G':
-						$ratio = 0.917;
-						break;
+					switch ( $char ) {
+						case 'A':
+						case 'G':
+							$ratio = 0.917;
+							break;
 
-					case 'B':
-					case 'H':
-					case 'N':
-					case 'S':
-					case 'T':
-					case 'U':
-					case 'Z':
-						$ratio = 0.8;
-						break;
+						case 'B':
+						case 'H':
+						case 'N':
+						case 'S':
+						case 'T':
+						case 'U':
+						case 'Z':
+							$ratio = 0.8;
+							break;
 
-					case 'C':
-					case 'Y':
-						$ratio = 0.9;
-						break;
+						case 'C':
+						case 'Y':
+							$ratio = 0.9;
+							break;
 
-					case 'D':
-					case 'R':
-					case 'X':
-						$ratio = 0.833;
-						break;
+						case 'D':
+						case 'R':
+						case 'X':
+							$ratio = 0.833;
+							break;
 
-					case 'E':
-						$ratio = 0.7;
-						break;
+						case 'E':
+							$ratio = 0.7;
+							break;
 
-					case 'F':
-					case 'L':
-						$ratio = 0.667;
-						break;
+						case 'F':
+						case 'L':
+							$ratio = 0.667;
+							break;
 
-					case 'J':
-						$ratio = 0.6;
-						break;
+						case 'J':
+							$ratio = 0.6;
+							break;
 
-					case 'K':
-						$ratio = 0.817;
-						break;
+						case 'K':
+							$ratio = 0.817;
+							break;
 
-					case 'O':
-					case 'Q':
-						$ratio = 0.967;
-						break;
+						case 'O':
+						case 'Q':
+							$ratio = 0.967;
+							break;
 
-					case 'P':
-						$ratio = 0.75;
-						break;
+						case 'P':
+							$ratio = 0.75;
+							break;
 
-					case 'V':
-						$ratio = 0.867;
-						break;
+						case 'V':
+							$ratio = 0.867;
+							break;
 
-					case 'W':
-						$ratio = 1.283;
-						break;
+						case 'W':
+							$ratio = 1.283;
+							break;
 
-					case 'I':
-						$ratio = 0.133;
-						break;
+						case 'I':
+							$ratio = 0.133;
+							break;
 
-					default:
-						$ratio = 1;
-						break;
+						default:
+							$ratio = 1;
+							break;
+					}
+
+					return $ratio;
 				}
-
-				return $ratio;
-			} );
+			);
 
 		$length = $text->get_text_length();
 

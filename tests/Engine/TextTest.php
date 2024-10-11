@@ -280,6 +280,26 @@ class TextTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_get_font_url() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$reflect = new ReflectionClass( $this->text );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'font' )
+			->andReturn( 'Arial' );
+
+		\WP_Mock::userFunction( 'plugin_dir_path' )
+			->with( pathinfo( $reflect->getFileName(), PATHINFO_DIRNAME ) )
+			->andReturn( '/var/www/wp-content/uploads/watermark-my-images/inc/Engine' );
+
+		$font = $text->get_font_url();
+
+		$this->assertSame( $font, '/var/www/wp-content/uploads/watermark-my-images/inc/Engine/../fonts/Arial.otf' );
+		$this->assertConditionsMet();
+	}
+
 	/*public function test_get_font_throws_exception() {
 		$rgb_mock = $this->createMock( RGB::class );
 		$rgb_mock->method( 'color' )

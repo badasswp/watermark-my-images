@@ -388,6 +388,101 @@ class TextTest extends TestCase {
 		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
+	public function test_get_text_length() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'size' )
+			->andReturn( 100 );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'label' )
+			->andReturn( 'WATERMARK' );
+
+		$text->shouldReceive('get_char_ratio')
+			->andReturnUsing( function( $char ) {
+				$ratio = 1;
+
+				switch ( $char ) {
+					case 'A':
+					case 'G':
+						$ratio = 0.917;
+						break;
+
+					case 'B':
+					case 'H':
+					case 'N':
+					case 'S':
+					case 'T':
+					case 'U':
+					case 'Z':
+						$ratio = 0.8;
+						break;
+
+					case 'C':
+					case 'Y':
+						$ratio = 0.9;
+						break;
+
+					case 'D':
+					case 'R':
+					case 'X':
+						$ratio = 0.833;
+						break;
+
+					case 'E':
+						$ratio = 0.7;
+						break;
+
+					case 'F':
+					case 'L':
+						$ratio = 0.667;
+						break;
+
+					case 'J':
+						$ratio = 0.6;
+						break;
+
+					case 'K':
+						$ratio = 0.817;
+						break;
+
+					case 'O':
+					case 'Q':
+						$ratio = 0.967;
+						break;
+
+					case 'P':
+						$ratio = 0.75;
+						break;
+
+					case 'V':
+						$ratio = 0.867;
+						break;
+
+					case 'W':
+						$ratio = 1.283;
+						break;
+
+					case 'I':
+						$ratio = 0.133;
+						break;
+
+					default:
+						$ratio = 1;
+						break;
+				}
+
+				return $ratio;
+			} );
+
+		$length = $text->get_text_length();
+
+		$this->assertSame( $length, 890.0 );
+		$this->assertConditionsMet();
+	}
+
 	/*public function test_get_font_throws_exception() {
 		$rgb_mock = $this->createMock( RGB::class );
 		$rgb_mock->method( 'color' )

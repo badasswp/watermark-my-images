@@ -483,48 +483,6 @@ class TextTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
-	/*public function test_get_font_throws_exception() {
-		$rgb_mock = $this->createMock( RGB::class );
-		$rgb_mock->method( 'color' )
-			->will( $this->throwException( new Exception( 'Invalid RGB Color value' ) ) );
-
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 1,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'esc_html',
-			[
-				'times'  => 1,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
-
-		$text = Mockery::mock( Text::class )->makePartial();
-		$text->shouldAllowMockingProtectedMethods();
-
-		$text->shouldReceive( 'get_option' )
-			->with( 'tx_color' )
-			->andReturn( '#FFF' );
-
-		$text->shouldReceive( 'get_option' )
-			->with( 'tx_opacity' )
-			->andReturn( '100' );
-
-		$this->expectException( Exception::class );
-		$this->expectExceptionMessage( 'Unable to create Text color, Invalid RGB Color value' );
-
-		$text->get_font();
-	}*/
-
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
 		$width  = 850;

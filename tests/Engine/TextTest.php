@@ -300,6 +300,24 @@ class TextTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_get_size_passes() {
+		$options = [
+			'size' => 50
+		];
+
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$this->create_mock_image( __DIR__ . '/sample.png' );
+
+		$size = $text->get_size( $options );
+
+		$this->assertSame( $size, 50 );
+		$this->assertConditionsMet();
+
+		$this->destroy_mock_image( __DIR__ . '/sample.png' );
+	}
+
 	/*public function test_get_font_throws_exception() {
 		$rgb_mock = $this->createMock( RGB::class );
 		$rgb_mock->method( 'color' )
@@ -344,7 +362,7 @@ class TextTest extends TestCase {
 
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
-		$width  = 400;
+		$width  = 850;
 		$height = 200;
 		$image  = imagecreatetruecolor( $width, $height );
 

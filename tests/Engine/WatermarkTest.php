@@ -37,7 +37,6 @@ class WatermarkerTest extends TestCase {
 	public function test_get_watermark_rel_path_returns_empty_string() {
 		$service = Mockery::mock( Service::class )->makePartial();
 		$service->shouldAllowMockingProtectedMethods();
-		$service->id = null;
 
 		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
 		$watermarker->shouldAllowMockingProtectedMethods();

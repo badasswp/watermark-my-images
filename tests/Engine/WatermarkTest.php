@@ -6,6 +6,7 @@ use Mockery;
 use Exception;
 use WP_Mock\Tools\TestCase;
 
+use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
 
 /**
@@ -30,6 +31,21 @@ class WatermarkerTest extends TestCase {
 		$abs_path = $watermarker->get_watermark_abs_path();
 
 		$this->assertSame( $abs_path, '/var/www/wp-content/uploads/2024/10/sample-watermark-my-images.jpg' );
+		$this->assertConditionsMet();
+	}
+
+	public function test_get_watermark_rel_path_returns_empty_string() {
+		$service = Mockery::mock( Service::class )->makePartial();
+		$service->shouldAllowMockingProtectedMethods();
+		$service->id = null;
+
+		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
+		$watermarker->shouldAllowMockingProtectedMethods();
+		$watermarker->service = $service;
+
+		$rel_path = $watermarker->get_watermark_rel_path();
+
+		$this->assertSame( $rel_path, '' );
 		$this->assertConditionsMet();
 	}
 }

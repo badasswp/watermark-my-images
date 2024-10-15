@@ -12,6 +12,7 @@ use WatermarkMyImages\Engine\Watermarker;
 /**
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers \WatermarkMyImages\Engine\Watermarker::get_watermark_abs_path
+ * @covers \WatermarkMyImages\Engine\Watermarker::get_watermark_rel_path
  */
 class WatermarkerTest extends TestCase {
 	public function setUp(): void {

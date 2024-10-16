@@ -9,6 +9,15 @@ use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
 
+use Imagine\Gd\Image as Text;
+use Imagine\Image\ImageInterface as Image;
+use Imagine\Image\BoxInterface as Box;
+
+use Resource;
+use Imagine\Image\Palette\PaletteInterface as Palette;
+use Imagine\Image\Metadata\MetadataBag as MetaData;
+use Imagine\Image\Point;
+
 /**
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers \WatermarkMyImages\Engine\Watermarker::get_watermark_abs_path
@@ -65,6 +74,63 @@ class WatermarkerTest extends TestCase {
 		$rel_path = $watermarker->get_watermark_rel_path();
 
 		$this->assertSame( $rel_path, 'https://example.com/wp-content/uploads/2024/10/sample-watermark-my-images.jpg' );
+		$this->assertConditionsMet();
+	}
+
+	public function test_get_position() {
+		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
+		$watermarker->shouldAllowMockingProtectedMethods();
+
+		$resource = Mockery::mock( Resource::class )->makePartial();
+		$resource->shouldAllowMockingProtectedMethods();
+
+		$palette = Mockery::mock( Palette::class )->makePartial();
+		$palette->shouldAllowMockingProtectedMethods();
+
+		$metadata = Mockery::mock( Metadata::class )->makePartial();
+		$metadata->shouldAllowMockingProtectedMethods();
+
+		$text = Mockery::mock( new Text( $resource, $palette, $metadata ) )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$image = Mockery::mock( Image::class )->makePartial();
+		$image->shouldAllowMockingProtectedMethods();
+
+		$text_size_object = Mockery::mock( Box::class )->makePartial();
+		$text_size_object->shouldAllowMockingProtectedMethods();
+
+		$image_size_object = Mockery::mock( Box::class )->makePartial();
+		$image_size_object->shouldAllowMockingProtectedMethods();
+
+		$text->shouldReceive( 'getSize' )
+			->with()
+			->andReturn( $text_size_object );
+
+		$image->shouldReceive( 'getSize' )
+			->with()
+			->andReturn( $image_size_object );
+
+		$text_size_object->shouldReceive( 'getWidth' )
+			->with()
+			->andReturn( 50 );
+
+		$image_size_object->shouldReceive( 'getWidth' )
+			->with()
+			->andReturn( 100 );
+
+		$text_size_object->shouldReceive( 'getHeight' )
+			->with()
+			->andReturn( 50 );
+
+		$image_size_object->shouldReceive( 'getHeight' )
+			->with()
+			->andReturn( 100 );
+
+		\WP_Mock::expectFilter( 'watermark_my_images_text_position', [ 25, 25 ] );
+
+		$position = $watermarker->get_position( $image, $text );
+
+		$this->assertInstanceOf( Point::class, $position );
 		$this->assertConditionsMet();
 	}
 }

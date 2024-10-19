@@ -18,6 +18,8 @@ use WatermarkMyImages\Services\WooCommerce;
  * @covers \WatermarkMyImages\Core\Container::__construct
  */
 class ContainerTest extends TestCase {
+	public Container $container;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 	}

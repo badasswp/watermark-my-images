@@ -11,6 +11,8 @@ use WatermarkMyImages\Exceptions\TextException;
  * @covers \WatermarkMyImages\Exceptions\TextException::getContext
  */
 class TextExceptionTest extends TestCase {
+	public TextException $text_exception;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

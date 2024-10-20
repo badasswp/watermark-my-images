@@ -17,6 +17,8 @@ use Imagine\Image\ImageInterface as Image_Object;
  * @covers \WatermarkMyImages\Engine\Image::get_image
  */
 class ImageTest extends TestCase {
+	public Image $image;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

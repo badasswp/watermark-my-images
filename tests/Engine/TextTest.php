@@ -18,6 +18,8 @@ use Imagine\Image\Palette\Color\RGB as TextColor;
  * @covers \WatermarkMyImages\Engine\Text::__construct
  */
 class TextTest extends TestCase {
+	public Text $text;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

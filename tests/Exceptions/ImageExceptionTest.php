@@ -11,6 +11,8 @@ use WatermarkMyImages\Exceptions\ImageException;
  * @covers \WatermarkMyImages\Exceptions\ImageException::getContext
  */
 class ImageExceptionTest extends TestCase {
+	public ImageException $image_exception;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

@@ -11,6 +11,8 @@ use WatermarkMyImages\Exceptions\SaveException;
  * @covers \WatermarkMyImages\Exceptions\SaveException::getContext
  */
 class SaveExceptionTest extends TestCase {
+	public SaveException $save_exception;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

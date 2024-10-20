@@ -11,6 +11,8 @@ use WatermarkMyImages\Exceptions\PasteException;
  * @covers \WatermarkMyImages\Exceptions\PasteException::getContext
  */
 class PasteExceptionTest extends TestCase {
+	public PasteException $paste_exception;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

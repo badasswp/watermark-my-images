@@ -23,6 +23,13 @@ use WatermarkMyImages\Exceptions\PasteException;
 
 class Watermarker {
 	/**
+	 * Service.
+	 *
+	 * @var Service
+	 */
+	public Service $service;
+
+	/**
 	 * Image absolute file path.
 	 *
 	 * @since 1.0.1

@@ -41,10 +41,10 @@ class MetaDataTest extends TestCase {
 		\WP_Mock::userFunction(
 			'is_wp_error',
 			[
-				'times' => 1,
-				'return' => function( $error ) {
+				'times'  => 1,
+				'return' => function ( $error ) {
 					return $error instanceof \WP_Error;
-				}
+				},
 			]
 		);
 

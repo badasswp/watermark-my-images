@@ -23,15 +23,6 @@ use WatermarkMyImages\Exceptions\PasteException;
 
 class Watermarker {
 	/**
-	 * Set up.
-	 *
-	 * @param Service $service
-	 */
-	public function __construct( Service $service ) {
-		$this->service = $service;
-	}
-
-	/**
 	 * Image absolute file path.
 	 *
 	 * @since 1.0.1
@@ -39,6 +30,15 @@ class Watermarker {
 	 * @var string
 	 */
 	public static string $file;
+
+	/**
+	 * Set up.
+	 *
+	 * @param Service $service
+	 */
+	public function __construct( Service $service ) {
+		$this->service = $service;
+	}
 
 	/**
 	 * Get Watermark.

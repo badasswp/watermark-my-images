@@ -13,6 +13,8 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\Boot::register_translation
  */
 class BootTest extends TestCase {
+	public Boot $boot;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

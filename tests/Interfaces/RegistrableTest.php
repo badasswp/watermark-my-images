@@ -10,6 +10,8 @@ use WatermarkMyImages\Interfaces\Registrable;
  * @covers \WatermarkMyImages\Interfaces\Registrable::__construct
  */
 class RegistrableTest extends TestCase {
+	public Registrable $registrable;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

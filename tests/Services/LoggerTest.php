@@ -16,6 +16,8 @@ require_once __DIR__ . '/../../inc/Helpers/functions.php';
  * @covers wmig_set_settings
  */
 class LoggerTest extends TestCase {
+	public Logger $logger;
+
 	public function setUp(): void {
 		\WP_Mock::setUp();
 

@@ -53,4 +53,29 @@ class MetaDataTest extends TestCase {
 
 		$this->assertConditionsMet();
 	}
+
+	public function test_add_watermark_metadata_bails_out_on_get_post_meta() {
+		\WP_Mock::userFunction(
+			'is_wp_error',
+			[
+				'times'  => 1,
+				'return' => function ( $error ) {
+					return $error instanceof \WP_Error;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn(
+				[
+					'abs' => '/var/www/html/wp-content/uploads/2024/10/img-watermark-my-images.jpg',
+					'rel' => 'https://www.example.com/wp-content/uploads/2024/10/img-watermark-my-images.jpg',
+				]
+			);
+
+		$this->metadata->add_watermark_metadata( '', [], 1 );
+
+		$this->assertConditionsMet();
+	}
 }

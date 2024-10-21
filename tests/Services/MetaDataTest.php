@@ -78,4 +78,33 @@ class MetaDataTest extends TestCase {
 
 		$this->assertConditionsMet();
 	}
+
+	public function test_add_watermark_metadata_passes() {
+		$watermark = [
+			'abs' => '/var/www/html/wp-content/uploads/2024/10/img-watermark-my-images.jpg',
+			'rel' => 'https://www.example.com/wp-content/uploads/2024/10/img-watermark-my-images.jpg',
+		];
+
+		\WP_Mock::userFunction(
+			'is_wp_error',
+			[
+				'times'  => 1,
+				'return' => function ( $error ) {
+					return $error instanceof \WP_Error;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn( '' );
+
+		\WP_Mock::userFunction( 'update_post_meta' )
+			->with( 1, 'watermark_my_images', $watermark )
+			->andReturn( true );
+
+		$this->metadata->add_watermark_metadata( $watermark['abs'], $watermark, 1 );
+
+		$this->assertConditionsMet();
+	}
 }

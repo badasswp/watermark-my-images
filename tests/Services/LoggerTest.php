@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../inc/Helpers/functions.php';
  * @covers \WatermarkMyImages\Services\Logger::__construct
  * @covers \WatermarkMyImages\Services\Logger::register
  * @covers \WatermarkMyImages\Services\Logger::log_watermark_errors
+ * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers wmig_set_settings
  */
 class LoggerTest extends TestCase {

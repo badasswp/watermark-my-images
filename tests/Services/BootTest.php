@@ -11,6 +11,7 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\Boot::__construct
  * @covers \WatermarkMyImages\Services\Boot::register
  * @covers \WatermarkMyImages\Services\Boot::register_translation
+ * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  */
 class BootTest extends TestCase {
 	public Boot $boot;

@@ -11,6 +11,7 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\MetaData::__construct
  * @covers \WatermarkMyImages\Services\MetaData::register
  * @covers \WatermarkMyImages\Services\MetaData::add_watermark_metadata
+ * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  */
 class MetaDataTest extends TestCase {
 	public MetaData $metadata;

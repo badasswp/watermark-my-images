@@ -7,7 +7,7 @@ use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Interfaces\Registrable;
 
 /**
- * @covers \WatermarkMyImages\Interfaces\Registrable::__construct
+ * @covers \WatermarkMyImages\Interfaces\Registrable::register
  */
 class RegistrableTest extends TestCase {
 	public Registrable $registrable;

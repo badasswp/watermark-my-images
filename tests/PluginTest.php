@@ -8,7 +8,7 @@ use WatermarkMyImages\Plugin;
 use WatermarkMyImages\Abstracts\Service;
 
 /**
- * @covers \WatermarkMyImages\Plugin::__construct
+ * @covers \WatermarkMyImages\Plugin::get_instance
  */
 class PluginTest extends TestCase {
 	public function setUp(): void {

@@ -16,6 +16,12 @@ use Imagine\Image\Palette\Color\RGB as TextColor;
 
 /**
  * @covers \WatermarkMyImages\Engine\Text::__construct
+ * @covers \WatermarkMyImages\Engine\Text::get_option
+ * @covers \WatermarkMyImages\Engine\Text::get_options
+ * @covers \WatermarkMyImages\Engine\Text::get_font
+ * @covers \WatermarkMyImages\Engine\Text::get_font_url
+ * @covers \WatermarkMyImages\Engine\Text::get_size
+ * @covers \WatermarkMyImages\Engine\Text::get_text_length
  */
 class TextTest extends TestCase {
 	public Text $text;

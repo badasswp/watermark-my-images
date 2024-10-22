@@ -22,6 +22,8 @@ use Imagine\Image\Point;
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers \WatermarkMyImages\Engine\Watermarker::get_watermark_abs_path
  * @covers \WatermarkMyImages\Engine\Watermarker::get_watermark_rel_path
+ * @covers \WatermarkMyImages\Engine\Watermarker::get_position
+ * @covers wmig_set_equivalent
  */
 class WatermarkerTest extends TestCase {
 	public function setUp(): void {

@@ -7,7 +7,6 @@ use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Admin\Options;
 
 /**
- * @covers \WatermarkMyImages\Admin\Options::__construct
  * @covers \WatermarkMyImages\Admin\Options::get_form_page
  * @covers \WatermarkMyImages\Admin\Options::get_form_submit
  * @covers \WatermarkMyImages\Admin\Options::get_form_notice

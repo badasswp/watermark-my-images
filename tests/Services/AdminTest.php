@@ -13,6 +13,12 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\Admin::register
  * @covers \WatermarkMyImages\Services\Admin::register_options_menu
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
+ * @covers \WatermarkMyImages\Admin\Options::__callStatic
+ * @covers \WatermarkMyImages\Admin\Options::get_form_fields
+ * @covers \WatermarkMyImages\Admin\Options::get_form_notice
+ * @covers \WatermarkMyImages\Admin\Options::get_form_page
+ * @covers \WatermarkMyImages\Admin\Options::get_form_submit
+ * @covers \WatermarkMyImages\Admin\Options::init
  */
 class AdminTest extends TestCase {
 	public Admin $admin;

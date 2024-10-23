@@ -34,6 +34,8 @@ class AdminTest extends TestCase {
 
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
+
+		$_POST = [];
 	}
 
 	public function test_register() {
@@ -123,6 +125,59 @@ class AdminTest extends TestCase {
 				},
 			]
 		);
+
+		$this->admin->register_options_init();
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_register_options_init_bails_on_NONCE() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'times'  => 75,
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr',
+			[
+				'times'  => 27,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr__',
+			[
+				'times'  => 18,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		$_POST = [
+			'watermark_my_images_save_settings'  => true,
+			'watermark_my_images_settings_nonce' => 'a8jfkgw2h7i',
+		];
+
+		\WP_Mock::userFunction( 'wp_unslash' )
+			->with( 'a8jfkgw2h7i' )
+			->andReturn( 'a8jfkgw2h7i' );
+
+		\WP_Mock::userFunction( 'sanitize_text_field' )
+			->with( 'a8jfkgw2h7i' )
+			->andReturn( 'a8jfkgw2h7i' );
+
+		\WP_Mock::userFunction( 'wp_verify_nonce' )
+			->with( 'a8jfkgw2h7i', 'watermark_my_images_settings_action' )
+			->andReturn( false );
 
 		$this->admin->register_options_init();
 

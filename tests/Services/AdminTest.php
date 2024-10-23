@@ -184,6 +184,90 @@ class AdminTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_register_options_init_passes() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'times'  => 125,
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr',
+			[
+				'times'  => 45,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr__',
+			[
+				'times'  => 30,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		$_POST = [
+			'watermark_my_images_save_settings'  => true,
+			'watermark_my_images_settings_nonce' => 'a8jfkgw2h7i',
+		];
+
+		\WP_Mock::userFunction( 'wp_verify_nonce' )
+			->once()
+			->with( 'a8jfkgw2h7i', 'watermark_my_images_settings_action' )
+			->andReturn( true );
+
+		\WP_Mock::userFunction(
+			'wp_unslash',
+			[
+				'times'  => 10,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'sanitize_text_field',
+			[
+				'times'  => 10,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction( 'update_option' )
+			->once()
+			->with(
+				'watermark_my_images',
+				[
+					'upload'     => '',
+					'page_load'  => '',
+					'logs'       => '',
+					'label'      => '',
+					'size'       => '',
+					'tx_color'   => '',
+					'bg_color'   => '',
+					'tx_opacity' => '',
+					'bg_opacity' => '',
+				]
+			)
+			->andReturn( true );
+
+		$this->admin->register_options_init();
+
+		$this->assertConditionsMet();
+	}
+
 	public function test_register_options_styles() {
 		\WP_Mock::userFunction(
 			'esc_html__',

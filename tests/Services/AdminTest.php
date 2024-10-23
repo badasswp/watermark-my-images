@@ -4,6 +4,7 @@ namespace WatermarkMyImages\Tests\Services;
 
 use Mockery;
 use WP_Mock\Tools\TestCase;
+use WatermarkMyImages\Admin\Form;
 use WatermarkMyImages\Admin\Options;
 use WatermarkMyImages\Services\Admin;
 use WatermarkMyImages\Abstracts\Service;
@@ -12,6 +13,7 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\Admin::__construct
  * @covers \WatermarkMyImages\Services\Admin::register
  * @covers \WatermarkMyImages\Services\Admin::register_options_menu
+ * @covers \WatermarkMyImages\Services\Admin::register_options_styles
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers \WatermarkMyImages\Admin\Options::__callStatic
  * @covers \WatermarkMyImages\Admin\Options::get_form_fields
@@ -86,6 +88,56 @@ class AdminTest extends TestCase {
 			);
 
 		$this->admin->register_options_menu();
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_register_options_styles() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'times'  => 25,
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr',
+			[
+				'times'  => 9,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr__',
+			[
+				'times'  => 6,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction( 'plugins_url' )
+			->with( 'watermark-my-images/styles.css' )
+			->andReturn( 'https://example.com/wp-content/plugins/watermark-my-images/styles.css' );
+
+		\WP_Mock::userFunction( 'wp_enqueue_style' )
+			->with(
+				'watermark-my-images',
+				'https://example.com/wp-content/plugins/watermark-my-images/styles.css',
+				[],
+				true,
+				'all'
+			)
+			->andReturn( null );
+
+		$this->admin->register_options_styles();
 
 		$this->assertConditionsMet();
 	}

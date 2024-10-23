@@ -92,6 +92,42 @@ class AdminTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_register_options_init_bails_on_POST() {
+		\WP_Mock::userFunction(
+			'esc_html__',
+			[
+				'times'  => 75,
+				'return' => function ( $text, $domain = 'watermark-my-images' ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr',
+			[
+				'times'  => 27,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'esc_attr__',
+			[
+				'times'  => 18,
+				'return' => function ( $text ) {
+					return $text;
+				},
+			]
+		);
+
+		$this->admin->register_options_init();
+
+		$this->assertConditionsMet();
+	}
+
 	public function test_register_options_styles() {
 		\WP_Mock::userFunction(
 			'esc_html__',

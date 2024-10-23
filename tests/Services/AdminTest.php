@@ -13,6 +13,7 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Services\Admin::__construct
  * @covers \WatermarkMyImages\Services\Admin::register
  * @covers \WatermarkMyImages\Services\Admin::register_options_menu
+ * @covers \WatermarkMyImages\Services\Admin::register_options_init
  * @covers \WatermarkMyImages\Services\Admin::register_options_styles
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers \WatermarkMyImages\Admin\Options::__callStatic

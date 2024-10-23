@@ -10,6 +10,8 @@ use WatermarkMyImages\Abstracts\Service;
 /**
  * @covers \WatermarkMyImages\Services\WooCommerce::__construct
  * @covers \WatermarkMyImages\Services\WooCommerce::register
+ * @covers \WatermarkMyImages\Services\WooCommerce::add_watermark_on_get_image
+ * @covers \WatermarkMyImages\Services\WooCommerce::get_image_html
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  */
 class WooCommerceTest extends TestCase {

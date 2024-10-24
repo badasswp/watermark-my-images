@@ -54,7 +54,7 @@ class WooCommerceTest extends TestCase {
 			->andReturn(
 				[
 					'abs' => __DIR__ . '/sample.png',
-					'rel' => 'https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg',
+					'rel' => 'https://example.com/wp-content/uploads/2024/10/sample-watermark-my-images.jpg',
 				]
 			);
 

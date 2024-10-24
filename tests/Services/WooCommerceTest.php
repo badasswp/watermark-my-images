@@ -115,6 +115,16 @@ class WooCommerceTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_get_image_html() {
+		$image = $this->woocommerce->get_image_html(
+			'<img src="https://example.com/wp-content/uploads/2024/10/sample-1.png">',
+			'https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg'
+		);
+
+		$this->assertSame( $image, '<img src="https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg">' );
+		$this->assertConditionsMet();
+	}
+
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
 		$width  = 400;

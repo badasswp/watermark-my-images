@@ -3,9 +3,11 @@
 namespace WatermarkMyImages\Tests\Services;
 
 use Mockery;
+use DOMDocument;
 use WP_Mock\Tools\TestCase;
-use WatermarkMyImages\Services\WooCommerce;
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Engine\Watermarker;
+use WatermarkMyImages\Services\WooCommerce;
 
 /**
  * @covers \WatermarkMyImages\Services\WooCommerce::__construct
@@ -64,6 +66,52 @@ class WooCommerceTest extends TestCase {
 			true
 		);
 
+		$this->assertConditionsMet();
+	}
+
+	public function test_add_watermark_on_get_image_passes() {
+		$product = Mockery::mock( \WC_Product::class )->makePartial();
+		$product->shouldAllowMockingProtectedMethods();
+
+		$product->shouldReceive( 'get_image_id' )
+			->once()
+			->andReturn( 1 );
+
+		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
+		$watermarker->shouldAllowMockingProtectedMethods();
+
+		$watermark = [
+			'abs' => '/var/www/html/wp-content/uploads/2024/10/sample-1.png',
+			'rel' => 'https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg',
+		];
+
+		$watermarker->shouldReceive( 'get_watermark' )
+			->once()
+			->andReturn( $watermark );
+
+		$this->woocommerce->watermarker = $watermarker;
+
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->once()
+			->with( 1, 'watermark_my_images', true )
+			->andReturn( '' );
+
+		\WP_Mock::expectAction(
+			'watermark_my_images_on_woo_product_get_image',
+			'https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg',
+			$watermark,
+			1
+		);
+
+		$image = $this->woocommerce->add_watermark_on_get_image(
+			'<img src="https://example.com/wp-content/uploads/2024/10/sample-1.png">',
+			$product,
+			'woocommerce_thumbnail',
+			[],
+			true
+		);
+
+		$this->assertSame( $image, '<img src="https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg">' );
 		$this->assertConditionsMet();
 	}
 

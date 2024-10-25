@@ -11,6 +11,7 @@ use WatermarkMyImages\Services\Attachment;
  * @covers \WatermarkMyImages\Services\Attachment::__construct
  * @covers \WatermarkMyImages\Services\Attachment::register
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
+ * @covers wmig_set_settings
  */
 class AttachmentTest extends TestCase {
 	public Attachment $attachment;
@@ -33,6 +34,24 @@ class AttachmentTest extends TestCase {
 		\WP_Mock::expectFilterAdded( 'wp_prepare_attachment_for_js', [ $this->attachment, 'show_watermark_images_on_wp_media_modal' ], 10, 3 );
 
 		$this->attachment->register();
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_add_watermark_on_add_attachment_bails_on_upload_NOT_set() {
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn( [] );
+
+		\WP_Mock::userFunction( 'get_option' )
+			->with( 'watermark_my_images', [] )
+			->andReturn(
+				[
+					'upload' => false
+				]
+			);
+
+		$this->attachment->add_watermark_on_add_attachment( 1 );
 
 		$this->assertConditionsMet();
 	}

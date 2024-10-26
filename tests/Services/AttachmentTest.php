@@ -51,7 +51,7 @@ class AttachmentTest extends TestCase {
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
-					'upload' => false
+					'upload' => false,
 				]
 			);
 
@@ -69,7 +69,7 @@ class AttachmentTest extends TestCase {
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
-					'upload' => true
+					'upload' => true,
 				]
 			);
 
@@ -88,7 +88,7 @@ class AttachmentTest extends TestCase {
 			->andReturn(
 				[
 					'abs' => __DIR__ . '/sample.png',
-					'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg'
+					'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
 				]
 			);
 
@@ -96,7 +96,7 @@ class AttachmentTest extends TestCase {
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
-					'upload' => true
+					'upload' => true,
 				]
 			);
 

@@ -20,10 +20,14 @@ class AttachmentTest extends TestCase {
 		\WP_Mock::setUp();
 
 		$this->attachment = new Attachment();
+
+		$this->create_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
+
+		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function test_register() {
@@ -72,6 +76,33 @@ class AttachmentTest extends TestCase {
 		\WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( false );
+
+		$this->attachment->add_watermark_on_add_attachment( 1 );
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_add_watermark_on_add_attachment_bails_if_watermark_already_exists() {
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn(
+				[
+					'abs' => __DIR__ . '/sample.png',
+					'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg'
+				]
+			);
+
+		\WP_Mock::userFunction( 'get_option' )
+			->with( 'watermark_my_images', [] )
+			->andReturn(
+				[
+					'upload' => true
+				]
+			);
+
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->with( 1 )
+			->andReturn( true );
 
 		$this->attachment->add_watermark_on_add_attachment( 1 );
 

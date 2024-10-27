@@ -5,6 +5,7 @@ namespace WatermarkMyImages\Tests\Services;
 use Mockery;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Abstracts\Service;
+use WatermarkMyImages\Engine\Watermarker;
 use WatermarkMyImages\Services\Attachment;
 
 /**
@@ -104,6 +105,52 @@ class AttachmentTest extends TestCase {
 		\WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
+
+		$this->attachment->add_watermark_on_add_attachment( 1 );
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_add_watermark_on_add_attachment_passes() {
+		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
+		$watermarker->shouldAllowMockingProtectedMethods();
+
+		$watermarker->shouldReceive( 'get_watermark' )
+			->with()
+			->andReturn(
+				[
+					'abs' => __DIR__ . '/sample.png',
+					'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
+				]
+			);
+
+		$this->attachment->watermarker = $watermarker;
+
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn( '' );
+
+		\WP_Mock::userFunction( 'get_option' )
+			->with( 'watermark_my_images', [] )
+			->andReturn(
+				[
+					'upload' => true,
+				]
+			);
+
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->with( 1 )
+			->andReturn( true );
+
+		\WP_Mock::expectAction(
+			'watermark_my_images_on_add_image',
+			'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
+			[
+				'abs' => __DIR__ . '/sample.png',
+				'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
+			],
+			1
+		);
 
 		$this->attachment->add_watermark_on_add_attachment( 1 );
 

@@ -157,6 +157,17 @@ class AttachmentTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_add_watermark_to_attachement() {
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->once()
+			->with( 1 )
+			->andReturn( false );
+
+		$this->attachment->add_watermark_to_metadata( [], 1, 'create' );
+
+		$this->assertConditionsMet();
+	}
+
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
 		$width  = 400;

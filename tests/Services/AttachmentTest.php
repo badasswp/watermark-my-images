@@ -3,6 +3,7 @@
 namespace WatermarkMyImages\Tests\Services;
 
 use Mockery;
+use WP_Error;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
@@ -164,6 +165,65 @@ class AttachmentTest extends TestCase {
 			->andReturn( false );
 
 		$this->attachment->add_watermark_to_metadata( [], 1, 'create' );
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_add_watermark_to_metadata() {
+		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
+		$watermarker->shouldAllowMockingProtectedMethods();
+
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->with( 1 )
+			->andReturn( true );
+
+		\WP_Mock::userFunction( 'get_attached_file' )
+			->with( 1 )
+			->andReturn( '/var/www/html/wp-content/uploads/2024/10/sample-watermark-my-images.jpg' );
+
+		\WP_Mock::userFunction(
+			'trailingslashit',
+			[
+				'times'  => 1,
+				'return' => function ( $url ) {
+					return rtrim( $url, '/' ) . '/';
+				},
+			]
+		);
+
+		\WP_Mock::expectAction(
+			'watermark_my_images_on_add_image_crops',
+			'https://example.com/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
+			[
+				'abs' => '/var/www/html/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
+				'rel' => 'https://example.com/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
+			],
+			1,
+			'/var/www/html/wp-content/uploads/2024/10/full.png'
+		);
+
+		$watermarker->shouldReceive( 'get_watermark' )
+			->with( '/var/www/html/wp-content/uploads/2024/10/full.png' )
+			->andReturn(
+				[
+					'abs' => '/var/www/html/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
+					'rel' => 'https://example.com/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
+				]
+			);
+
+		$this->attachment->watermarker = $watermarker;
+
+		$this->attachment->add_watermark_to_metadata(
+			[
+				'sizes' => [
+					[
+						'file' => 'full.png',
+					],
+				],
+			],
+			1,
+			'create'
+		);
 
 		$this->assertConditionsMet();
 	}

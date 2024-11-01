@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return mixed
  */
-function wmig_set_settings( $option, $fallback = '' ) {
+function wmig_get_settings( $option, $fallback = '' ) {
 	return get_option( 'watermark_my_images', [] )[ $option ] ?? $fallback;
 }
 

@@ -46,7 +46,7 @@ class PageLoad extends Service implements Registrable {
 		}
 
 		// Bail out, if not enabled in Options.
-		if ( ! wmig_set_settings( 'page_load' ) ) {
+		if ( ! wmig_get_settings( 'page_load' ) ) {
 			return $html;
 		}
 

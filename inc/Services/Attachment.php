@@ -45,7 +45,7 @@ class Attachment extends Service implements Registrable {
 		$image_watermark = get_post_meta( $image_id, 'watermark_my_images', true );
 
 		// Bail out, if not enabled in Options.
-		if ( ! wmig_set_settings( 'upload' ) ) {
+		if ( ! wmig_get_settings( 'upload' ) ) {
 			return;
 		}
 

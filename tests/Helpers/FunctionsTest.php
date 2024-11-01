@@ -7,11 +7,11 @@ use WP_Mock\Tools\TestCase;
 require_once __DIR__ . '/../../inc/Helpers/functions.php';
 
 /**
- * @covers wmig_set_settings
+ * @covers wmig_get_settings
  * @covers wmig_get_equivalent
  */
 class FunctionsTest extends TestCase {
-	public function test_wmig_set_settings() {
+	public function test_wmig_get_settings() {
 		\WP_Mock::userFunction( 'get_option' )
 			->once()
 			->with( 'watermark_my_images', [] )
@@ -21,7 +21,7 @@ class FunctionsTest extends TestCase {
 				]
 			);
 
-		$is_watermark_added_on_upload = wmig_set_settings( 'upload', [] );
+		$is_watermark_added_on_upload = wmig_get_settings( 'upload', [] );
 
 		$this->assertTrue( $is_watermark_added_on_upload );
 	}

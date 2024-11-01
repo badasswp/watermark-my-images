@@ -190,7 +190,7 @@ class Attachment extends Service implements Registrable {
 
 		foreach ( $metadata['sizes'] ?? [] as $img ) {
 			$url_prefix = pathinfo( ( $main_image['abs'] ?? '' ), PATHINFO_DIRNAME );
-			$meta_image = wmig_set_equivalent( $img['file'] ?? '' );
+			$meta_image = wmig_get_equivalent( $img['file'] ?? '' );
 
 			$meta_watermarked_image = trailingslashit( $url_prefix ) . $meta_image;
 
@@ -289,19 +289,19 @@ class Attachment extends Service implements Registrable {
 					[
 						'thumbnail' => wp_parse_args(
 							[
-								'url' => wmig_set_equivalent( $metadata['sizes']['thumbnail']['url'] ?? '' ),
+								'url' => wmig_get_equivalent( $metadata['sizes']['thumbnail']['url'] ?? '' ),
 							],
 							$metadata['sizes']['thumbnail'] ?? [],
 						),
 						'medium'    => wp_parse_args(
 							[
-								'url' => wmig_set_equivalent( $metadata['sizes']['medium']['url'] ?? '' ),
+								'url' => wmig_get_equivalent( $metadata['sizes']['medium']['url'] ?? '' ),
 							],
 							$metadata['sizes']['medium'] ?? [],
 						),
 						'large'     => wp_parse_args(
 							[
-								'url' => wmig_set_equivalent( $metadata['sizes']['large']['url'] ?? '' ),
+								'url' => wmig_get_equivalent( $metadata['sizes']['large']['url'] ?? '' ),
 							],
 							$metadata['sizes']['large'] ?? [],
 						),

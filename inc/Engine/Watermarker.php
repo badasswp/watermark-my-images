@@ -148,7 +148,7 @@ class Watermarker {
 	 * @return string
 	 */
 	protected function get_watermark_abs_path(): string {
-		return wmig_set_equivalent( static::$file );
+		return wmig_get_equivalent( static::$file );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Watermarker {
 
 		$url = wp_get_attachment_url( $this->service->image_id );
 
-		return wmig_set_equivalent( $url );
+		return wmig_get_equivalent( $url );
 	}
 
 	/**

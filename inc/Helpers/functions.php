@@ -37,7 +37,7 @@ function wmig_set_settings( $option, $fallback = '' ) {
  * @param string $url Passed in URL.
  * @return string
  */
-function wmig_set_equivalent( $url ): string {
+function wmig_get_equivalent( $url ): string {
 	$base_name = pathinfo( $url, PATHINFO_BASENAME );
 	$file_name = pathinfo( $url, PATHINFO_FILENAME );
 

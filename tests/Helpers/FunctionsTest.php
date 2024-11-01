@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../inc/Helpers/functions.php';
 
 /**
  * @covers wmig_set_settings
- * @covers wmig_set_equivalent
+ * @covers wmig_get_equivalent
  */
 class FunctionsTest extends TestCase {
 	public function test_wmig_set_settings() {
@@ -26,9 +26,9 @@ class FunctionsTest extends TestCase {
 		$this->assertTrue( $is_watermark_added_on_upload );
 	}
 
-	public function test_wmig_set_equivalent() {
-		$watermark_abs_url = wmig_set_equivalent( '/var/www/wp-content/uploads/2024/09/sample-1.png' );
-		$watermark_rel_url = wmig_set_equivalent( 'https://example.com/wp-content/uploads/2024/09/sample-2.png' );
+	public function test_wmig_get_equivalent() {
+		$watermark_abs_url = wmig_get_equivalent( '/var/www/wp-content/uploads/2024/09/sample-1.png' );
+		$watermark_rel_url = wmig_get_equivalent( 'https://example.com/wp-content/uploads/2024/09/sample-2.png' );
 
 		$this->assertSame( $watermark_abs_url, '/var/www/wp-content/uploads/2024/09/sample-1-watermark-my-images.jpg' );
 		$this->assertSame( $watermark_rel_url, 'https://example.com/wp-content/uploads/2024/09/sample-2-watermark-my-images.jpg' );

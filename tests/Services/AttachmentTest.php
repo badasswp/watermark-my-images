@@ -258,6 +258,35 @@ class AttachmentTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_remove_watermark_on_attachment_delete_removes_parent_watermark() {
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->with( 1 )
+			->andReturn( true );
+
+		\WP_Mock::userFunction( 'get_post_meta' )
+			->with( 1, 'watermark_my_images', true )
+			->andReturn(
+				[
+					'abs' => __DIR__ . '/sample.png',
+					'rel' => 'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
+				]
+			);
+
+		\WP_Mock::userFunction( 'wp_delete_file' )
+			->with( __DIR__ . '/sample.png' )
+			->andReturn( true );
+
+		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
+
+		\WP_Mock::userFunction( 'wp_get_attachment_metadata' )
+			->with( 1 )
+			->andReturn( [] );
+
+		$this->attachment->remove_watermark_on_attachment_delete( 1 );
+
+		$this->assertConditionsMet();
+	}
+
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
 		$width  = 400;

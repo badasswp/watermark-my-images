@@ -229,6 +229,16 @@ class AttachmentTest extends TestCase {
 		$this->assertConditionsMet();
 	}
 
+	public function test_remove_watermark_on_attachment_delete_bails_if_NOT_image() {
+		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+			->with( 1 )
+			->andReturn( false );
+
+		$this->attachment->remove_watermark_on_attachment_delete( 1 );
+
+		$this->assertConditionsMet();
+	}
+
 	public function create_mock_image( $image_file_name ) {
 		// Create a blank image.
 		$width  = 400;

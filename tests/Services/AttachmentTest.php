@@ -307,7 +307,7 @@ class AttachmentTest extends TestCase {
 
 		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
 
-		$this->create_mock_image( __DIR__ . '/thumbnail.png' );
+		$this->create_mock_image( __DIR__ . '/thumbnail-watermark-my-images.jpg' );
 
 		\WP_Mock::userFunction(
 			'trailingslashit',
@@ -324,17 +324,23 @@ class AttachmentTest extends TestCase {
 				[
 					'sizes' => [
 						[
-							'file' => 'https://example.com/wp-content/uploads/2024/11/thumbnail.png',
+							'file' => 'thumbnail.png',
 						],
 					],
 				]
 			);
 
+		\WP_Mock::userFunction( 'wp_delete_file' )
+			->with( __DIR__ . '/thumbnail-watermark-my-images.jpg' )
+			->andReturn( true );
+
+		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image_crops', __DIR__ . '/thumbnail-watermark-my-images.jpg', 1 );
+
 		$this->attachment->remove_watermark_on_attachment_delete( 1 );
 
 		$this->assertConditionsMet();
 
-		$this->destroy_mock_image( __DIR__ . '/thumbnail.png' );
+		$this->destroy_mock_image( __DIR__ . '/thumbnail-watermark-my-images.jpg' );
 	}
 
 	public function create_mock_image( $image_file_name ) {

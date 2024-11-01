@@ -14,6 +14,7 @@ use WatermarkMyImages\Services\Attachment;
  * @covers \WatermarkMyImages\Services\Attachment::register
  * @covers \WatermarkMyImages\Services\Attachment::add_watermark_on_add_attachment
  * @covers \WatermarkMyImages\Services\Attachment::add_watermark_to_metadata
+ * @covers \WatermarkMyImages\Services\Attachment::remove_watermark_on_attachment_delete
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers wmig_set_settings
  */

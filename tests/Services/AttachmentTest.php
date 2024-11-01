@@ -18,6 +18,7 @@ use WatermarkMyImages\Services\Attachment;
  * @covers \WatermarkMyImages\Services\Attachment::add_watermark_attachment_fields
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers wmig_get_settings
+ * @covers wmig_get_equivalent
  */
 class AttachmentTest extends TestCase {
 	public Attachment $attachment;

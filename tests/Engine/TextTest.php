@@ -66,7 +66,6 @@ class TextTest extends TestCase {
 					'font'       => 'Arial',
 					'label'      => 'WATERMARK',
 					'tx_opacity' => 100,
-					'bg_opacity' => 0,
 				]
 			);
 
@@ -120,7 +119,6 @@ class TextTest extends TestCase {
 				'font'       => 'Arial',
 				'label'      => 'WATERMARK',
 				'tx_opacity' => 100,
-				'bg_opacity' => 0,
 			]
 		);
 		$this->assertConditionsMet();
@@ -182,7 +180,6 @@ class TextTest extends TestCase {
 				'font'       => 'Arial',
 				'label'      => 'WATERMARK',
 				'tx_opacity' => 100,
-				'bg_opacity' => 0,
 			]
 		);
 		$this->assertConditionsMet();
@@ -246,7 +243,6 @@ class TextTest extends TestCase {
 				'font'       => 'Arial',
 				'label'      => 'Copyright',
 				'tx_opacity' => 100,
-				'bg_opacity' => 0,
 			]
 		);
 		$this->assertConditionsMet();

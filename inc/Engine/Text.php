@@ -82,6 +82,14 @@ class Text {
 		// Adjust the text height based on Image width.
 		$filtered_options['size'] = $this->get_size( $filtered_options );
 
+		// Remove empty plugin options.
+		$filtered_options = array_filter(
+			$filtered_options,
+			function ( $value ) {
+				return ! empty( $value );
+			}
+		);
+
 		return wp_parse_args( $filtered_options, $this->args );
 	}
 

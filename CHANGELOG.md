@@ -1,5 +1,10 @@
 # Changelog
 
+= 1.0.6 =
+* Fix bug related to empty plugin options.
+* Fix failing tests.
+* Tested up to WP 6.7.0.
+
 ## 1.0.5
 * Change function name `wmi_get_settings` to `wmig_get_settings`.
 * Change function name `wmi_get_equivalent` to `wmig_get_equivalent`.

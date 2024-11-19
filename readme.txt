@@ -23,6 +23,24 @@ Insert Watermarks into your WP images.
 
 In this age of social media, it is easy for your intellectual assets to get hijacked and you never get the credit you deserve for your work. This plugin prevents that by helping you insert watermarks on your site images, article thumbnails, and your product photos, so you don't have to worry about anyone stealing your image assets ever again!
 
+= ✨ Getting Started =
+
+After installing the plugin, you should see a plugin <strong>options page</strong> where you can set your <strong>Text options</strong>. Make sure to enable the <strong>Add Watermark on Image Upload</strong> option. Now proceed to upload a new image in your media library. You should now see the watermark label attached to it. Happy Watermarking!!!
+
+You can get a taste of how this works, by using the [demo](https://tastewp.com/create/NMS/8.0/6.7.0/watermark-my-images/twentytwentythree?ni=true&origin=wp) link.
+
+= ⚡ WooCommerce Images =
+
+By default, <strong>Watermark My Images</strong>, will attach watermarks to product images. For future releases, you should be able to toggle this feature ON/OFF based on your needs.
+
+NB: The <strong>Add Watermark on Page Load</strong> option helps you add watermarks for images that are already uploaded on your WP website when the page or post that contains that image is loaded.
+
+= 🔌🎨 Plug and Play or Customize =
+
+The <strong>Watermark My Images</strong> plugin is built to work right out of the box. Simply install, activate, configure options and start using straight away.
+
+Want to add your personal touch? All of our documentation can be found [here](https://github.com/badasswp/watermark-my-images). You can override the plugin's behaviour with custom logic of your own using [hooks](https://github.com/badasswp/watermark-my-images?tab=readme-ov-file#hooks).
+
 == Screenshots ==
 
 1. WooCommerce Watermarked Images - Watermark your WooCommerce Product Images.

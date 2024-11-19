@@ -178,6 +178,11 @@ class Options {
 						'label'   => esc_html__( 'Add Watermark on Page Load', 'watermark-my-images' ),
 						'summary' => esc_html__( 'This is useful for existing images.', 'watermark-my-images' ),
 					],
+					'woocommerce' => [
+						'control' => esc_attr( 'checkbox' ),
+						'label'   => esc_html__( 'Enable WooCommerce Watermarks', 'watermark-my-images' ),
+						'summary' => esc_html__( 'Allow WooCommerce serve watermark images.', 'watermark-my-images' ),
+					],
 					'logs'      => [
 						'control' => esc_attr( 'checkbox' ),
 						'label'   => esc_html__( 'Log errors for Failed Watermarks', 'watermark-my-images' ),

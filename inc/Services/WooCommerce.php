@@ -43,6 +43,11 @@ class WooCommerce extends Service implements Registrable {
 	 * @return string
 	 */
 	public function add_watermark_on_get_image( $image_html, $product, $size, $attr, $placeholder ): string {
+		// Bail out, if not enabled in Options.
+		if ( ! wmig_get_settings( 'woocommerce' ) ) {
+			return $image_html;
+		}
+
 		$this->image_id  = $product->get_image_id();
 		$image_watermark = get_post_meta( $this->image_id, 'watermark_my_images', true );
 

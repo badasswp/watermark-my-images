@@ -25,7 +25,7 @@ In this age of social media, it is easy for your intellectual assets to get hija
 
 = ✨ Getting Started =
 
-After installing the plugin, you should see a plugin <strong>options page</strong> where you can set your <strong>Text options</strong>. Make sure to enable the <strong>Add Watermark on Image Upload</strong> option. Now proceed to upload a new image in your media library. You should now see the watermark label attached to it. Happy Watermarking!!!
+After installing the plugin, you should see a plugin <strong>options page</strong> where you can set your <strong>Text options</strong>. Make sure to enable the <strong>Add Watermark on Image Upload</strong> option. Now, proceed to upload a new image in your media library. You should now see the watermark label attached to the image you just uploaded. Happy Watermarking!!!
 
 You can get a taste of how this works, by using the [demo](https://tastewp.com/create/NMS/8.0/6.7.0/watermark-my-images/twentytwentythree?ni=true&origin=wp) link.
 

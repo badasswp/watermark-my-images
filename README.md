@@ -1,6 +1,8 @@
 # watermark-my-images
 Insert Watermarks into your WP images.
 
+[![Coverage Status](https://coveralls.io/repos/github/badasswp/watermark-my-images/badge.svg?branch=master)](https://coveralls.io/github/badasswp/watermark-my-images?branch=master)
+
 <img width="1018" alt="screenshot-1" src="https://github.com/user-attachments/assets/2f8218c9-2dd1-4d6f-9998-f7c84c5b070a">
 
 ## Download

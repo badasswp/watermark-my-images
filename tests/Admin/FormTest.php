@@ -39,4 +39,19 @@ class FormTest extends TestCase {
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
 	}
+
+	public function test_get_options() {
+		$this->form->expects( $this->once() )
+			->method( 'get_form' )
+			->willReturn( 'Plugin Form' );
+
+		$this->assertSame(
+			$this->form->get_options(),
+			[
+				'title'   => 'Plugin Title',
+				'summary' => 'Plugin Summary',
+				'form'    => 'Plugin Form',
+			]
+		);
+	}
 }

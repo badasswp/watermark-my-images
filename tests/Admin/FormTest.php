@@ -150,8 +150,8 @@ class FormTest extends TestCase {
 
 		$form_group = $this->form->get_form_group(
 			[
-				'heading' => 'Form Heading',
-				'controls' => []
+				'heading'  => 'Form Heading',
+				'controls' => [],
 			]
 		);
 

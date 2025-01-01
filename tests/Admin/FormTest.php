@@ -19,25 +19,26 @@ class FormTest extends TestCase {
 	public function setUp(): void {
 		\WP_Mock::setUp();
 
-		$options = [
-			'page' => [
-				'title'   => 'Plugin Title',
-				'summary' => 'Plugin Summary',
-			],
-		];
+		$this->form = Mockery::mock( Form::class )->makePartial();
+		$this->form->shouldAllowMockingProtectedMethods();
 
-		$this->form = $this->getMockBuilder( Form::class )
-			->setConstructorArgs( [ $options ] )
-			->onlyMethods(
-				[
-					'get_form',
-					'get_form_action',
-					'get_form_notice',
-					'get_form_main',
-					'get_form_submit',
-				]
-			)
-			->getMock();
+		$reflection = new \ReflectionClass( $this->form );
+		$property   = $reflection->getProperty( 'options' );
+		$property->setAccessible( true );
+		$property->setValue(
+			$this->form,
+			[
+				'page'   => [
+					'title'   => 'Plugin Title',
+					'summary' => 'Plugin Summary',
+				],
+				'fields' => [
+					'form_group_1',
+					'form_group_2',
+					'form_group_3',
+				],
+			]
+		);
 	}
 
 	public function tearDown(): void {
@@ -45,9 +46,8 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_options() {
-		$this->form->expects( $this->once() )
-			->method( 'get_form' )
-			->willReturn( 'Plugin Form' );
+		$this->form->shouldReceive( 'get_form' )
+			->andReturn( 'Plugin Form' );
 
 		$this->assertSame(
 			$this->form->get_options(),
@@ -60,22 +60,19 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_form() {
-		$form = Mockery::mock( Form::class )->makePartial();
-		$form->shouldAllowMockingProtectedMethods();
-
-		$form->shouldReceive( 'get_form_action' )
+		$this->form->shouldReceive( 'get_form_action' )
 			->andReturn( 'https://example.com' );
 
-		$form->shouldReceive( 'get_form_notice' )
+		$this->form->shouldReceive( 'get_form_notice' )
 			->andReturn( 'Form Notice' );
 
-		$form->shouldReceive( 'get_form_main' )
+		$this->form->shouldReceive( 'get_form_main' )
 			->andReturn( 'Form Main' );
 
-		$form->shouldReceive( 'get_form_submit' )
+		$this->form->shouldReceive( 'get_form_submit' )
 			->andReturn( 'Form Submit' );
 
-		$plugin_form = $form->get_form();
+		$plugin_form = $this->form->get_form();
 
 		$this->assertSame(
 			'<form class="badasswp-form" method="POST" action="https://example.com">
@@ -88,9 +85,6 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_form_action() {
-		$form = Mockery::mock( Form::class )->makePartial();
-		$form->shouldAllowMockingProtectedMethods();
-
 		$_SERVER['REQUEST_URI'] = 'https://example.com/\/';
 
 		\WP_Mock::userFunction( 'esc_url' )
@@ -114,29 +108,12 @@ class FormTest extends TestCase {
 				}
 			);
 
-		$form_action = $form->get_form_action();
+		$form_action = $this->form->get_form_action();
 
 		$this->assertSame( 'https://example.com', $form_action );
 	}
 
 	public function test_get_form_main() {
-		$form = Mockery::mock( Form::class )->makePartial();
-		$form->shouldAllowMockingProtectedMethods();
-
-		$reflection = new \ReflectionClass( $form );
-		$property   = $reflection->getProperty( 'options' );
-		$property->setAccessible( true );
-		$property->setValue(
-			$form,
-			[
-				'fields' => [
-					'form_group_1',
-					'form_group_2',
-					'form_group_3',
-				],
-			]
-		);
-
 		\WP_Mock::expectFilter(
 			'watermark_my_images_form_fields',
 			[
@@ -146,7 +123,7 @@ class FormTest extends TestCase {
 			]
 		);
 
-		$form->shouldReceive( 'get_form_group' )
+		$this->form->shouldReceive( 'get_form_group' )
 			->times( 3 )
 			->andReturnUsing(
 				function ( $arg ) {
@@ -157,7 +134,7 @@ class FormTest extends TestCase {
 				}
 			);
 
-		$form_main = $form->get_form_main();
+		$form_main = $this->form->get_form_main();
 
 		$this->assertSame(
 			'<section>form_group_1</section><section>form_group_2</section><section>form_group_3</section>',

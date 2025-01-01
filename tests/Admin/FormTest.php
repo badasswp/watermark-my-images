@@ -11,6 +11,7 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_options
  * @covers \WatermarkMyImages\Admin\Form::get_form
  * @covers \WatermarkMyImages\Admin\Form::get_form_action
+ * @covers \WatermarkMyImages\Admin\Form::get_form_main
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -116,5 +117,51 @@ class FormTest extends TestCase {
 		$form_action = $form->get_form_action();
 
 		$this->assertSame( 'https://example.com', $form_action );
+	}
+
+	public function test_get_form_main() {
+		$form = Mockery::mock( Form::class )->makePartial();
+		$form->shouldAllowMockingProtectedMethods();
+
+		$reflection = new \ReflectionClass( $form );
+		$property   = $reflection->getProperty( 'options' );
+		$property->setAccessible( true );
+		$property->setValue(
+			$form,
+			[
+				'fields' => [
+					'form_group_1',
+					'form_group_2',
+					'form_group_3',
+				],
+			]
+		);
+
+		\WP_Mock::expectFilter(
+			'watermark_my_images_form_fields',
+			[
+				'form_group_1',
+				'form_group_2',
+				'form_group_3',
+			]
+		);
+
+		$form->shouldReceive( 'get_form_group' )
+			->times( 3 )
+			->andReturnUsing(
+				function ( $arg ) {
+					return sprintf(
+						'<section>%s</section>',
+						$arg
+					);
+				}
+			);
+
+		$form_main = $form->get_form_main();
+
+		$this->assertSame(
+			'<section>form_group_1</section><section>form_group_2</section><section>form_group_3</section>',
+			$form_main
+		);
 	}
 }

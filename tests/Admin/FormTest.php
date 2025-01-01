@@ -10,6 +10,7 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::__construct
  * @covers \WatermarkMyImages\Admin\Form::get_options
  * @covers \WatermarkMyImages\Admin\Form::get_form
+ * @covers \WatermarkMyImages\Admin\Form::get_form_action
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -83,5 +84,37 @@ class FormTest extends TestCase {
 			</form>',
 			$plugin_form
 		);
+	}
+
+	public function test_get_form_action() {
+		$form = Mockery::mock( Form::class )->makePartial();
+		$form->shouldAllowMockingProtectedMethods();
+
+		$_SERVER['REQUEST_URI'] = 'https://example.com/\/';
+
+		\WP_Mock::userFunction( 'esc_url' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return rtrim( filter_var( $arg, FILTER_SANITIZE_URL ), '/' );
+				}
+			);
+
+		\WP_Mock::userFunction( 'sanitize_text_field' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'wp_unslash' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return stripslashes( $arg );
+				}
+			);
+
+		$form_action = $form->get_form_action();
+
+		$this->assertSame( 'https://example.com', $form_action );
 	}
 }

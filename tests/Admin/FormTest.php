@@ -16,6 +16,9 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_group_body
  * @covers \WatermarkMyImages\Admin\Form::get_setting
  * @covers \WatermarkMyImages\Admin\Form::get_form_control
+ * @covers \WatermarkMyImages\Admin\Form::get_text_control
+ * @covers \WatermarkMyImages\Admin\Form::get_checkbox_control
+ * @covers \WatermarkMyImages\Admin\Form::get_select_control
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -338,6 +341,34 @@ class FormTest extends TestCase {
 				type="checkbox"
 				checked
 			/>',
+			$control
+		);
+	}
+
+	public function test_get_select_control() {
+		$this->form->shouldReceive( 'get_setting' )
+			->times( 4 )->with( 'select_name' )->andReturn( 'selected_option' );
+
+		$control = $this->form->get_select_control(
+			[
+				'control'     => 'select',
+				'placeholder' => 'Select Placeholder',
+				'label'       => 'Select Label',
+				'summary'     => 'Select Summary',
+				'options'     => [
+					'not_selected_option_1' => 'Not Selected Option 1',
+					'not_selected_option_2' => 'Not Selected Option 2',
+					'selected_option'       => 'Selected Option',
+					'not_selected_option_3' => 'Not Selected Option 3',
+				]
+			],
+			'select_name'
+		);
+
+		$this->assertSame(
+			'<select name="select_name">
+				<option value="not_selected_option_1" >Not Selected Option 1</option><option value="not_selected_option_2" >Not Selected Option 2</option><option value="selected_option" selected>Selected Option</option><option value="not_selected_option_3" >Not Selected Option 3</option>
+			</select>',
 			$control
 		);
 	}

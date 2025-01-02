@@ -13,6 +13,7 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_action
  * @covers \WatermarkMyImages\Admin\Form::get_form_main
  * @covers \WatermarkMyImages\Admin\Form::get_form_group
+ * @covers \WatermarkMyImages\Admin\Form::get_form_group_body
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -158,6 +159,41 @@ class FormTest extends TestCase {
 		$this->assertSame(
 			'<div class="badasswp-form-group"><div class="badasswp-form-group-heading">Form Heading</div><div class="badasswp-form-group-body">Form Group Body</div></div>',
 			$form_group
+		);
+	}
+
+	public function test_get_form_group_body() {
+		$this->form->shouldReceive( 'get_form_control' )
+			->times( 1 )
+			->with(
+				[
+					'control'     => 'text',
+					'placeholder' => 'Placeholder',
+					'label'       => 'Label',
+					'summary'     => 'Summary',
+				],
+				'name'
+			)
+			->andReturn( 'Form Control' );
+
+		$form_group_body = $this->form->get_form_group_body(
+			[
+				'name' => [
+					'control'     => 'text',
+					'placeholder' => 'Placeholder',
+					'label'       => 'Label',
+					'summary'     => 'Summary',
+				],
+			]
+		);
+
+		$this->assertSame(
+			'<p class="badasswp-form-group-block">
+					<label>Label</label>
+					Form Control
+					<em>Summary</em>
+				</p>',
+			$form_group_body
 		);
 	}
 }

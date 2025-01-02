@@ -14,6 +14,7 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_main
  * @covers \WatermarkMyImages\Admin\Form::get_form_group
  * @covers \WatermarkMyImages\Admin\Form::get_form_group_body
+ * @covers \WatermarkMyImages\Admin\Form::get_setting
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -33,6 +34,8 @@ class FormTest extends TestCase {
 				'page'   => [
 					'title'   => 'Plugin Title',
 					'summary' => 'Plugin Summary',
+					'slug'    => 'plugin-slug',
+					'option'  => 'plugin_option',
 				],
 				'fields' => [
 					'form_group_1',
@@ -195,5 +198,21 @@ class FormTest extends TestCase {
 				</p>',
 			$form_group_body
 		);
+	}
+
+	public function test_get_setting() {
+		\WP_Mock::userFunction( 'get_option' )
+			->with( 'plugin_option', [] )
+			->andReturn(
+				[
+					'option_1' => 'Option 1',
+					'option_2' => 'Option 2',
+					'option_3' => 'Option 3',
+				]
+			);
+
+		$this->assertSame( 'Option 1', $this->form->get_setting( 'option_1' ) );
+		$this->assertSame( 'Option 2', $this->form->get_setting( 'option_2' ) );
+		$this->assertSame( 'Option 3', $this->form->get_setting( 'option_3' ) );
 	}
 }

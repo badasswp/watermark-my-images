@@ -297,4 +297,24 @@ class FormTest extends TestCase {
 
 		$this->assertSame( 'Checkbox Control', $control );
 	}
+
+	public function test_get_text_control() {
+		$this->form->shouldReceive( 'get_setting' )
+			->times( 1 )->with( 'text_name' )->andReturn( 'Text Name' );
+
+		$control = $this->form->get_text_control(
+			[
+				'control'     => 'text',
+				'placeholder' => 'Text Placeholder',
+				'label'       => 'Text Label',
+				'summary'     => 'Text Summary',
+			],
+			'text_name'
+		);
+
+		$this->assertSame(
+			'<input type="text" placeholder="Text Placeholder" value="Text Name" name="text_name"/>',
+			$control
+		);
+	}
 }

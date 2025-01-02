@@ -15,6 +15,7 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_group
  * @covers \WatermarkMyImages\Admin\Form::get_form_group_body
  * @covers \WatermarkMyImages\Admin\Form::get_setting
+ * @covers \WatermarkMyImages\Admin\Form::get_form_control
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -214,5 +215,86 @@ class FormTest extends TestCase {
 		$this->assertSame( 'Option 1', $this->form->get_setting( 'option_1' ) );
 		$this->assertSame( 'Option 2', $this->form->get_setting( 'option_2' ) );
 		$this->assertSame( 'Option 3', $this->form->get_setting( 'option_3' ) );
+	}
+
+	public function test_get_form_control_returns_text_control() {
+		$this->form->shouldReceive( 'get_text_control' )
+			->once()
+			->with(
+				[
+					'control'     => 'text',
+					'placeholder' => 'Text Placeholder',
+					'label'       => 'Text Label',
+					'summary'     => 'Text Summary',
+				],
+				'text_name'
+			)
+			->andReturn( 'Text Control' );
+
+		$control = $this->form->get_form_control(
+			[
+				'control'     => 'text',
+				'placeholder' => 'Text Placeholder',
+				'label'       => 'Text Label',
+				'summary'     => 'Text Summary',
+			],
+			'text_name'
+		);
+
+		$this->assertSame( 'Text Control', $control );
+	}
+
+	public function test_get_form_control_returns_select_control() {
+		$this->form->shouldReceive( 'get_select_control' )
+			->once()
+			->with(
+				[
+					'control'     => 'select',
+					'placeholder' => 'Select Placeholder',
+					'label'       => 'Select Label',
+					'summary'     => 'Select Summary',
+				],
+				'select_name'
+			)
+			->andReturn( 'Select Control' );
+
+		$control = $this->form->get_form_control(
+			[
+				'control'     => 'select',
+				'placeholder' => 'Select Placeholder',
+				'label'       => 'Select Label',
+				'summary'     => 'Select Summary',
+			],
+			'select_name'
+		);
+
+		$this->assertSame( 'Select Control', $control );
+	}
+
+	public function test_get_form_control_returns_checkbox_control() {
+		$this->form->shouldReceive( 'get_checkbox_control' )
+			->once()
+			->with(
+				[
+					'control'     => 'checkbox',
+					'placeholder' => 'Checkbox Placeholder',
+					'label'       => 'Checkbox Label',
+					'summary'     => 'Checkbox Summary',
+				],
+				'checkbox_name'
+			)
+			->andReturn( 'Checkbox Control' );
+
+		$control = $this->form->get_form_control(
+			[
+				'control'     => 'checkbox',
+				'placeholder' => 'Checkbox Placeholder',
+				'label'       => 'Checkbox Label',
+				'summary'     => 'Checkbox Summary',
+			],
+			'checkbox_name'
+		);
+
+		$this->assertSame( 'Checkbox Control', $control );
 	}
 }

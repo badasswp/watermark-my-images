@@ -19,6 +19,8 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_text_control
  * @covers \WatermarkMyImages\Admin\Form::get_checkbox_control
  * @covers \WatermarkMyImages\Admin\Form::get_select_control
+ * @covers \WatermarkMyImages\Admin\Form::get_form_submit
+ * @covers \WatermarkMyImages\Admin\Form::get_form_notice
  */
 class FormTest extends TestCase {
 	public Form $form;
@@ -45,6 +47,20 @@ class FormTest extends TestCase {
 					'form_group_1',
 					'form_group_2',
 					'form_group_3',
+				],
+				'submit' => [
+					'heading' => 'Plugin Title',
+					'button'  => [
+						'name'  => 'button_name',
+						'label' => 'Button Label',
+					],
+					'nonce'   => [
+						'name'   => 'nonce_name',
+						'action' => 'nonce_action',
+					],
+				],
+				'notice' => [
+					'label' => 'Notice Label',
 				],
 			]
 		);
@@ -360,7 +376,7 @@ class FormTest extends TestCase {
 					'not_selected_option_2' => 'Not Selected Option 2',
 					'selected_option'       => 'Selected Option',
 					'not_selected_option_3' => 'Not Selected Option 3',
-				]
+				],
 			],
 			'select_name'
 		);
@@ -370,6 +386,129 @@ class FormTest extends TestCase {
 				<option value="not_selected_option_1" >Not Selected Option 1</option><option value="not_selected_option_2" >Not Selected Option 2</option><option value="selected_option" selected>Selected Option</option><option value="not_selected_option_3" >Not Selected Option 3</option>
 			</select>',
 			$control
+		);
+	}
+
+	public function test_get_form_submit() {
+		\WP_Mock::userFunction( 'wp_nonce_field' )
+			->with( 'nonce_action', 'nonce_name', true, false )
+			->andReturn( '<input type="hidden" id="nonce_name" name="nonce_name" value="a8gkfhvzhi" />' );
+
+		$form_submit = $this->form->get_form_submit();
+
+		$this->assertSame(
+			'<div class="badasswp-form-group">
+				<p class="badasswp-form-group-heading">
+					<strong>Plugin Title</strong>
+				</p>
+				<p class="badasswp-form-group-heading">
+					<button name="button_name" type="submit" class="button button-primary">
+						<span>Button Label</span>
+					</button>
+				</p>
+				<input type="hidden" id="nonce_name" name="nonce_name" value="a8gkfhvzhi" />
+			</div>',
+			$form_submit
+		);
+	}
+
+	public function test_get_form_notice_bails_out_if_button_name_is_not_set() {
+		$_POST['nonce_name'] = 'nonce_action\/';
+
+		\WP_Mock::userFunction( 'wp_unslash' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return rtrim( stripslashes( $arg ), '/' );
+				}
+			);
+
+		\WP_Mock::userFunction( 'sanitize_text_field' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'wp_verify_nonce' )
+			->andReturnUsing(
+				function ( $arg1, $arg2 ) {
+					return $arg1 === $arg2;
+				}
+			);
+
+		$form_notice = $this->form->get_form_notice();
+
+		$this->assertSame(
+			'',
+			$form_notice
+		);
+	}
+
+	public function test_get_form_notice_bails_out_if_wp_verify_nonce_fails() {
+		$_POST['button_name'] = true;
+		$_POST['nonce_name']  = 'incorrect_action_name\/';
+
+		\WP_Mock::userFunction( 'wp_unslash' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return rtrim( stripslashes( $arg ), '/' );
+				}
+			);
+
+		\WP_Mock::userFunction( 'sanitize_text_field' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'wp_verify_nonce' )
+			->andReturnUsing(
+				function ( $arg1, $arg2 ) {
+					return $arg1 === $arg2;
+				}
+			);
+
+		$form_notice = $this->form->get_form_notice();
+
+		$this->assertSame(
+			'',
+			$form_notice
+		);
+	}
+
+	public function test_get_form_notice_passes() {
+		$_POST['button_name'] = true;
+		$_POST['nonce_name']  = 'nonce_action\/';
+
+		\WP_Mock::userFunction( 'wp_unslash' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return rtrim( stripslashes( $arg ), '/' );
+				}
+			);
+
+		\WP_Mock::userFunction( 'sanitize_text_field' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'wp_verify_nonce' )
+			->andReturnUsing(
+				function ( $arg1, $arg2 ) {
+					return $arg1 === $arg2;
+				}
+			);
+
+		$form_notice = $this->form->get_form_notice();
+
+		$this->assertSame(
+			'<div class="badasswp-form-notice">
+					<span>Notice Label</span>
+				</div>',
+			$form_notice
 		);
 	}
 }

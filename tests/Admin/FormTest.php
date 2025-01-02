@@ -317,4 +317,28 @@ class FormTest extends TestCase {
 			$control
 		);
 	}
+
+	public function test_get_checkbox_control() {
+		$this->form->shouldReceive( 'get_setting' )
+			->times( 1 )->with( 'checkbox_name' )->andReturn( 'on' );
+
+		$control = $this->form->get_checkbox_control(
+			[
+				'control'     => 'checkbox',
+				'placeholder' => 'Checkbox Placeholder',
+				'label'       => 'Checkbox Label',
+				'summary'     => 'Checkbox Summary',
+			],
+			'checkbox_name'
+		);
+
+		$this->assertSame(
+			'<input
+				name="checkbox_name"
+				type="checkbox"
+				checked
+			/>',
+			$control
+		);
+	}
 }

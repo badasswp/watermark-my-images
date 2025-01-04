@@ -13,6 +13,7 @@ use WatermarkMyImages\Services\PageLoad;
  * @covers \WatermarkMyImages\Services\PageLoad::__construct
  * @covers \WatermarkMyImages\Services\PageLoad::register
  * @covers \WatermarkMyImages\Services\PageLoad::register_wp_get_attachment_image
+ * @covers \WatermarkMyImages\Services\PageLoad::get_watermark_html
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
  * @covers wmig_get_settings
  */
@@ -114,6 +115,81 @@ class PageLoadTest extends TestCase {
 		$this->assertConditionsMet();
 		$this->assertSame(
 			'<p><img src="https://example.com/wp-content/uploads/sample-watermark.jpeg"/></p>',
+			$html
+		);
+	}
+
+	public function test_get_watermark_html_bails_out_if_empty() {
+		$page_load = Mockery::mock( PageLoad::class )->makePartial();
+		$page_load->shouldAllowMockingProtectedMethods();
+
+		$html = $page_load->get_watermark_html( '' );
+
+		$this->assertConditionsMet();
+		$this->assertSame( '', $html );
+	}
+
+	public function test_get_watermark_html_bails_out_if_not_image_html() {
+		$page_load = Mockery::mock( PageLoad::class )->makePartial();
+		$page_load->shouldAllowMockingProtectedMethods();
+
+		$html = $page_load->get_watermark_html( '<p>Hello World!</p>' );
+
+		$this->assertConditionsMet();
+		$this->assertSame( '<p>Hello World!</p>', $html );
+	}
+
+	public function test_get_watermark_html_bails_out_if_src_is_empty() {
+		$page_load = Mockery::mock( PageLoad::class )->makePartial();
+		$page_load->shouldAllowMockingProtectedMethods();
+
+		$html = $page_load->get_watermark_html( '<p><img src=""/></p>' );
+
+		$this->assertConditionsMet();
+		$this->assertSame( '<p><img src=""/></p>', $html );
+	}
+
+	public function test_get_watermark_html_bails_out_if_srcset_is_empty() {
+		$page_load = Mockery::mock( PageLoad::class )->makePartial();
+		$page_load->shouldAllowMockingProtectedMethods();
+
+		$html = $page_load->get_watermark_html( '<p><img src="https://example.com/wp-content/uploads/sample.jpeg" srcset=""/></p>' );
+
+		$this->assertConditionsMet();
+		$this->assertSame( '<p><img src="https://example.com/wp-content/uploads/sample.jpeg" srcset=""/></p>', $html );
+	}
+
+	public function test_get_watermark_html_passes_correctly() {
+		$page_load = Mockery::mock( PageLoad::class )->makePartial();
+		$page_load->shouldAllowMockingProtectedMethods();
+
+		$page_load->shouldReceive( '_get_webp_html' )
+			->with(
+				'https://example.com/wp-content/uploads/sample-300x300.jpeg',
+				'<p><img src="https://example.com/wp-content/uploads/sample.jpeg" srcset="https://example.com/wp-content/uploads/sample-300x300.jpeg"/></p>',
+				0
+			)
+			->andReturnUsing(
+				function ( $arg1, $arg2, $arg3 ) {
+					$dom = new \DOMDocument();
+					$dom->loadHTML( $arg2, LIBXML_NOERROR );
+					$srcset_img = $dom->getElementsByTagName( 'img' )[0];
+
+					$extension  = pathinfo( $arg1, PATHINFO_EXTENSION );
+					$old_srcset = $srcset_img->getAttribute( 'srcset' );
+					$new_srcset = str_replace( ".$extension", "-watermark.$extension", $arg1 );
+
+					return str_replace( $old_srcset, $new_srcset, $arg2 );
+				}
+			);
+
+		$html = $page_load->get_watermark_html(
+			'<p><img src="https://example.com/wp-content/uploads/sample.jpeg" srcset="https://example.com/wp-content/uploads/sample-300x300.jpeg"/></p>'
+		);
+
+		$this->assertConditionsMet();
+		$this->assertSame(
+			'<p><img src="https://example.com/wp-content/uploads/sample.jpeg" srcset="https://example.com/wp-content/uploads/sample-300x300-watermark.jpeg"/></p>',
 			$html
 		);
 	}

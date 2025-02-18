@@ -17,7 +17,9 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Image\Palette\RGB;
 
-class Text {
+use WatermarkMyImages\Abstracts\Entity;
+
+class Text extends Entity {
 	/**
 	 * Text Args.
 	 *
@@ -104,7 +106,7 @@ class Text {
 	 */
 	protected function get_font(): Font {
 		try {
-			$tx_color = ( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
+			$tx_color = $this->get_rgb( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -135,7 +137,7 @@ class Text {
 	 */
 	public function get_text(): Image {
 		try {
-			$bg_color = ( new RGB() )->color( $this->get_option( 'bg_color' ), (int) $this->get_option( 'bg_opacity' ) );
+			$bg_color = $this->get_rgb( new RGB() )->color( $this->get_option( 'bg_color' ), (int) $this->get_option( 'bg_opacity' ) );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(
@@ -147,7 +149,7 @@ class Text {
 		}
 
 		try {
-			$text_box = ( new Imagine() )->create(
+			$text_box = $this->get_imagine( new Imagine() )->create(
 				new Box(
 					$this->get_text_length(),
 					$this->get_option( 'size' )

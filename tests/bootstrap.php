@@ -11,6 +11,8 @@
 // First we need to load the composer autoloader.
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 
+DG\BypassFinals::enable();
+
 // Bootstrap WP_Mock.
 WP_Mock::activateStrictMode();
 WP_Mock::bootstrap();

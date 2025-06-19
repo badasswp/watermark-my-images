@@ -362,10 +362,16 @@ class AdminTest extends TestCase {
 	}
 
 	public function test_register_options_styles() {
+		$screen = Mockery::mock( \WP_Screen::class )->makePartial();
+		$screen->shouldAllowMockingProtectedMethods();
+		$screen->id = 'toplevel_page_watermark-my-images';
+
+		\WP_Mock::userFunction( 'get_current_screen' )
+			->andReturn( $screen );
+
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 25,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -375,7 +381,6 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 9,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -385,7 +390,6 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr__',
 			[
-				'times'  => 6,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -405,6 +409,15 @@ class AdminTest extends TestCase {
 				'all'
 			)
 			->andReturn( null );
+
+		$this->admin->register_options_styles();
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_register_options_styles_bails() {
+		\WP_Mock::userFunction( 'get_current_screen' )
+			->andReturn( '' );
 
 		$this->admin->register_options_styles();
 

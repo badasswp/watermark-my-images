@@ -28,7 +28,8 @@
     "phpunit/phpcov": "^8.2",
     "phpstan/phpstan": "^1.10",
     "szepeviktor/phpstan-wordpress": "^1.3",
-    "phpstan/extension-installer": "^1.3"
+    "phpstan/extension-installer": "^1.3",
+    "dg/bypass-finals": "^1.9"
   },
   "config": {
     "allow-plugins": {
@@ -40,6 +41,7 @@
     "lint": "vendor/bin/phpcs -v",
     "lint:fix": "vendor/bin/phpcbf -v",
     "test": "vendor/bin/phpunit --testdox",
-    "analyse": "vendor/bin/phpstan analyse --memory-limit=2048M"
+    "analyse": "vendor/bin/phpstan analyse --memory-limit=2048M",
+    "coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-cobertura cobertura.xml && coveralls --repo-token=O1AV3K3l9gSHKgeI4ic1Tn2PHweT232MN --file=cobertura.xml"
   }
 }

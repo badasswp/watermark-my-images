@@ -13,28 +13,9 @@ namespace WatermarkMyImages\Engine;
 use Imagine\Gd\Imagine;
 use Imagine\Image\ImageInterface as Image_Object;
 
-class Image {
-	/**
-	 * Imagine object.
-	 *
-	 * This object is an instance of the
-	 * Imagine class.
-	 *
-	 * @since 1.0.5
-	 *
-	 * @var Imagine
-	 */
-	protected $imagine;
+use WatermarkMyImages\Abstracts\Entity;
 
-	/**
-	 * Set up.
-	 *
-	 * @since 1.0.5
-	 */
-	public function __construct() {
-		$this->imagine = new Imagine();
-	}
-
+class Image extends Entity {
 	/**
 	 * Get Image Resource.
 	 *
@@ -44,7 +25,7 @@ class Image {
 	 */
 	public function get_image(): Image_Object {
 		try {
-			return $this->imagine->open( Watermarker::$file );
+			return $this->get_imagine( new Imagine() )->open( Watermarker::$file );
 		} catch ( \Exception $e ) {
 			throw new \Exception(
 				sprintf(

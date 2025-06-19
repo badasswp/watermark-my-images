@@ -21,7 +21,7 @@ abstract class Service implements Registrable {
 	 *
 	 * @var array
 	 */
-	protected static array $instances;
+	public static array $instances;
 
 	/**
 	 * Watermarker Instance.

@@ -13,8 +13,8 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\ImageInterface as Image_Object;
 
 /**
- * @covers \WatermarkMyImages\Engine\Image::__construct
  * @covers \WatermarkMyImages\Engine\Image::get_image
+ * @covers \WatermarkMyImages\Engine\Image::get_imagine
  */
 class ImageTest extends TestCase {
 	public Image $image;
@@ -22,84 +22,87 @@ class ImageTest extends TestCase {
 	public function setUp(): void {
 		\WP_Mock::setUp();
 
-		$this->image       = new Image();
 		Watermarker::$file = __DIR__ . '/sample.png';
-
-		$this->create_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function tearDown(): void {
 		\WP_Mock::tearDown();
-
-		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
-	public function test_get_image() {
-		$imagine      = Mockery::mock( Imagine::class )->makePartial();
+	public function test_get_image_passes_and_returns_image_object() {
+		$image = Mockery::mock( Image::class )->makePartial();
+		$image->shouldAllowMockingProtectedMethods();
+
+		$imagine = Mockery::mock( Imagine::class )->makePartial();
+		$imagine->shouldAllowMockingProtectedMethods();
+
 		$image_object = Mockery::mock( Image_Object::class )->makePartial();
+		$image_object->shouldAllowMockingProtectedMethods();
 
 		$imagine->shouldReceive( 'open' )
 			->with( __DIR__ . '/sample.png' )
 			->andReturn( $image_object );
 
-		$image_resource = $this->image->get_image();
+		$image->shouldReceive( 'get_imagine' )
+			->with( Mockery::type( Imagine::class ) )
+			->andReturn( $imagine );
 
-		$this->assertInstanceOf( Image_Object::class, $image_resource );
+		$response = $image->get_image();
+
+		$this->assertInstanceOf( Image_Object::class, $response );
 		$this->assertConditionsMet();
 	}
 
-	public function test_get_image_throws_exception() {
-		$imagine_mock = $this->createMock( Imagine::class );
-		$imagine_mock->method( 'open' )
-			->will( $this->throwException( new Exception( 'File not found' ) ) );
+	public function test_get_image_catches_and_then_throws_exception() {
+		$image = Mockery::mock( Image::class )->makePartial();
+		$image->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 1,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
+		$imagine = Mockery::mock( Imagine::class )->makePartial();
+		$imagine->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction(
-			'esc_html',
-			[
-				'times'  => 1,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
+		$imagine->shouldReceive( 'open' )
+			->with( __DIR__ . '/sample.png' )
+			->andThrow(
+				new \Exception( 'File not found' )
+			);
 
-		$reflection = new \ReflectionClass( $this->image );
-		$property   = $reflection->getProperty( 'imagine' );
+		$image->shouldReceive( 'get_imagine' )
+			->with( Mockery::type( Imagine::class ) )
+			->andReturn( $imagine );
 
-		$property->setAccessible( true );
-		$property->setValue( $this->image, $imagine_mock );
+		\WP_Mock::userFunction( 'esc_html__' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'esc_html' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( 'Unable to open Image Resource, File not found' );
 
-		$this->image->get_image();
+		$response = $image->get_image();
+
+		$this->assertInstanceOf( Image_Object::class, $response );
+		$this->assertConditionsMet();
 	}
 
-	public function create_mock_image( $image_file_name ) {
-		// Create a blank image.
-		$width  = 400;
-		$height = 200;
-		$image  = imagecreatetruecolor( $width, $height );
+	public function test_get_imagine_returns_imagine_instance() {
+		$image = Mockery::mock( Image::class )->makePartial();
+		$image->shouldAllowMockingProtectedMethods();
 
-		// Set background color.
-		$bg_color = imagecolorallocate( $image, 255, 255, 255 );
-		imagefill( $image, 0, 0, $bg_color );
-		imagejpeg( $image, $image_file_name );
-	}
+		$imagine = Mockery::mock( Imagine::class )->makePartial();
+		$imagine->shouldAllowMockingProtectedMethods();
 
-	public function destroy_mock_image( $image_file_name ) {
-		if ( file_exists( $image_file_name ) ) {
-			unlink( $image_file_name );
-		}
+		$response = $image->get_imagine( new Imagine() );
+
+		$this->assertInstanceOf( Imagine::class, $response );
+		$this->assertConditionsMet();
 	}
 }

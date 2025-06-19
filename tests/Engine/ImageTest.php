@@ -13,7 +13,6 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\ImageInterface as Image_Object;
 
 /**
- * @covers \WatermarkMyImages\Engine\Image::__construct
  * @covers \WatermarkMyImages\Engine\Image::get_image
  * @covers \WatermarkMyImages\Engine\Image::get_imagine
  */

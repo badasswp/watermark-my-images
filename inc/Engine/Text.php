@@ -150,10 +150,7 @@ class Text extends Entity {
 
 		try {
 			$text_box = $this->get_imagine( new Imagine() )->create(
-				new Box(
-					$this->get_text_length(),
-					$this->get_option( 'size' )
-				),
+				$this->get_text_box(),
 				$bg_color
 			);
 		} catch ( \Exception $e ) {
@@ -183,6 +180,20 @@ class Text extends Entity {
 		}
 
 		return $text_box;
+	}
+
+	/**
+	 * Get Text Box.
+	 *
+	 * @since TBD
+	 *
+	 * @return Box
+	 */
+	protected function get_text_box(): Box {
+		return new Box(
+			$this->get_text_length(),
+			$this->get_option( 'size' )
+		);
 	}
 
 	/**

@@ -15,6 +15,7 @@ use WatermarkMyImages\Services\WooCommerce;
  * @covers \WatermarkMyImages\Services\WooCommerce::add_watermark_on_get_image
  * @covers \WatermarkMyImages\Services\WooCommerce::get_image_html
  * @covers \WatermarkMyImages\Engine\Watermarker::__construct
+ * @covers wmig_get_settings
  */
 class WooCommerceTest extends TestCase {
 	public WooCommerce $woocommerce;

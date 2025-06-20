@@ -45,10 +45,19 @@ class WooCommerceTest extends TestCase {
 		$product = Mockery::mock( \WC_Product::class )->makePartial();
 		$product->shouldAllowMockingProtectedMethods();
 
+		\WP_Mock::userFunction( 'get_option' )
+			->once()
+			->with( 'watermark_my_images', [] )
+			->andReturn(
+				[
+					'upload' => false,
+				]
+			);
+
 		$product->shouldReceive( 'get_image_id' )
 			->andReturn( 1 );
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		/*\WP_Mock::userFunction( 'get_post_meta' )
 			->once()
 			->with( 1, 'watermark_my_images', true )
 			->andReturn(
@@ -56,7 +65,7 @@ class WooCommerceTest extends TestCase {
 					'abs' => __DIR__ . '/sample.png',
 					'rel' => 'https://example.com/wp-content/uploads/2024/10/sample-watermark-my-images.jpg',
 				]
-			);
+			);*/
 
 		$image = $this->woocommerce->add_watermark_on_get_image(
 			'<img src="">',
@@ -72,6 +81,15 @@ class WooCommerceTest extends TestCase {
 	public function test_add_watermark_on_get_image_passes() {
 		$product = Mockery::mock( \WC_Product::class )->makePartial();
 		$product->shouldAllowMockingProtectedMethods();
+
+		\WP_Mock::userFunction( 'get_option' )
+			->once()
+			->with( 'watermark_my_images', [] )
+			->andReturn(
+				[
+					'woocommerce' => true,
+				]
+			);
 
 		$product->shouldReceive( 'get_image_id' )
 			->once()

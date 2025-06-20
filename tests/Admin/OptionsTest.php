@@ -78,7 +78,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 20,
+				'times'  => 22,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -88,7 +88,7 @@ class OptionsTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 9,
+				'times'  => 10,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -163,6 +163,11 @@ class OptionsTest extends TestCase {
 							'control' => 'checkbox',
 							'label'   => 'Add Watermark on Page Load',
 							'summary' => 'This is useful for existing images.',
+						],
+						'woocommerce' => [
+							'control' => 'checkbox',
+							'label'   => 'Enable WooCommerce Watermarks',
+							'summary' => 'Allow WooCommerce serve watermark images.',
 						],
 						'logs'      => [
 							'control' => 'checkbox',

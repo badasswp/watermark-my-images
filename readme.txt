@@ -50,6 +50,13 @@ Want to add your personal touch? All of our documentation can be found [here](ht
 
 == Changelog ==
 
+= 1.1.0 =
+- Feat: Add WooCommerce watermark option in plugin settings page.
+- Test: Updated unit test cases.
+- Fix: Issue with WooCommerce watermarked images not showing.
+- Refactor of Service Instances to use Dependency Injection.
+- Tested up to WP 6.8.
+
 = 1.0.6 =
 * Fix bug related to empty plugin options.
 * Fix failing tests.

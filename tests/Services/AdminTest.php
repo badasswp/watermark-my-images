@@ -52,7 +52,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 75,
+				'times'  => 81,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -62,7 +62,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 27,
+				'times'  => 30,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -99,7 +99,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 75,
+				'times'  => 81,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -109,7 +109,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 27,
+				'times'  => 30,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -135,7 +135,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 75,
+				'times'  => 81,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -145,7 +145,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 27,
+				'times'  => 30,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -188,7 +188,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 125,
+				'times'  => 135,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -198,7 +198,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 45,
+				'times'  => 50,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -228,7 +228,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'wp_unslash',
 			[
-				'times'  => 10,
+				'times'  => 11,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -238,7 +238,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'sanitize_text_field',
 			[
-				'times'  => 10,
+				'times'  => 11,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -250,15 +250,16 @@ class AdminTest extends TestCase {
 			->with(
 				'watermark_my_images',
 				[
-					'upload'     => '',
-					'page_load'  => '',
-					'logs'       => '',
-					'label'      => '',
-					'size'       => '',
-					'tx_color'   => '',
-					'bg_color'   => '',
-					'tx_opacity' => '',
-					'bg_opacity' => '',
+					'upload'      => '',
+					'page_load'   => '',
+					'logs'        => '',
+					'label'       => '',
+					'size'        => '',
+					'tx_color'    => '',
+					'bg_color'    => '',
+					'tx_opacity'  => '',
+					'bg_opacity'  => '',
+					'woocommerce' => '',
 				]
 			)
 			->andReturn( true );
@@ -272,7 +273,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 125,
+				'times'  => 135,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -282,7 +283,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 45,
+				'times'  => 50,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -321,7 +322,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'wp_unslash',
 			[
-				'times'  => 10,
+				'times'  => 11,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -331,7 +332,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'sanitize_text_field',
 			[
-				'times'  => 10,
+				'times'  => 11,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -343,15 +344,16 @@ class AdminTest extends TestCase {
 			->with(
 				'watermark_my_images',
 				[
-					'upload'     => true,
-					'page_load'  => '',
-					'logs'       => '',
-					'label'      => 'WATERMARK',
-					'size'       => 60,
-					'tx_color'   => '',
-					'bg_color'   => '',
-					'tx_opacity' => '',
-					'bg_opacity' => '',
+					'upload'      => true,
+					'page_load'   => '',
+					'logs'        => '',
+					'label'       => 'WATERMARK',
+					'size'        => 60,
+					'tx_color'    => '',
+					'bg_color'    => '',
+					'tx_opacity'  => '',
+					'bg_opacity'  => '',
+					'woocommerce' => '',
 				]
 			)
 			->andReturn( true );

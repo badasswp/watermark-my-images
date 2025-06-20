@@ -228,6 +228,16 @@ class ContainerTest extends TestCase {
 			5
 		);
 
+		\WP_Mock::expectFilterAdded(
+			'woocommerce_single_product_image_thumbnail_html',
+			[
+				Service::$instances[ WooCommerce::class ],
+				'add_watermark_to_product_gallery_image',
+			],
+			10,
+			2
+		);
+
 		$container->register();
 
 		$this->assertConditionsMet();

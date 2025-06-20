@@ -24,6 +24,35 @@ class WooCommerce extends Service implements Registrable {
 	 */
 	public function register(): void {
 		add_filter( 'woocommerce_product_get_image', [ $this, 'add_watermark_on_get_image' ], 10, 5 );
+		add_filter( 'woocommerce_single_product_image_thumbnail_html', [ $this, 'add_watermark_to_product_gallery_image' ], 10, 2 );
+	}
+
+	/**
+	 * Add Watermark to Product Gallery Image.
+	 *
+	 * This method is used to add watermark to the
+	 * product gallery image.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param string $html    HTML of the product gallery image.
+	 * @param int    $post_id Post ID of the product.
+	 *
+	 * @return string
+	 */
+	public function add_watermark_to_product_gallery_image( $html, $post_id ) {
+		// Bail out, if not enabled in Options.
+		if ( ! wmig_get_settings( 'woocommerce' ) ) {
+			return $html;
+		}
+
+		$image_watermark = get_post_meta( absint( $post_id ), 'watermark_my_images', true );
+
+		if ( ! empty( $image_watermark['rel'] ) && file_exists( $image_watermark['abs'] ) ) {
+			return str_replace( wp_get_attachment_url( $post_id ), esc_url( $image_watermark['rel'] ), $html );
+		}
+
+		return $html;
 	}
 
 	/**
@@ -43,6 +72,11 @@ class WooCommerce extends Service implements Registrable {
 	 * @return string
 	 */
 	public function add_watermark_on_get_image( $image_html, $product, $size, $attr, $placeholder ): string {
+		// Bail out, if not enabled in Options.
+		if ( ! wmig_get_settings( 'woocommerce' ) ) {
+			return $image_html;
+		}
+
 		$this->image_id  = $product->get_image_id();
 		$image_watermark = get_post_meta( $this->image_id, 'watermark_my_images', true );
 

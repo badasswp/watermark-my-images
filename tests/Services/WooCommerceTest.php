@@ -36,6 +36,7 @@ class WooCommerceTest extends TestCase {
 
 	public function test_register() {
 		\WP_Mock::expectFilterAdded( 'woocommerce_product_get_image', [ $this->woocommerce, 'add_watermark_on_get_image' ], 10, 5 );
+		\WP_Mock::expectFilterAdded( 'woocommerce_single_product_image_thumbnail_html', [ $this->woocommerce, 'add_watermark_to_product_gallery_image' ], 10, 2 );
 
 		$this->woocommerce->register();
 

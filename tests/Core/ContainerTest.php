@@ -232,7 +232,7 @@ class ContainerTest extends TestCase {
 			'woocommerce_single_product_image_thumbnail_html',
 			[
 				Service::$instances[ WooCommerce::class ],
-				'add_watermark_to_product_gallery_image'
+				'add_watermark_to_product_gallery_image',
 			],
 			10,
 			2

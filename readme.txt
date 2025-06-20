@@ -2,8 +2,8 @@
 Contributors: badasswp
 Tags: image, watermark, copyright, intellectual, media.
 Requires at least: 4.0
-Tested up to: 6.7.0
-Stable tag: 1.0.6
+Tested up to: 6.8
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,13 @@ Want to add your personal touch? All of our documentation can be found [here](ht
 4. Watermark Image Options - Configure your plugin image options here.
 
 == Changelog ==
+
+= 1.1.0 =
+- Feat: Add WooCommerce watermark option in plugin settings page.
+- Test: Updated unit test cases.
+- Fix: Issue with WooCommerce watermarked images not showing.
+- Refactor of Service Instances to use Dependency Injection.
+- Tested up to WP 6.8.
 
 = 1.0.6 =
 * Fix bug related to empty plugin options.

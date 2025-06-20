@@ -168,17 +168,22 @@ class Options {
 			'image_options' => [
 				'heading'  => esc_html__( 'Image Options', 'watermark-my-images' ),
 				'controls' => [
-					'upload'    => [
+					'upload'      => [
 						'control' => esc_attr( 'checkbox' ),
 						'label'   => esc_html__( 'Add Watermark on Image Upload', 'watermark-my-images' ),
 						'summary' => esc_html__( 'This is useful for new images.', 'watermark-my-images' ),
 					],
-					'page_load' => [
+					'page_load'   => [
 						'control' => esc_attr( 'checkbox' ),
 						'label'   => esc_html__( 'Add Watermark on Page Load', 'watermark-my-images' ),
 						'summary' => esc_html__( 'This is useful for existing images.', 'watermark-my-images' ),
 					],
-					'logs'      => [
+					'woocommerce' => [
+						'control' => esc_attr( 'checkbox' ),
+						'label'   => esc_html__( 'Enable WooCommerce Watermarks', 'watermark-my-images' ),
+						'summary' => esc_html__( 'Allow WooCommerce serve watermark images.', 'watermark-my-images' ),
+					],
+					'logs'        => [
 						'control' => esc_attr( 'checkbox' ),
 						'label'   => esc_html__( 'Log errors for Failed Watermarks', 'watermark-my-images' ),
 						'summary' => esc_html__( 'Enable this option to log errors.', 'watermark-my-images' ),

@@ -3,7 +3,7 @@
  * Plugin Name: Watermark My Images
  * Plugin URI:  https://github.com/badasswp/watermark-my-images
  * Description: Insert Watermarks into your WP images.
- * Version:     1.0.6
+ * Version:     1.1.0
  * Author:      badasswp
  * Author URI:  https://github.com/badasswp
  * License:     GPL v2 or later

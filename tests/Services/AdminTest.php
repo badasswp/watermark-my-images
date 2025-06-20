@@ -250,15 +250,15 @@ class AdminTest extends TestCase {
 			->with(
 				'watermark_my_images',
 				[
-					'upload'     => '',
-					'page_load'  => '',
-					'logs'       => '',
-					'label'      => '',
-					'size'       => '',
-					'tx_color'   => '',
-					'bg_color'   => '',
-					'tx_opacity' => '',
-					'bg_opacity' => '',
+					'upload'      => '',
+					'page_load'   => '',
+					'logs'        => '',
+					'label'       => '',
+					'size'        => '',
+					'tx_color'    => '',
+					'bg_color'    => '',
+					'tx_opacity'  => '',
+					'bg_opacity'  => '',
 					'woocommerce' => '',
 				]
 			)
@@ -344,15 +344,15 @@ class AdminTest extends TestCase {
 			->with(
 				'watermark_my_images',
 				[
-					'upload'     => true,
-					'page_load'  => '',
-					'logs'       => '',
-					'label'      => 'WATERMARK',
-					'size'       => 60,
-					'tx_color'   => '',
-					'bg_color'   => '',
-					'tx_opacity' => '',
-					'bg_opacity' => '',
+					'upload'      => true,
+					'page_load'   => '',
+					'logs'        => '',
+					'label'       => 'WATERMARK',
+					'size'        => 60,
+					'tx_color'    => '',
+					'bg_color'    => '',
+					'tx_opacity'  => '',
+					'bg_opacity'  => '',
 					'woocommerce' => '',
 				]
 			)

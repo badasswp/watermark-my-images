@@ -154,12 +154,12 @@ class OptionsTest extends TestCase {
 				'image_options' => [
 					'heading'  => 'Image Options',
 					'controls' => [
-						'upload'    => [
+						'upload'      => [
 							'control' => 'checkbox',
 							'label'   => 'Add Watermark on Image Upload',
 							'summary' => 'This is useful for new images.',
 						],
-						'page_load' => [
+						'page_load'   => [
 							'control' => 'checkbox',
 							'label'   => 'Add Watermark on Page Load',
 							'summary' => 'This is useful for existing images.',
@@ -169,7 +169,7 @@ class OptionsTest extends TestCase {
 							'label'   => 'Enable WooCommerce Watermarks',
 							'summary' => 'Allow WooCommerce serve watermark images.',
 						],
-						'logs'      => [
+						'logs'        => [
 							'control' => 'checkbox',
 							'label'   => 'Log errors for Failed Watermarks',
 							'summary' => 'Enable this option to log errors.',

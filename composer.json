@@ -1,7 +1,7 @@
 {
   "name": "badasswp/watermark-my-images",
   "description": "Insert Watermarks into your WP images.",
-  "type": "package",
+  "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {

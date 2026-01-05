@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+* Specify `wordpress-plugin` as Composer package type.
+* Tested up to WP 6.9.
+
 ## 1.1.0
 * Feat: Add WooCommerce watermark option in plugin settings page.
 * Test: Updated unit test cases.

@@ -251,3 +251,32 @@ public function custom_form_fields( $fields ): array {
 
 - fields _`{array}`_ By default this will be an associative array containing key, value options of each field option.
 <br/>
+
+## Contribute
+
+Contributions are __welcome__ and will be fully __credited__. To contribute, please fork this repo and raise a PR (Pull Request) against the `master` branch.
+
+### Pre-requisites
+
+You should have the following tools before proceeding to the next steps:
+
+- Composer
+- Yarn
+- Docker
+
+To enable you start development, please run:
+
+```bash
+yarn start
+```
+
+This should spin up a local WP env instance for you to work with at:
+
+```bash
+http://watermark-my-images.localhost:6400
+```
+
+You should now have a functioning local WP env to work with. To login to the `wp-admin` backend, please use `admin` for username & `password` for password.
+
+__Awesome!__ - Thanks for being interested in contributing your time and code to this project!
+

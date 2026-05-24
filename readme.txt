@@ -50,6 +50,10 @@ Want to add your personal touch? All of our documentation can be found [here](ht
 
 == Changelog ==
 
+= 1.2.0 =
+* Chore: Update CI/CD pipeline.
+* Tested up to WP 7.0.
+
 = 1.1.1 =
 * Specify `wordpress-plugin` as Composer package type.
 * Tested up to WP 6.9.

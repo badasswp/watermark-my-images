@@ -9,3 +9,5 @@ README.md
 tests
 assets
 vendor/imagine/imagine/src/resources
+package.json
+.wp-env.json

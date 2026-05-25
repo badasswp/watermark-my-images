@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    ".",
+    "./vendor/woocommerce"
+  ],
+  "phpVersion": "8.2",
+  "port": 6400,
+  "testsPort": 6401,
+  "config": {
+    "WP_SITEURL": "http://watermark-my-images.localhost",
+    "WP_HOME": "http://watermark-my-images.localhost"
+  }
+}

@@ -2,6 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
 use Exception;
 use ReflectionClass;
@@ -36,14 +37,14 @@ class TextTest extends TestCase {
 	public Text $text;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		$this->text        = new Text();
 		Watermarker::$file = __DIR__ . '/sample.png';
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_args_is_set() {
@@ -97,11 +98,11 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'wp_parse_args',
 			[
 				'times'  => 1,
@@ -115,7 +116,7 @@ class TextTest extends TestCase {
 			->with( $options )
 			->andReturn( 60 );
 
-		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
+		WP_Mock::expectFilter( 'watermark_my_images_text', $options );
 
 		$options = $text->get_options();
 
@@ -148,11 +149,11 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'wp_parse_args',
 			[
 				'times'  => 1,
@@ -176,7 +177,7 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
+		WP_Mock::expectFilter( 'watermark_my_images_text', $options );
 
 		$options = $text->get_options();
 
@@ -219,11 +220,11 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'wp_parse_args',
 			[
 				'times'  => 1,
@@ -233,7 +234,7 @@ class TextTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::onFilter( 'watermark_my_images_text' )
+		WP_Mock::onFilter( 'watermark_my_images_text' )
 			->with( $options )
 			->reply( $filtered_options );
 
@@ -319,17 +320,17 @@ class TextTest extends TestCase {
 		$rgb->shouldReceive( 'color' )
 			->with( '#FFF', 100 )
 			->andThrow(
-				new \Exception( 'Error: Unable to parse RGB color' )
+				new Exception( 'Error: Unable to parse RGB color' )
 			);
 
-		\WP_Mock::userFunction( 'esc_html__' )
+		WP_Mock::userFunction( 'esc_html__' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'esc_html' )
+		WP_Mock::userFunction( 'esc_html' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
@@ -366,17 +367,17 @@ class TextTest extends TestCase {
 		$rgb->shouldReceive( 'color' )
 			->with( '#FFF', 100 )
 			->andThrow(
-				new \Exception( 'Error: Unable to parse Background color' )
+				new Exception( 'Error: Unable to parse Background color' )
 			);
 
-		\WP_Mock::userFunction( 'esc_html__' )
+		WP_Mock::userFunction( 'esc_html__' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'esc_html' )
+		WP_Mock::userFunction( 'esc_html' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
@@ -572,7 +573,7 @@ class TextTest extends TestCase {
 			->with( 'font' )
 			->andReturn( 'Arial' );
 
-		\WP_Mock::userFunction( 'plugin_dir_path' )
+		WP_Mock::userFunction( 'plugin_dir_path' )
 			->with( pathinfo( $reflect->getFileName(), PATHINFO_DIRNAME ) )
 			->andReturn( '/var/www/wp-content/uploads/watermark-my-images/inc/Engine' );
 

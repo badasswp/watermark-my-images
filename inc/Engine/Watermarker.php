@@ -10,6 +10,7 @@
 
 namespace WatermarkMyImages\Engine;
 
+use Exception;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
 use Imagine\Gd\Image as Text_Object;
@@ -69,7 +70,7 @@ class Watermarker {
 		static::$file = is_null( $file ) ? get_attached_file( $this->service->image_id ) : $file;
 
 		if ( ! file_exists( static::$file ) ) {
-			throw new \Exception(
+			throw new Exception(
 				sprintf(
 					/* translators: Image ID. */
 					esc_html__( 'Unable to create Image watermark, file does not exist for Image ID: %d.', 'watermark-my-images' ),
@@ -80,7 +81,7 @@ class Watermarker {
 
 		try {
 			$image = ( new Image() )->get_image();
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			throw new ImageException(
 				sprintf(
 					/* translators: Exception error message. */
@@ -94,7 +95,7 @@ class Watermarker {
 
 		try {
 			$text = ( new Text() )->get_text();
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			throw new TextException(
 				sprintf(
 					/* translators: Exception error message. */
@@ -108,7 +109,7 @@ class Watermarker {
 
 		try {
 			$image->paste( $text, $this->get_position( $image, $text ) );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			throw new PasteException(
 				sprintf(
 					/* translators: Exception error message. */
@@ -122,7 +123,7 @@ class Watermarker {
 
 		try {
 			$image->save( $this->get_watermark_abs_path() );
-		} catch ( \Exception $e ) {
+		} catch ( Exception $e ) {
 			throw new SaveException(
 				sprintf(
 					/* translators: Exception error message. */

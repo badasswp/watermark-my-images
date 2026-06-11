@@ -10,7 +10,9 @@
 
 namespace WatermarkMyImages\Exceptions;
 
-class PasteException extends \Exception {
+use Exception;
+
+class PasteException extends Exception {
 	/**
 	 * Context.
 	 *

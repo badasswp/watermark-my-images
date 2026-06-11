@@ -10,7 +10,9 @@
 
 namespace WatermarkMyImages\Exceptions;
 
-class SaveException extends \Exception {
+use Exception;
+
+class SaveException extends Exception {
 	/**
 	 * Context.
 	 *

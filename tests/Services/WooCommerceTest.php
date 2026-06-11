@@ -2,10 +2,10 @@
 
 namespace WatermarkMyImages\Tests\Services;
 
+use WP_Mock;
 use Mockery;
-use DOMDocument;
+use WC_Product;
 use WP_Mock\Tools\TestCase;
-use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
 use WatermarkMyImages\Services\WooCommerce;
 
@@ -21,7 +21,7 @@ class WooCommerceTest extends TestCase {
 	public WooCommerce $woocommerce;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		$this->woocommerce = new WooCommerce();
 
@@ -29,14 +29,14 @@ class WooCommerceTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 
 		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function test_register() {
-		\WP_Mock::expectFilterAdded( 'woocommerce_product_get_image', [ $this->woocommerce, 'add_watermark_on_get_image' ], 10, 5 );
-		\WP_Mock::expectFilterAdded( 'woocommerce_single_product_image_thumbnail_html', [ $this->woocommerce, 'add_watermark_to_product_gallery_image' ], 10, 2 );
+		WP_Mock::expectFilterAdded( 'woocommerce_product_get_image', [ $this->woocommerce, 'add_watermark_on_get_image' ], 10, 5 );
+		WP_Mock::expectFilterAdded( 'woocommerce_single_product_image_thumbnail_html', [ $this->woocommerce, 'add_watermark_to_product_gallery_image' ], 10, 2 );
 
 		$this->woocommerce->register();
 
@@ -44,10 +44,10 @@ class WooCommerceTest extends TestCase {
 	}
 
 	public function test_add_watermark_on_get_image_bails_on_image_existence() {
-		$product = Mockery::mock( \WC_Product::class )->makePartial();
+		$product = Mockery::mock( WC_Product::class )->makePartial();
 		$product->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->once()
 			->with( 'watermark_my_images', [] )
 			->andReturn(
@@ -81,10 +81,10 @@ class WooCommerceTest extends TestCase {
 	}
 
 	public function test_add_watermark_on_get_image_passes() {
-		$product = Mockery::mock( \WC_Product::class )->makePartial();
+		$product = Mockery::mock( WC_Product::class )->makePartial();
 		$product->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->once()
 			->with( 'watermark_my_images', [] )
 			->andReturn(
@@ -111,12 +111,12 @@ class WooCommerceTest extends TestCase {
 
 		$this->woocommerce->watermarker = $watermarker;
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->once()
 			->with( 1, 'watermark_my_images', true )
 			->andReturn( '' );
 
-		\WP_Mock::expectAction(
+		WP_Mock::expectAction(
 			'watermark_my_images_on_woo_product_get_image',
 			'https://example.com/wp-content/uploads/2024/10/sample-1-watermark-my-images.jpg',
 			$watermark,

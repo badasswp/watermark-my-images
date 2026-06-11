@@ -2,6 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
 use Exception;
 use WP_Mock\Tools\TestCase;
@@ -20,13 +21,13 @@ class ImageTest extends TestCase {
 	public Image $image;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		Watermarker::$file = __DIR__ . '/sample.png';
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_get_image_passes_and_returns_image_object() {
@@ -63,21 +64,21 @@ class ImageTest extends TestCase {
 		$imagine->shouldReceive( 'open' )
 			->with( __DIR__ . '/sample.png' )
 			->andThrow(
-				new \Exception( 'File not found' )
+				new Exception( 'File not found' )
 			);
 
 		$image->shouldReceive( 'get_imagine' )
 			->with( Mockery::type( Imagine::class ) )
 			->andReturn( $imagine );
 
-		\WP_Mock::userFunction( 'esc_html__' )
+		WP_Mock::userFunction( 'esc_html__' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'esc_html' )
+		WP_Mock::userFunction( 'esc_html' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;

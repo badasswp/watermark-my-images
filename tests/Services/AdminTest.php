@@ -54,7 +54,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 81,
+				'times'  => 135,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -64,7 +64,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 30,
+				'times'  => 50,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -74,7 +74,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr__',
 			[
-				'times'  => 18,
+				'times'  => 30,
 				'return' => function ( $text ) {
 					return $text;
 				},

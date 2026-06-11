@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.0
+* Feat: Add `More Plugins` options page.
+
 ## 1.2.0
 * Chore: Update CI/CD pipeline.
 * Tested up to WP 7.0.

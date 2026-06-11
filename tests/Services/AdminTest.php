@@ -22,6 +22,7 @@ use WatermarkMyImages\Abstracts\Service;
  * @covers \WatermarkMyImages\Admin\Options::get_form_page
  * @covers \WatermarkMyImages\Admin\Options::get_form_submit
  * @covers \WatermarkMyImages\Admin\Options::init
+ * @covers \WatermarkMyImages\Services\Admin::__construct
  */
 class AdminTest extends TestCase {
 	public Admin $admin;
@@ -42,6 +43,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::expectActionAdded( 'admin_init', [ $this->admin, 'register_options_init' ] );
 		\WP_Mock::expectActionAdded( 'admin_menu', [ $this->admin, 'register_options_menu' ] );
 		\WP_Mock::expectActionAdded( 'admin_enqueue_scripts', [ $this->admin, 'register_options_styles' ] );
+		\WP_Mock::expectActionAdded( 'admin_init', [ $this->admin->pluginate, 'init' ] );
 
 		$this->admin->register();
 
@@ -52,7 +54,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_html__',
 			[
-				'times'  => 81,
+				'times'  => 135,
 				'return' => function ( $text, $domain = 'watermark-my-images' ) {
 					return $text;
 				},
@@ -62,7 +64,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr',
 			[
-				'times'  => 30,
+				'times'  => 50,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -72,7 +74,7 @@ class AdminTest extends TestCase {
 		\WP_Mock::userFunction(
 			'esc_attr__',
 			[
-				'times'  => 18,
+				'times'  => 30,
 				'return' => function ( $text ) {
 					return $text;
 				},
@@ -89,6 +91,21 @@ class AdminTest extends TestCase {
 				'dashicons-format-image',
 				100
 			);
+
+		\WP_Mock::userFunction( '__' )
+			->andReturnUsing( fn( $text, $domain ) => $text );
+
+		\WP_Mock::userFunction( 'add_submenu_page' )
+			->once()
+			->with(
+				'watermark-my-images',
+				'More Plugins',
+				'More Plugins',
+				'manage_options',
+				'watermark-my-images-more-plugins',
+				[ $this->admin, 'register_more_plugins' ]
+			)
+			->andReturn( null );
 
 		$this->admin->register_options_menu();
 

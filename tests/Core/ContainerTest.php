@@ -2,7 +2,6 @@
 
 namespace WatermarkMyImages\Tests\Core;
 
-use Mockery;
 use WP_Mock\Tools\TestCase;
 
 use WatermarkMyImages\Core\Container;
@@ -29,6 +28,7 @@ use WatermarkMyImages\Services\WooCommerce;
  * @covers \WatermarkMyImages\Services\MetaData::register
  * @covers \WatermarkMyImages\Services\PageLoad::register
  * @covers \WatermarkMyImages\Services\WooCommerce::register
+ * @covers \WatermarkMyImages\Services\Admin::__construct
  */
 class ContainerTest extends TestCase {
 	public Container $container;
@@ -87,6 +87,16 @@ class ContainerTest extends TestCase {
 			[
 				Service::$instances[ Admin::class ],
 				'register_options_styles',
+			]
+		);
+
+		$admin = Service::$instances[ Admin::class ];
+
+		\WP_Mock::expectActionAdded(
+			'admin_init',
+			[
+				$admin->pluginate,
+				'init',
 			]
 		);
 

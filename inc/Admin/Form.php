@@ -88,9 +88,6 @@ class Form {
 	 * @return string
 	 */
 	protected function get_form_action(): string {
-		// return esc_url(
-		//  sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) )
-		// );
 		$uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
 		return esc_url( untrailingslashit( $uri ) );
 	}

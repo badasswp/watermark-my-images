@@ -3,8 +3,8 @@
 namespace WatermarkMyImages\Tests\Admin;
 
 use Mockery;
-use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Admin\Form;
+use Badasswp\WPMockTC\WPMockTestCase;
 
 /**
  * @covers \WatermarkMyImages\Admin\Form::__construct
@@ -22,11 +22,11 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_submit
  * @covers \WatermarkMyImages\Admin\Form::get_form_notice
  */
-class FormTest extends TestCase {
+class FormTest extends WPMockTestCase {
 	public Form $form;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		parent::setUp();
 
 		$this->form = Mockery::mock( Form::class )->makePartial();
 		$this->form->shouldAllowMockingProtectedMethods();
@@ -67,7 +67,7 @@ class FormTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		parent::tearDown();
 	}
 
 	public function test_get_options() {
@@ -112,13 +112,6 @@ class FormTest extends TestCase {
 	public function test_get_form_action() {
 		$_SERVER['REQUEST_URI'] = 'https://example.com/\/';
 
-		\WP_Mock::userFunction( 'esc_url' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return rtrim( filter_var( $arg, FILTER_SANITIZE_URL ), '/' );
-				}
-			);
-
 		\WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
@@ -130,6 +123,13 @@ class FormTest extends TestCase {
 			->andReturnUsing(
 				function ( $arg ) {
 					return stripslashes( $arg );
+				}
+			);
+
+		\WP_Mock::userFunction( 'untrailingslashit' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return rtrim( $arg, '/' );
 				}
 			);
 

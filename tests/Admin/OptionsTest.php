@@ -3,8 +3,8 @@
 namespace WatermarkMyImages\Tests\Admin;
 
 use Mockery;
-use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Admin\Options;
+use Badasswp\WPMockTC\WPMockTestCase;
 
 /**
  * @covers \WatermarkMyImages\Admin\Options::get_form_page
@@ -12,25 +12,16 @@ use WatermarkMyImages\Admin\Options;
  * @covers \WatermarkMyImages\Admin\Options::get_form_notice
  * @covers \WatermarkMyImages\Admin\Options::get_form_fields
  */
-class OptionsTest extends TestCase {
+class OptionsTest extends WPMockTestCase {
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		parent::setUp();
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		parent::tearDown();
 	}
 
 	public function test_get_form_page() {
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 2,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
 
 		$form_page = Options::get_form_page();
 
@@ -46,15 +37,6 @@ class OptionsTest extends TestCase {
 	}
 
 	public function test_get_form_submit() {
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 2,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
 
 		$form_submit = Options::get_form_submit();
 
@@ -75,35 +57,6 @@ class OptionsTest extends TestCase {
 	}
 
 	public function test_get_form_fields() {
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 22,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'esc_attr',
-			[
-				'times'  => 10,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'esc_attr__',
-			[
-				'times'  => 6,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
 
 		$form_fields = Options::get_form_fields();
 
@@ -181,15 +134,6 @@ class OptionsTest extends TestCase {
 	}
 
 	public function test_get_form_notice() {
-		\WP_Mock::userFunction(
-			'esc_html__',
-			[
-				'times'  => 1,
-				'return' => function ( $text, $domain = 'watermark-my-images' ) {
-					return $text;
-				},
-			]
-		);
 
 		$form_notice = Options::get_form_notice();
 

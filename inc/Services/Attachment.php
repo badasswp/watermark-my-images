@@ -10,6 +10,8 @@
 
 namespace WatermarkMyImages\Services;
 
+use WP_Error;
+use Exception;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Interfaces\Registrable;
 
@@ -64,8 +66,8 @@ class Attachment extends Service implements Registrable {
 		try {
 			$watermark = $this->watermarker->get_watermark();
 			$response  = $watermark['rel'] ?? '';
-		} catch ( \Exception $e ) {
-			$response = new \WP_Error(
+		} catch ( Exception $e ) {
+			$response = new WP_Error(
 				'watermark-log-error',
 				sprintf(
 					'Fatal Error: %s',

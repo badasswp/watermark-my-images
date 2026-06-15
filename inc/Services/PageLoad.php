@@ -7,6 +7,8 @@
 
 namespace WatermarkMyImages\Services;
 
+use WP_Error;
+use Exception;
 use DOMDocument;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Interfaces\Registrable;
@@ -143,8 +145,8 @@ class PageLoad extends Service implements Registrable {
 		try {
 			$watermark = $this->watermarker->get_watermark( $img_metadata );
 			$response  = $watermark['rel'] ?? '';
-		} catch ( \Exception $e ) {
-			$response = new \WP_Error(
+		} catch ( Exception $e ) {
+			$response = new WP_Error(
 				'watermark-log-error',
 				sprintf(
 					'Fatal Error: %s',

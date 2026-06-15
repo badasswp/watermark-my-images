@@ -2,8 +2,8 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
-use Exception;
 use WP_Mock\Tools\TestCase;
 
 use WatermarkMyImages\Abstracts\Service;
@@ -27,13 +27,13 @@ use Imagine\Image\Point;
  */
 class WatermarkerTest extends TestCase {
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		Watermarker::$file = '/var/www/wp-content/uploads/2024/10/sample.png';
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_get_watermark_abs_path() {
@@ -69,7 +69,7 @@ class WatermarkerTest extends TestCase {
 		$watermarker->shouldAllowMockingProtectedMethods();
 		$watermarker->service = $service;
 
-		\WP_Mock::userFunction( 'wp_get_attachment_url' )
+		WP_Mock::userFunction( 'wp_get_attachment_url' )
 			->with( 1 )
 			->andReturn( 'https://example.com/wp-content/uploads/2024/10/sample.png' );
 
@@ -128,7 +128,7 @@ class WatermarkerTest extends TestCase {
 			->with()
 			->andReturn( 100 );
 
-		\WP_Mock::expectFilter( 'watermark_my_images_text_position', [ 25, 25 ] );
+		WP_Mock::expectFilter( 'watermark_my_images_text_position', [ 25, 25 ] );
 
 		$position = $watermarker->get_position( $image, $text );
 

@@ -3,9 +3,9 @@
 namespace WatermarkMyImages\Tests\Services;
 
 use Mockery;
-use WP_Error;
+use WP_Mock;
+use WP_Post;
 use WP_Mock\Tools\TestCase;
-use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
 use WatermarkMyImages\Services\Attachment;
 
@@ -24,7 +24,7 @@ class AttachmentTest extends TestCase {
 	public Attachment $attachment;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		$this->attachment = new Attachment();
 
@@ -32,17 +32,17 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 
 		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function test_register() {
-		\WP_Mock::expectActionAdded( 'add_attachment', [ $this->attachment, 'add_watermark_on_add_attachment' ], 10, 1 );
-		\WP_Mock::expectActionAdded( 'delete_attachment', [ $this->attachment, 'remove_watermark_on_attachment_delete' ], 10, 1 );
-		\WP_Mock::expectFilterAdded( 'attachment_fields_to_edit', [ $this->attachment, 'add_watermark_attachment_fields' ], 10, 2 );
-		\WP_Mock::expectFilterAdded( 'wp_generate_attachment_metadata', [ $this->attachment, 'add_watermark_to_metadata' ], 10, 3 );
-		\WP_Mock::expectFilterAdded( 'wp_prepare_attachment_for_js', [ $this->attachment, 'show_watermark_images_on_wp_media_modal' ], 10, 3 );
+		WP_Mock::expectActionAdded( 'add_attachment', [ $this->attachment, 'add_watermark_on_add_attachment' ], 10, 1 );
+		WP_Mock::expectActionAdded( 'delete_attachment', [ $this->attachment, 'remove_watermark_on_attachment_delete' ], 10, 1 );
+		WP_Mock::expectFilterAdded( 'attachment_fields_to_edit', [ $this->attachment, 'add_watermark_attachment_fields' ], 10, 2 );
+		WP_Mock::expectFilterAdded( 'wp_generate_attachment_metadata', [ $this->attachment, 'add_watermark_to_metadata' ], 10, 3 );
+		WP_Mock::expectFilterAdded( 'wp_prepare_attachment_for_js', [ $this->attachment, 'show_watermark_images_on_wp_media_modal' ], 10, 3 );
 
 		$this->attachment->register();
 
@@ -50,11 +50,11 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_add_watermark_on_add_attachment_bails_on_upload_NOT_set() {
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn( [] );
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
@@ -68,11 +68,11 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_add_watermark_on_add_attachment_bails_if_attachment_is_NOT_image() {
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn( [] );
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
@@ -80,7 +80,7 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( false );
 
@@ -90,7 +90,7 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_add_watermark_on_add_attachment_bails_if_watermark_already_exists() {
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn(
 				[
@@ -99,7 +99,7 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
@@ -107,7 +107,7 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
@@ -131,11 +131,11 @@ class AttachmentTest extends TestCase {
 
 		$this->attachment->watermarker = $watermarker;
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn( '' );
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn(
 				[
@@ -143,11 +143,11 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
-		\WP_Mock::expectAction(
+		WP_Mock::expectAction(
 			'watermark_my_images_on_add_image',
 			'https://example.com/wp-content/2024/10/sample-watermark-my-images.jpg',
 			[
@@ -163,7 +163,7 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_add_watermark_to_attachement() {
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->once()
 			->with( 1 )
 			->andReturn( false );
@@ -177,15 +177,15 @@ class AttachmentTest extends TestCase {
 		$watermarker = Mockery::mock( Watermarker::class )->makePartial();
 		$watermarker->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
-		\WP_Mock::userFunction( 'get_attached_file' )
+		WP_Mock::userFunction( 'get_attached_file' )
 			->with( 1 )
 			->andReturn( '/var/www/html/wp-content/uploads/2024/10/sample-watermark-my-images.jpg' );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'trailingslashit',
 			[
 				'times'  => 1,
@@ -195,7 +195,7 @@ class AttachmentTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::expectAction(
+		WP_Mock::expectAction(
 			'watermark_my_images_on_add_image_crops',
 			'https://example.com/wp-content/uploads/2024/10/full-watermark-my-images.jpg',
 			[
@@ -233,7 +233,7 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_remove_watermark_on_attachment_delete_bails_if_NOT_image() {
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( false );
 
@@ -243,15 +243,15 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_remove_watermark_on_attachment_delete_bails_if_no_watermark_post_meta() {
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn( '' );
 
-		\WP_Mock::userFunction( 'wp_get_attachment_metadata' )
+		WP_Mock::userFunction( 'wp_get_attachment_metadata' )
 			->with( 1 )
 			->andReturn( [] );
 
@@ -261,11 +261,11 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_remove_watermark_on_attachment_delete_removes_parent_watermark() {
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn(
 				[
@@ -274,13 +274,13 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_delete_file' )
+		WP_Mock::userFunction( 'wp_delete_file' )
 			->with( __DIR__ . '/sample.png' )
 			->andReturn( true );
 
-		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
+		WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
 
-		\WP_Mock::userFunction( 'wp_get_attachment_metadata' )
+		WP_Mock::userFunction( 'wp_get_attachment_metadata' )
 			->with( 1 )
 			->andReturn( [] );
 
@@ -290,11 +290,11 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_remove_watermark_on_attachment_delete_removes_parent_and_child_watermarks() {
-		\WP_Mock::userFunction( 'wp_attachment_is_image' )
+		WP_Mock::userFunction( 'wp_attachment_is_image' )
 			->with( 1 )
 			->andReturn( true );
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn(
 				[
@@ -303,15 +303,15 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_delete_file' )
+		WP_Mock::userFunction( 'wp_delete_file' )
 			->with( __DIR__ . '/sample.png' )
 			->andReturn( true );
 
-		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
+		WP_Mock::expectAction( 'watermark_my_images_on_delete_image', __DIR__ . '/sample.png', 1 );
 
 		$this->create_mock_image( __DIR__ . '/thumbnail-watermark-my-images.jpg' );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'trailingslashit',
 			[
 				'return' => function ( $url ) {
@@ -320,7 +320,7 @@ class AttachmentTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::userFunction( 'wp_get_attachment_metadata' )
+		WP_Mock::userFunction( 'wp_get_attachment_metadata' )
 			->with( 1 )
 			->andReturn(
 				[
@@ -332,11 +332,11 @@ class AttachmentTest extends TestCase {
 				]
 			);
 
-		\WP_Mock::userFunction( 'wp_delete_file' )
+		WP_Mock::userFunction( 'wp_delete_file' )
 			->with( __DIR__ . '/thumbnail-watermark-my-images.jpg' )
 			->andReturn( true );
 
-		\WP_Mock::expectAction( 'watermark_my_images_on_delete_image_crops', __DIR__ . '/thumbnail-watermark-my-images.jpg', 1 );
+		WP_Mock::expectAction( 'watermark_my_images_on_delete_image_crops', __DIR__ . '/thumbnail-watermark-my-images.jpg', 1 );
 
 		$this->attachment->remove_watermark_on_attachment_delete( 1 );
 
@@ -346,11 +346,11 @@ class AttachmentTest extends TestCase {
 	}
 
 	public function test_add_watermark_attachment_fields() {
-		$post = Mockery::mock( \WP_Post::class )->makePartial();
+		$post = Mockery::mock( WP_Post::class )->makePartial();
 		$post->shouldAllowMockingProtectedMethods();
 		$post->ID = 1;
 
-		\WP_Mock::userFunction( 'get_post_meta' )
+		WP_Mock::userFunction( 'get_post_meta' )
 			->with( 1, 'watermark_my_images', true )
 			->andReturn(
 				[

@@ -40,10 +40,10 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register() {
-		\WP_Mock::expectActionAdded( 'admin_init', [ $this->admin, 'register_options_init' ] );
-		\WP_Mock::expectActionAdded( 'admin_menu', [ $this->admin, 'register_options_menu' ] );
-		\WP_Mock::expectActionAdded( 'admin_enqueue_scripts', [ $this->admin, 'register_options_styles' ] );
-		\WP_Mock::expectActionAdded( 'admin_init', [ $this->admin->pluginate, 'init' ] );
+		WP_Mock::expectActionAdded( 'admin_init', [ $this->admin, 'register_options_init' ] );
+		WP_Mock::expectActionAdded( 'admin_menu', [ $this->admin, 'register_options_menu' ] );
+		WP_Mock::expectActionAdded( 'admin_enqueue_scripts', [ $this->admin, 'register_options_styles' ] );
+		WP_Mock::expectActionAdded( 'admin_init', [ $this->admin->pluginate, 'init' ] );
 
 		$this->admin->register();
 
@@ -51,8 +51,7 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register_options_menu() {
-
-		\WP_Mock::userFunction( 'add_menu_page' )
+		WP_Mock::userFunction( 'add_menu_page' )
 			->with(
 				'Watermark My Images',
 				'Watermark My Images',
@@ -63,10 +62,10 @@ class AdminTest extends WPMockTestCase {
 				100
 			);
 
-		\WP_Mock::userFunction( '__' )
+		WP_Mock::userFunction( '__' )
 			->andReturnUsing( fn( $text, $domain ) => $text );
 
-		\WP_Mock::userFunction( 'add_submenu_page' )
+		WP_Mock::userFunction( 'add_submenu_page' )
 			->once()
 			->with(
 				'watermark-my-images',
@@ -92,21 +91,20 @@ class AdminTest extends WPMockTestCase {
 	// }
 
 	public function test_register_options_init_bails_on_NONCE() {
-
 		$_POST = [
 			'watermark_my_images_save_settings'  => true,
 			'watermark_my_images_settings_nonce' => 'a8jfkgw2h7i',
 		];
 
-		\WP_Mock::userFunction( 'wp_unslash' )
+		WP_Mock::userFunction( 'wp_unslash' )
 			->with( 'a8jfkgw2h7i' )
 			->andReturn( 'a8jfkgw2h7i' );
 
-		\WP_Mock::userFunction( 'sanitize_text_field' )
+		WP_Mock::userFunction( 'sanitize_text_field' )
 			->with( 'a8jfkgw2h7i' )
 			->andReturn( 'a8jfkgw2h7i' );
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->with( 'a8jfkgw2h7i', 'watermark_my_images_settings_action' )
 			->andReturn( false );
 
@@ -116,18 +114,17 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register_options_init_passes() {
-
 		$_POST = [
 			'watermark_my_images_save_settings'  => true,
 			'watermark_my_images_settings_nonce' => 'a8jfkgw2h7i',
 		];
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->once()
 			->with( 'a8jfkgw2h7i', 'watermark_my_images_settings_action' )
 			->andReturn( true );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'wp_unslash',
 			[
 				'times'  => 11,
@@ -137,7 +134,7 @@ class AdminTest extends WPMockTestCase {
 			]
 		);
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'sanitize_text_field',
 			[
 				'times'  => 11,
@@ -147,7 +144,7 @@ class AdminTest extends WPMockTestCase {
 			]
 		);
 
-		\WP_Mock::userFunction( 'update_option' )
+		WP_Mock::userFunction( 'update_option' )
 			->once()
 			->with(
 				'watermark_my_images',
@@ -172,7 +169,6 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register_options_init_updates_POST_values_that_are_set() {
-
 		$updated_options = [
 			'size'   => 60,
 			'label'  => 'WATERMARK',
@@ -187,12 +183,12 @@ class AdminTest extends WPMockTestCase {
 			]
 		);
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->once()
 			->with( 'a8jfkgw2h7i', 'watermark_my_images_settings_action' )
 			->andReturn( true );
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'wp_unslash',
 			[
 				'times'  => 11,
@@ -202,7 +198,7 @@ class AdminTest extends WPMockTestCase {
 			]
 		);
 
-		\WP_Mock::userFunction(
+		WP_Mock::userFunction(
 			'sanitize_text_field',
 			[
 				'times'  => 11,
@@ -212,7 +208,7 @@ class AdminTest extends WPMockTestCase {
 			]
 		);
 
-		\WP_Mock::userFunction( 'update_option' )
+		WP_Mock::userFunction( 'update_option' )
 			->once()
 			->with(
 				'watermark_my_images',
@@ -237,18 +233,18 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register_options_styles() {
-		$screen = Mockery::mock( \WP_Screen::class )->makePartial();
+		$screen = Mockery::mock( WP_Screen::class )->makePartial();
 		$screen->shouldAllowMockingProtectedMethods();
 		$screen->id = 'toplevel_page_watermark-my-images';
 
-		\WP_Mock::userFunction( 'get_current_screen' )
+		WP_Mock::userFunction( 'get_current_screen' )
 			->andReturn( $screen );
 
 		\WP_Mock::userFunction( 'plugins_url' )
 			->with( 'watermark-my-images/styles.css' )
 			->andReturn( 'https://example.com/wp-content/plugins/watermark-my-images/styles.css' );
 
-		\WP_Mock::userFunction( 'wp_enqueue_style' )
+		WP_Mock::userFunction( 'wp_enqueue_style' )
 			->with(
 				'watermark-my-images',
 				'https://example.com/wp-content/plugins/watermark-my-images/styles.css',
@@ -264,7 +260,7 @@ class AdminTest extends WPMockTestCase {
 	}
 
 	public function test_register_options_styles_bails() {
-		\WP_Mock::userFunction( 'get_current_screen' )
+		WP_Mock::userFunction( 'get_current_screen' )
 			->andReturn( '' );
 
 		$this->admin->register_options_styles();

@@ -2,7 +2,8 @@
 
 namespace WatermarkMyImages\Tests\Exceptions;
 
-use Mockery;
+use WP_Mock;
+use Exception;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Exceptions\TextException;
 
@@ -14,7 +15,7 @@ class TextExceptionTest extends TestCase {
 	public TextException $text_exception;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		$this->text_exception = new TextException(
 			'Unable to create Text Object',
@@ -24,11 +25,11 @@ class TextExceptionTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_instance_is_an_exception() {
-		$this->assertInstanceOf( \Exception::class, $this->text_exception );
+		$this->assertInstanceOf( Exception::class, $this->text_exception );
 	}
 
 	public function test_context_is_set() {

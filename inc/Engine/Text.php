@@ -10,6 +10,7 @@
 
 namespace WatermarkMyImages\Engine;
 
+use Exception;
 use Imagine\Gd\Font;
 use Imagine\Gd\Image;
 use Imagine\Image\Box;
@@ -107,8 +108,8 @@ class Text extends Entity {
 	protected function get_font(): Font {
 		try {
 			$tx_color = $this->get_rgb( new RGB() )->color( $this->get_option( 'tx_color' ), (int) $this->get_option( 'tx_opacity' ) );
-		} catch ( \Exception $e ) {
-			throw new \Exception(
+		} catch ( Exception $e ) {
+			throw new Exception(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text color, %s', 'watermark-my-images' ),
@@ -138,8 +139,8 @@ class Text extends Entity {
 	public function get_text(): Image {
 		try {
 			$bg_color = $this->get_rgb( new RGB() )->color( $this->get_option( 'bg_color' ), (int) $this->get_option( 'bg_opacity' ) );
-		} catch ( \Exception $e ) {
-			throw new \Exception(
+		} catch ( Exception $e ) {
+			throw new Exception(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Background color, %s', 'watermark-my-images' ),
@@ -153,8 +154,8 @@ class Text extends Entity {
 				$this->get_text_box(),
 				$bg_color
 			);
-		} catch ( \Exception $e ) {
-			throw new \Exception(
+		} catch ( Exception $e ) {
+			throw new Exception(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to create Text Box, %s', 'watermark-my-images' ),
@@ -169,8 +170,8 @@ class Text extends Entity {
 				$this->get_font(),
 				new Point( 0, 0 )
 			);
-		} catch ( \Exception $e ) {
-			throw new \Exception(
+		} catch ( Exception $e ) {
+			throw new Exception(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to draw Text, %s', 'watermark-my-images' ),

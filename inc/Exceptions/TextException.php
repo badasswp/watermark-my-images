@@ -10,7 +10,9 @@
 
 namespace WatermarkMyImages\Exceptions;
 
-class TextException extends \Exception {
+use Exception;
+
+class TextException extends Exception {
 	/**
 	 * Context.
 	 *

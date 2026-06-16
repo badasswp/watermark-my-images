@@ -2,6 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
 use Exception;
 use Badasswp\WPMockTC\WPMockTestCase;
@@ -63,7 +64,7 @@ class ImageTest extends WPMockTestCase {
 		$imagine->shouldReceive( 'open' )
 			->with( __DIR__ . '/sample.png' )
 			->andThrow(
-				new \Exception( 'File not found' )
+				new Exception( 'File not found' )
 			);
 
 		$image->shouldReceive( 'get_imagine' )

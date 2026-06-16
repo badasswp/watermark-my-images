@@ -2,6 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Core;
 
+use WP_Mock;
 use WP_Mock\Tools\TestCase;
 
 use WatermarkMyImages\Core\Container;
@@ -34,11 +35,11 @@ class ContainerTest extends TestCase {
 	public Container $container;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_container_contains_required_services() {
@@ -66,7 +67,7 @@ class ContainerTest extends TestCase {
 			$service::get_instance();
 		}
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'admin_init',
 			[
 				Service::$instances[ Admin::class ],
@@ -74,7 +75,7 @@ class ContainerTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'admin_menu',
 			[
 				Service::$instances[ Admin::class ],
@@ -82,7 +83,7 @@ class ContainerTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'admin_enqueue_scripts',
 			[
 				Service::$instances[ Admin::class ],
@@ -92,7 +93,7 @@ class ContainerTest extends TestCase {
 
 		$admin = Service::$instances[ Admin::class ];
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'admin_init',
 			[
 				$admin->pluginate,
@@ -100,7 +101,7 @@ class ContainerTest extends TestCase {
 			]
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'add_attachment',
 			[
 				Service::$instances[ Attachment::class ],
@@ -110,7 +111,7 @@ class ContainerTest extends TestCase {
 			1
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'delete_attachment',
 			[
 				Service::$instances[ Attachment::class ],
@@ -120,7 +121,7 @@ class ContainerTest extends TestCase {
 			1
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'attachment_fields_to_edit',
 			[
 				Service::$instances[ Attachment::class ],
@@ -130,7 +131,7 @@ class ContainerTest extends TestCase {
 			2
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'wp_generate_attachment_metadata',
 			[
 				Service::$instances[ Attachment::class ],
@@ -140,7 +141,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'wp_prepare_attachment_for_js',
 			[
 				Service::$instances[ Attachment::class ],
@@ -150,7 +151,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'init',
 			[
 				Service::$instances[ Boot::class ],
@@ -158,7 +159,7 @@ class ContainerTest extends TestCase {
 			],
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_add_image',
 			[
 				Service::$instances[ Logger::class ],
@@ -168,7 +169,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_page_load',
 			[
 				Service::$instances[ Logger::class ],
@@ -178,7 +179,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_woo_product_get_image',
 			[
 				Service::$instances[ Logger::class ],
@@ -188,7 +189,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_add_image',
 			[
 				Service::$instances[ MetaData::class ],
@@ -198,7 +199,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_page_load',
 			[
 				Service::$instances[ MetaData::class ],
@@ -208,7 +209,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectActionAdded(
+		WP_Mock::expectActionAdded(
 			'watermark_my_images_on_woo_product_get_image',
 			[
 				Service::$instances[ MetaData::class ],
@@ -218,7 +219,7 @@ class ContainerTest extends TestCase {
 			3
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'wp_get_attachment_image',
 			[
 				Service::$instances[ PageLoad::class ],
@@ -228,7 +229,7 @@ class ContainerTest extends TestCase {
 			5
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'woocommerce_product_get_image',
 			[
 				Service::$instances[ WooCommerce::class ],
@@ -238,7 +239,7 @@ class ContainerTest extends TestCase {
 			5
 		);
 
-		\WP_Mock::expectFilterAdded(
+		WP_Mock::expectFilterAdded(
 			'woocommerce_single_product_image_thumbnail_html',
 			[
 				Service::$instances[ WooCommerce::class ],

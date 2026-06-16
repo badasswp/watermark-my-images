@@ -2,7 +2,6 @@
 
 namespace WatermarkMyImages\Tests\Admin;
 
-use Mockery;
 use WatermarkMyImages\Admin\Options;
 use Badasswp\WPMockTC\WPMockTestCase;
 
@@ -22,7 +21,6 @@ class OptionsTest extends WPMockTestCase {
 	}
 
 	public function test_get_form_page() {
-
 		$form_page = Options::get_form_page();
 
 		$this->assertSame(
@@ -37,7 +35,6 @@ class OptionsTest extends WPMockTestCase {
 	}
 
 	public function test_get_form_submit() {
-
 		$form_submit = Options::get_form_submit();
 
 		$this->assertSame(
@@ -57,7 +54,6 @@ class OptionsTest extends WPMockTestCase {
 	}
 
 	public function test_get_form_fields() {
-
 		$form_fields = Options::get_form_fields();
 
 		$this->assertSame(
@@ -134,7 +130,6 @@ class OptionsTest extends WPMockTestCase {
 	}
 
 	public function test_get_form_notice() {
-
 		$form_notice = Options::get_form_notice();
 
 		$this->assertSame(

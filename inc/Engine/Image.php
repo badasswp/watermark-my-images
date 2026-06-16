@@ -10,6 +10,7 @@
 
 namespace WatermarkMyImages\Engine;
 
+use Exception;
 use Imagine\Gd\Imagine;
 use Imagine\Image\ImageInterface as Image_Object;
 
@@ -26,8 +27,8 @@ class Image extends Entity {
 	public function get_image(): Image_Object {
 		try {
 			return $this->get_imagine( new Imagine() )->open( Watermarker::$file );
-		} catch ( \Exception $e ) {
-			throw new \Exception(
+		} catch ( Exception $e ) {
+			throw new Exception(
 				sprintf(
 					/* translators: Exception error message. */
 					esc_html__( 'Unable to open Image Resource, %s', 'watermark-my-images' ),

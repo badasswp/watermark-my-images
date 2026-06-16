@@ -2,6 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Services;
 
+use WP_Mock;
 use Mockery;
 use WatermarkMyImages\Admin\Form;
 use WatermarkMyImages\Admin\Options;

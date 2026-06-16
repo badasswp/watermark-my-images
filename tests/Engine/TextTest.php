@@ -334,6 +334,177 @@ class TextTest extends WPMockTestCase {
 		$this->assertConditionsMet();
 	}
 
+	/*public function test_get_text_catches_textbox_exception_and_throws_it() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$rgb = Mockery::mock( RGB::class )->makePartial();
+		$rgb->shouldAllowMockingProtectedMethods();
+
+		$imagine = Mockery::mock( Imagine::class )->makePartial();
+		$imagine->shouldAllowMockingProtectedMethods();
+
+		\WP_Mock::userFunction( 'esc_html__' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'esc_html' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		$bg_color = new TextColor( $rgb, [ 255, 255, 255 ], 100 );
+
+		// Now, 1st stage...
+		$text->shouldReceive( 'get_rgb' )
+			->with( Mockery::type( RGB::class ) )
+			->andReturn( $rgb );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'bg_color' )
+			->andReturn( '#FFF' );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'bg_opacity' )
+			->andReturn( 100 );
+
+		$rgb->shouldReceive( 'color' )
+			->with( '#FFF', 100 )
+			->andReturn( $bg_color );
+
+		// Now, 2nd stage...
+		$text->shouldReceive( 'get_imagine' )
+			->with( Mockery::type( Imagine::class ) )
+			->andReturn( $imagine );
+
+		$box = new Box( 100, 200 );
+
+		$text->shouldReceive( 'get_text_box' )
+			->andReturn( $box );
+
+		$imagine->shouldReceive( 'create' )
+			->with( $box, $bg_color )
+			->andThrow(
+				new \Exception( 'Error: Text Box color' )
+			);
+
+		$this->expectException( \Error::class );
+		$this->expectExceptionMessage( 'Unable to create Text Box, Error: Text Box color' );
+
+		$text->get_text();
+
+		$this->assertConditionsMet();
+	}
+
+	public function test_get_text_catches_draw_exception_and_throws_it() {
+		$text = Mockery::mock( Text::class )->makePartial();
+		$text->shouldAllowMockingProtectedMethods();
+
+		$rgb = Mockery::mock( RGB::class )->makePartial();
+		$rgb->shouldAllowMockingProtectedMethods();
+
+		$box = Mockery::mock( Box::class )->makePartial();
+		$box->shouldAllowMockingProtectedMethods();
+
+		$imagine = Mockery::mock( Imagine::class )->makePartial();
+		$imagine->shouldAllowMockingProtectedMethods();
+
+		$font = Mockery::mock( FontInterface::class )->makePartial();
+		$font->shouldAllowMockingProtectedMethods();
+
+		$bg_color = Mockery::mock( ColorInterface::class )->makePartial();
+		$bg_color->shouldAllowMockingProtectedMethods();
+
+		$text_box = Mockery::mock( ImageInterface::class )->makePartial();
+		$text_box->shouldAllowMockingProtectedMethods();
+
+		$drawer = Mockery::mock( DrawerInterface::class )->makePartial();
+		$drawer->shouldAllowMockingProtectedMethods();
+
+		\WP_Mock::userFunction( 'esc_html__' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		\WP_Mock::userFunction( 'esc_html' )
+			->andReturnUsing(
+				function ( $arg ) {
+					return $arg;
+				}
+			);
+
+		// Now, 1st stage...
+		$text->shouldReceive( 'get_rgb' )
+			->with( Mockery::type( RGB::class ) )
+			->andReturn( $rgb );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'bg_color' )
+			->andReturn( '#FFF' );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'bg_opacity' )
+			->andReturn( '100' );
+
+		$rgb->shouldReceive( 'color' )
+			->with( '#FFF', '100' )
+			->andReturn( $bg_color );
+
+		// Now, 2nd stage...
+		$text->shouldReceive( 'get_imagine' )
+			->with( Mockery::type( Imagine::class ) )
+			->andReturn( $imagine );
+
+		$text->shouldReceive( 'get_text_length' )
+			->andReturn( '200' );
+
+		$text->shouldReceive( 'get_text_box' )
+			->andReturn( $box );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'size' )
+			->andReturn( '100' );
+
+		$imagine->shouldReceive( 'create' )
+			->with( $box, $bg_color )
+			->andReturn( $text_box );
+
+		// Now, 3rd stage...
+		$text_box->shouldReceive( 'draw' )
+			->andReturn( $drawer );
+
+		$text->shouldReceive( 'get_option' )
+			->with( 'label' )
+			->andReturn( 'WATERMARK' );
+
+		$text->shouldReceive( 'get_font' )
+			->andReturn( $font );
+
+		$drawer->shouldReceive( 'text' )
+			->with(
+				'WATERMARK',
+				$font,
+				Mockery::type( PointInterface::class )
+			)
+			->andThrow(
+				new \Exception( 'Error: Drawing is disabled..' )
+			);
+
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( '' );
+
+		$text->get_text();
+
+		$this->assertConditionsMet();
+	}*/
+
 	public function test_get_font_url() {
 		$text = Mockery::mock( Text::class )->makePartial();
 		$text->shouldAllowMockingProtectedMethods();

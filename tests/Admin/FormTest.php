@@ -138,7 +138,7 @@ class FormTest extends WPMockTestCase {
 
 		$form_action = $this->form->get_form_action();
 
-		$this->assertSame( 'https://example.com', $form_action );
+		$this->assertSame( 'https://example.com/', $form_action );
 	}
 
 	public function test_get_form_main() {

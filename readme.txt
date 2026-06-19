@@ -3,7 +3,7 @@ Contributors: badasswp
 Tags: image, watermark, copyright, intellectual, media.
 Requires at least: 4.0
 Tested up to: 7.0
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,11 @@ Want to add your personal touch? All of our documentation can be found [here](ht
 4. Watermark Image Options - Configure your plugin image options here.
 
 == Changelog ==
+
+= 1.3.0 =
+* Feat: Add `More Plugins` options page.
+* Refactor: Replaced fully qualified path with their use counter part.
+* Refactor: Php unit tests now uses wp-mock-tc library.
 
 = 1.2.0 =
 * Chore: Update CI/CD pipeline.

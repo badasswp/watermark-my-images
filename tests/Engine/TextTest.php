@@ -2,10 +2,11 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
 use Exception;
 use ReflectionClass;
-use WP_Mock\Tools\TestCase;
+use Badasswp\WPMockTC\WPMockTestCase;
 
 use WatermarkMyImages\Engine\Text;
 use WatermarkMyImages\Engine\Watermarker;
@@ -32,18 +33,18 @@ use Imagine\Image\Palette\Color\ColorInterface;
  * @covers \WatermarkMyImages\Engine\Text::get_text_length
  * @covers \WatermarkMyImages\Engine\Text::get_text
  */
-class TextTest extends TestCase {
+class TextTest extends WPMockTestCase {
 	public Text $text;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		parent::setUp();
 
 		$this->text        = new Text();
 		Watermarker::$file = __DIR__ . '/sample.png';
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		parent::tearDown();
 	}
 
 	public function test_args_is_set() {
@@ -97,25 +98,15 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
-
-		\WP_Mock::userFunction(
-			'wp_parse_args',
-			[
-				'times'  => 1,
-				'return' => function ( $args, $default_args ) {
-					return array_merge( $default_args, $args );
-				},
-			]
-		);
 
 		$text->shouldReceive( 'get_size' )
 			->with( $options )
 			->andReturn( 60 );
 
-		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
+		WP_Mock::expectFilter( 'watermark_my_images_text', $options );
 
 		$options = $text->get_options();
 
@@ -148,19 +139,9 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
-
-		\WP_Mock::userFunction(
-			'wp_parse_args',
-			[
-				'times'  => 1,
-				'return' => function ( $args, $default_args ) {
-					return array_merge( $default_args, $args );
-				},
-			]
-		);
 
 		$text->shouldReceive( 'get_size' )
 			->with( $options )
@@ -176,7 +157,7 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::expectFilter( 'watermark_my_images_text', $options );
+		WP_Mock::expectFilter( 'watermark_my_images_text', $options );
 
 		$options = $text->get_options();
 
@@ -219,19 +200,9 @@ class TextTest extends TestCase {
 			'bg_opacity' => 0,
 		];
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'watermark_my_images', [] )
 			->andReturn( $options );
-
-		\WP_Mock::userFunction(
-			'wp_parse_args',
-			[
-				'times'  => 1,
-				'return' => function ( $args, $default_args ) {
-					return array_merge( $default_args, $args );
-				},
-			]
-		);
 
 		\WP_Mock::onFilter( 'watermark_my_images_text' )
 			->with( $options )
@@ -319,21 +290,7 @@ class TextTest extends TestCase {
 		$rgb->shouldReceive( 'color' )
 			->with( '#FFF', 100 )
 			->andThrow(
-				new \Exception( 'Error: Unable to parse RGB color' )
-			);
-
-		\WP_Mock::userFunction( 'esc_html__' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
-			);
-
-		\WP_Mock::userFunction( 'esc_html' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
+				new Exception( 'Error: Unable to parse RGB color' )
 			);
 
 		$this->expectException( Exception::class );
@@ -366,21 +323,7 @@ class TextTest extends TestCase {
 		$rgb->shouldReceive( 'color' )
 			->with( '#FFF', 100 )
 			->andThrow(
-				new \Exception( 'Error: Unable to parse Background color' )
-			);
-
-		\WP_Mock::userFunction( 'esc_html__' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
-			);
-
-		\WP_Mock::userFunction( 'esc_html' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
+				new Exception( 'Error: Unable to parse Background color' )
 			);
 
 		$this->expectException( Exception::class );
@@ -572,7 +515,7 @@ class TextTest extends TestCase {
 			->with( 'font' )
 			->andReturn( 'Arial' );
 
-		\WP_Mock::userFunction( 'plugin_dir_path' )
+		WP_Mock::userFunction( 'plugin_dir_path' )
 			->with( pathinfo( $reflect->getFileName(), PATHINFO_DIRNAME ) )
 			->andReturn( '/var/www/wp-content/uploads/watermark-my-images/inc/Engine' );
 

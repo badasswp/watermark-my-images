@@ -2,9 +2,12 @@
 
 namespace WatermarkMyImages\Tests\Admin;
 
+use WP_Mock;
 use Mockery;
+use ReflectionClass;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Admin\Form;
+use Badasswp\WPMockTC\WPMockTestCase;
 
 /**
  * @covers \WatermarkMyImages\Admin\Form::__construct
@@ -22,16 +25,16 @@ use WatermarkMyImages\Admin\Form;
  * @covers \WatermarkMyImages\Admin\Form::get_form_submit
  * @covers \WatermarkMyImages\Admin\Form::get_form_notice
  */
-class FormTest extends TestCase {
+class FormTest extends WPMockTestCase {
 	public Form $form;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		parent::setUp();
 
 		$this->form = Mockery::mock( Form::class )->makePartial();
 		$this->form->shouldAllowMockingProtectedMethods();
 
-		$reflection = new \ReflectionClass( $this->form );
+		$reflection = new ReflectionClass( $this->form );
 		$property   = $reflection->getProperty( 'options' );
 		$property->setAccessible( true );
 		$property->setValue(
@@ -67,7 +70,7 @@ class FormTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		parent::tearDown();
 	}
 
 	public function test_get_options() {
@@ -110,26 +113,19 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_form_action() {
-		$_SERVER['REQUEST_URI'] = 'https://example.com/\/';
+		$_SERVER['REQUEST_URI'] = 'https://example.com/';
 
-		\WP_Mock::userFunction( 'esc_url' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return rtrim( filter_var( $arg, FILTER_SANITIZE_URL ), '/' );
-				}
-			);
-
-		\WP_Mock::userFunction( 'sanitize_text_field' )
+		WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'wp_unslash' )
+		WP_Mock::userFunction( 'wp_unslash' )
 			->andReturnUsing(
 				function ( $arg ) {
-					return stripslashes( $arg );
+					return rtrim( $arg, '/' );
 				}
 			);
 
@@ -139,7 +135,7 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_form_main() {
-		\WP_Mock::expectFilter(
+		WP_Mock::expectFilter(
 			'watermark_my_images_form_fields',
 			[
 				'form_group_1',
@@ -221,7 +217,7 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_setting() {
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->with( 'plugin_option', [] )
 			->andReturn(
 				[
@@ -390,7 +386,7 @@ class FormTest extends TestCase {
 	}
 
 	public function test_get_form_submit() {
-		\WP_Mock::userFunction( 'wp_nonce_field' )
+		WP_Mock::userFunction( 'wp_nonce_field' )
 			->with( 'nonce_action', 'nonce_name', true, false )
 			->andReturn( '<input type="hidden" id="nonce_name" name="nonce_name" value="a8gkfhvzhi" />' );
 
@@ -416,21 +412,21 @@ class FormTest extends TestCase {
 		$_POST['button_name'] = null;
 		$_POST['nonce_name']  = 'nonce_action\/';
 
-		\WP_Mock::userFunction( 'wp_unslash' )
+		WP_Mock::userFunction( 'wp_unslash' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return rtrim( stripslashes( $arg ), '/' );
 				}
 			);
 
-		\WP_Mock::userFunction( 'sanitize_text_field' )
+		WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->andReturnUsing(
 				function ( $arg1, $arg2 ) {
 					return $arg1 === $arg2;
@@ -449,21 +445,21 @@ class FormTest extends TestCase {
 		$_POST['button_name'] = true;
 		$_POST['nonce_name']  = 'incorrect_action_name\/';
 
-		\WP_Mock::userFunction( 'wp_unslash' )
+		WP_Mock::userFunction( 'wp_unslash' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return rtrim( stripslashes( $arg ), '/' );
 				}
 			);
 
-		\WP_Mock::userFunction( 'sanitize_text_field' )
+		WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->andReturnUsing(
 				function ( $arg1, $arg2 ) {
 					return $arg1 === $arg2;
@@ -482,21 +478,21 @@ class FormTest extends TestCase {
 		$_POST['button_name'] = true;
 		$_POST['nonce_name']  = 'nonce_action\/';
 
-		\WP_Mock::userFunction( 'wp_unslash' )
+		WP_Mock::userFunction( 'wp_unslash' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return rtrim( stripslashes( $arg ), '/' );
 				}
 			);
 
-		\WP_Mock::userFunction( 'sanitize_text_field' )
+		WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
 					return $arg;
 				}
 			);
 
-		\WP_Mock::userFunction( 'wp_verify_nonce' )
+		WP_Mock::userFunction( 'wp_verify_nonce' )
 			->andReturnUsing(
 				function ( $arg1, $arg2 ) {
 					return $arg1 === $arg2;

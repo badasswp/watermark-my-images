@@ -10,6 +10,8 @@
 
 namespace WatermarkMyImages\Services;
 
+use WP_Error;
+use Exception;
 use DOMDocument;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Interfaces\Registrable;
@@ -89,8 +91,8 @@ class WooCommerce extends Service implements Registrable {
 			$watermark  = $this->watermarker->get_watermark();
 			$response   = $watermark['rel'] ?? '';
 			$image_html = $this->get_image_html( $image_html, $watermark['rel'] );
-		} catch ( \Exception $e ) {
-			$response = new \WP_Error(
+		} catch ( Exception $e ) {
+			$response = new WP_Error(
 				'watermark-log-error',
 				sprintf(
 					'Fatal Error: %s',

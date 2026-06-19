@@ -2,7 +2,7 @@
 
 namespace WatermarkMyImages\Tests\Abstracts;
 
-use Mockery;
+use WP_Mock;
 use WP_Mock\Tools\TestCase;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Engine\Watermarker;
@@ -14,11 +14,11 @@ use WatermarkMyImages\Engine\Watermarker;
  */
 class ServiceTest extends TestCase {
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 	}
 
 	public function test_get_instance_returns_same_instance() {

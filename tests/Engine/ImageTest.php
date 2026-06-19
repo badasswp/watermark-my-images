@@ -2,9 +2,10 @@
 
 namespace WatermarkMyImages\Tests\Engine;
 
+use WP_Mock;
 use Mockery;
 use Exception;
-use WP_Mock\Tools\TestCase;
+use Badasswp\WPMockTC\WPMockTestCase;
 
 use WatermarkMyImages\Engine\Image;
 use WatermarkMyImages\Engine\Watermarker;
@@ -16,17 +17,17 @@ use Imagine\Image\ImageInterface as Image_Object;
  * @covers \WatermarkMyImages\Engine\Image::get_image
  * @covers \WatermarkMyImages\Engine\Image::get_imagine
  */
-class ImageTest extends TestCase {
+class ImageTest extends WPMockTestCase {
 	public Image $image;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		parent::setUp();
 
 		Watermarker::$file = __DIR__ . '/sample.png';
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		parent::tearDown();
 	}
 
 	public function test_get_image_passes_and_returns_image_object() {
@@ -63,26 +64,12 @@ class ImageTest extends TestCase {
 		$imagine->shouldReceive( 'open' )
 			->with( __DIR__ . '/sample.png' )
 			->andThrow(
-				new \Exception( 'File not found' )
+				new Exception( 'File not found' )
 			);
 
 		$image->shouldReceive( 'get_imagine' )
 			->with( Mockery::type( Imagine::class ) )
 			->andReturn( $imagine );
-
-		\WP_Mock::userFunction( 'esc_html__' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
-			);
-
-		\WP_Mock::userFunction( 'esc_html' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
-			);
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( 'Unable to open Image Resource, File not found' );

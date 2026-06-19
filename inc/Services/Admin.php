@@ -12,7 +12,27 @@ use WatermarkMyImages\Admin\Options;
 use WatermarkMyImages\Abstracts\Service;
 use WatermarkMyImages\Interfaces\Registrable;
 
+use Pluginate\Admin as Pluginate;
+
 class Admin extends Service implements Registrable {
+	/**
+	 * Pluginate instance.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @var Pluginate
+	 */
+	public Pluginate $pluginate;
+
+	/**
+	 * Admin constructor.
+	 *
+	 * @since 1.3.0
+	 */
+	public function __construct() {
+		$this->pluginate = new Pluginate( 'watermark-my-images' );
+	}
+
 	/**
 	 * Bind to WP.
 	 *
@@ -24,6 +44,7 @@ class Admin extends Service implements Registrable {
 		add_action( 'admin_init', [ $this, 'register_options_init' ] );
 		add_action( 'admin_menu', [ $this, 'register_options_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'register_options_styles' ] );
+		add_action( 'admin_init', [ $this->pluginate, 'init' ] );
 	}
 
 	/**
@@ -44,6 +65,15 @@ class Admin extends Service implements Registrable {
 			[ $this, 'register_options_page' ],
 			'dashicons-format-image',
 			100
+		);
+
+		add_submenu_page(
+			Options::get_page_slug(),
+			__( 'More Plugins', 'watermark-my-images' ),
+			__( 'More Plugins', 'watermark-my-images' ),
+			'manage_options',
+			sprintf( '%s-more-plugins', Options::get_page_slug() ),
+			[ $this, 'register_more_plugins' ]
 		);
 	}
 
@@ -67,6 +97,35 @@ class Admin extends Service implements Registrable {
 			array_map(
 				'__',
 				( new Form( Options::$form ) )->get_options()
+			)
+		);
+	}
+
+	/**
+	 * Register More Plugins.
+	 *
+	 * This controls the display of the
+	 * "More Plugins" submenu page.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @return void
+	 */
+	public function register_more_plugins(): void {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		vprintf(
+			'<section class="wrap">
+				<h1>%s</h1>
+				<p>%s</p>
+				%s
+			</section>',
+			array_map(
+				'__',
+				[
+					'More Plugins',
+					'Check out some other amazing plugin of ours...',
+					$this->pluginate->get_more_plugins(),
+				]
 			)
 		);
 	}
@@ -129,7 +188,7 @@ class Admin extends Service implements Registrable {
 		$screen = get_current_screen();
 
 		// Bail out, if not plugin Admin page.
-		if ( ! is_object( $screen ) || 'toplevel_page_watermark-my-images' !== $screen->id ) {
+		if ( ! is_object( $screen ) || ! str_contains( $screen->id, Options::get_page_slug() ) ) {
 			return;
 		}
 

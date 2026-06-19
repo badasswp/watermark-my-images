@@ -2,11 +2,10 @@
 
 namespace WatermarkMyImages\Tests\Services;
 
+use WP_Mock;
 use Mockery;
 use DOMDocument;
 use WP_Mock\Tools\TestCase;
-use WatermarkMyImages\Abstracts\Service;
-use WatermarkMyImages\Engine\Watermarker;
 use WatermarkMyImages\Services\PageLoad;
 
 /**
@@ -21,7 +20,7 @@ class PageLoadTest extends TestCase {
 	public PageLoad $page_load;
 
 	public function setUp(): void {
-		\WP_Mock::setUp();
+		WP_Mock::setUp();
 
 		$this->page_load = new PageLoad();
 
@@ -29,13 +28,13 @@ class PageLoadTest extends TestCase {
 	}
 
 	public function tearDown(): void {
-		\WP_Mock::tearDown();
+		WP_Mock::tearDown();
 
 		$this->destroy_mock_image( __DIR__ . '/sample.png' );
 	}
 
 	public function test_register() {
-		\WP_Mock::expectFilterAdded( 'wp_get_attachment_image', [ $this->page_load, 'register_wp_get_attachment_image' ], 10, 5 );
+		WP_Mock::expectFilterAdded( 'wp_get_attachment_image', [ $this->page_load, 'register_wp_get_attachment_image' ], 10, 5 );
 
 		$this->page_load->register();
 
@@ -56,7 +55,7 @@ class PageLoadTest extends TestCase {
 	}
 
 	public function test_register_wp_get_attachment_image_bails_out_if_options_is_not_enabled() {
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->once()
 			->with( 'watermark_my_images', [] )
 			->andReturn(
@@ -81,7 +80,7 @@ class PageLoadTest extends TestCase {
 		$page_load = Mockery::mock( PageLoad::class )->makePartial();
 		$page_load->shouldAllowMockingProtectedMethods();
 
-		\WP_Mock::userFunction( 'get_option' )
+		WP_Mock::userFunction( 'get_option' )
 			->once()
 			->with( 'watermark_my_images', [] )
 			->andReturn(
@@ -98,7 +97,7 @@ class PageLoadTest extends TestCase {
 				}
 			);
 
-		\WP_Mock::expectFilter(
+		WP_Mock::expectFilter(
 			'watermark_my_images_attachment_html',
 			'<p><img src="https://example.com/wp-content/uploads/sample-watermark.jpeg"/></p>',
 			1
@@ -171,7 +170,7 @@ class PageLoadTest extends TestCase {
 			)
 			->andReturnUsing(
 				function ( $arg1, $arg2, $arg3 ) {
-					$dom = new \DOMDocument();
+					$dom = new DOMDocument();
 					$dom->loadHTML( $arg2, LIBXML_NOERROR );
 					$srcset_img = $dom->getElementsByTagName( 'img' )[0];
 

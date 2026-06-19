@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+* Feat: Add `More Plugins` options page.
+* Refactor: Replaced fully qualified path with their use counter part.
+* Refactor: Php unit tests now uses wp-mock-tc library.
+
 ## 1.2.0
 * Chore: Update CI/CD pipeline.
 * Tested up to WP 7.0.

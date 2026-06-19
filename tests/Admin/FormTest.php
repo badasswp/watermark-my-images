@@ -113,19 +113,12 @@ class FormTest extends WPMockTestCase {
 	}
 
 	public function test_get_form_action() {
-		$_SERVER['REQUEST_URI'] = 'https://example.com/\/';
-
-		WP_Mock::userFunction( 'esc_url' )
-			->andReturnUsing(
-				function ( $arg ) {
-					return $arg;
-				}
-			);
+		$_SERVER['REQUEST_URI'] = 'https://example.com/';
 
 		WP_Mock::userFunction( 'sanitize_text_field' )
 			->andReturnUsing(
 				function ( $arg ) {
-					return stripslashes( $arg );
+					return $arg;
 				}
 			);
 
@@ -138,7 +131,7 @@ class FormTest extends WPMockTestCase {
 
 		$form_action = $this->form->get_form_action();
 
-		$this->assertSame( 'https://example.com/', $form_action );
+		$this->assertSame( 'https://example.com', $form_action );
 	}
 
 	public function test_get_form_main() {
